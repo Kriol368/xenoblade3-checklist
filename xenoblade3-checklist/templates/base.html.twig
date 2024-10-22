@@ -1,19 +1,55 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project Description">
+    <meta name="keywords" content="HTML, CSS, Template">
+    <meta name="author" content="Kriol368">
+    <title>{% block title %}XC3 Checklist{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <div class="nav-toggle">☰</div>
+        <div class="logo">
+            <h1>{% block page_name %}Xenoblade Chronicles 3 Checklist{% endblock %}</h1>
+        </div>
+        <div class="search" id="searchContainer">
+            <input type="text" placeholder="Search... (Coming Soon)" disabled id="searchInput">
+            <span id="searchToggle" class="search-icon">🔍</span>
+        </div>
+        <div class="auth-buttons">
+            {% if app.user %}
+                <a href="{{ path('app_home') }}">Logout</a>
+            {% else %}
+                <a href="{{ path('app_home') }}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</header>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+
+<nav id="sidebar">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Section 1</a></li>
+        <li><a href="#">Section 2</a></li>
+    </ul>
+</nav>
+
+<main>
+    {% block body %}
+        <h2>Welcome to the content area!</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta.</p>
+        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+        <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+        <p>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</p>
+        <p>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</p>
+    {% endblock %}
+</main>
+
+<script src="{{ asset('js/script.js') }}"></script>
+</body>
 </html>

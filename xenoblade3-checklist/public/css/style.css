@@ -1,0 +1,166 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Layout for the page */
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    width: 250px;
+    height: calc(100vh - 60px); /* Full height minus the height of the header */
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    left: 0; /* Align to the left edge */
+    top: 60px; /* Position below the header */
+    padding: 20px;
+    transition: width 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
+}
+
+/* Hide sidebar completely when collapsed */
+nav.collapsed {
+    width: 0; /* Set width to 0 */
+    opacity: 0; /* Make it invisible */
+    padding: 0; /* Remove padding */
+    overflow: hidden; /* Hide any overflow */
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    margin: 20px 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Header styles */
+header {
+    width: 100%;
+    height: 60px;
+    background-color: #444;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0; /* Adjust to 0 so it doesn't affect sidebar */
+    z-index: 1000; /* Ensure header is above sidebar */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.header-content .nav-toggle {
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 20px; /* Space between toggle and title */
+}
+
+.header-content .logo {
+    flex: 1; /* Allow title to take available space */
+}
+
+header .search {
+    flex: 1; /* Take available space */
+    display: flex; /* Use flexbox to center the input */
+    justify-content: center; /* Center the input horizontally */
+    margin-left: 10px; /* Slight margin from the title */
+}
+
+header .search input {
+    width: 80%; /* Set a specific width */
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Adjust auth buttons */
+.auth-buttons {
+    margin-left: 20px; /* Space before buttons */
+}
+
+.auth-buttons a {
+    color: #fff; /* Make the link color white */
+    text-decoration: none; /* Remove underline */
+    padding: 8px 12px; /* Add padding for a button-like appearance */
+    border-radius: 4px; /* Slightly rounded corners */
+    background-color: #555; /* Background color for the buttons */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.auth-buttons a:hover {
+    background-color: #666; /* Darker background on hover */
+}
+
+/* Main content styles */
+main {
+    margin-left: 250px; /* Adjust based on sidebar */
+    margin-top: 60px;
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Smooth transition for margin change */
+}
+
+/* Collapse menu */
+nav.collapsed ul {
+    display: none; /* Hide the list items in collapsed state */
+}
+
+nav.collapsed ul li a {
+    font-size: 0; /* Hide text */
+}
+
+nav.collapsed ul li a:before {
+    font-size: 18px;
+    content: ""; /* You can replace this with icons */
+}
+
+/* Search bar */
+header .search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    transition: width 0.3s ease;
+}
+
+header .search input {
+    width: 0; /* Start hidden */
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    visibility: hidden; /* Hide initially */
+}
+
+header .search.expanded input {
+    width: 100%; /* Full width when expanded */
+    opacity: 1;
+    visibility: visible; /* Show when expanded */
+}
+
+header .search .search-icon {
+    cursor: pointer;
+    margin-left: 10px; /* Space between search and icon */
+    font-size: 20px;
+}
+
+header .search.expanded .search-icon {
+    content: "❌"; /* Change icon to 'X' when expanded */
+}
+
