@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CharacterClassRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CharacterClassRepository::class)]
@@ -39,6 +41,18 @@ class CharacterClass
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imgIndex = null;
+
+    #[ORM\OneToMany(targetEntity: Skill::class, mappedBy: 'class')]
+    private Collection $skills;
+
+    #[ORM\OneToMany(targetEntity: Art::class, mappedBy: 'class')]
+    private Collection $art;
+
+    public function __construct()
+    {
+        $this->skills = new ArrayCollection();
+        $this->art = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -149,6 +163,66 @@ class CharacterClass
     public function setImgIndex(?string $imgIndex): static
     {
         $this->imgIndex = $imgIndex;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): static
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+            $skill->setClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): static
+    {
+        if ($this->skills->removeElement($skill)) {
+            // set the owning side to null (unless already changed)
+            if ($skill->getClass() === $this) {
+                $skill->setClass(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Art>
+     */
+    public function getArt(): Collection
+    {
+        return $this->art;
+    }
+
+    public function addArt(Art $art): static
+    {
+        if (!$this->art->contains($art)) {
+            $this->art->add($art);
+            $art->setClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArt(Art $art): static
+    {
+        if ($this->art->removeElement($art)) {
+            // set the owning side to null (unless already changed)
+            if ($art->getClass() === $this) {
+                $art->setClass(null);
+            }
+        }
 
         return $this;
     }

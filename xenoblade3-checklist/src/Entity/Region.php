@@ -21,9 +21,17 @@ class Region
     #[ORM\OneToMany(targetEntity: Area::class, mappedBy: 'region')]
     private Collection $areas;
 
+    #[ORM\OneToMany(targetEntity: Quest::class, mappedBy: 'region')]
+    private Collection $quests;
+
+    #[ORM\OneToMany(targetEntity: LandmarkLocation::class, mappedBy: 'region')]
+    private Collection $landmarkLocations;
+
     public function __construct()
     {
         $this->areas = new ArrayCollection();
+        $this->quests = new ArrayCollection();
+        $this->landmarkLocations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +75,66 @@ class Region
             // set the owning side to null (unless already changed)
             if ($area->getRegion() === $this) {
                 $area->setRegion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quest>
+     */
+    public function getQuests(): Collection
+    {
+        return $this->quests;
+    }
+
+    public function addQuest(Quest $quest): static
+    {
+        if (!$this->quests->contains($quest)) {
+            $this->quests->add($quest);
+            $quest->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuest(Quest $quest): static
+    {
+        if ($this->quests->removeElement($quest)) {
+            // set the owning side to null (unless already changed)
+            if ($quest->getRegion() === $this) {
+                $quest->setRegion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LandmarkLocation>
+     */
+    public function getLandmarkLocations(): Collection
+    {
+        return $this->landmarkLocations;
+    }
+
+    public function addLandmarkLocation(LandmarkLocation $landmarkLocation): static
+    {
+        if (!$this->landmarkLocations->contains($landmarkLocation)) {
+            $this->landmarkLocations->add($landmarkLocation);
+            $landmarkLocation->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLandmarkLocation(LandmarkLocation $landmarkLocation): static
+    {
+        if ($this->landmarkLocations->removeElement($landmarkLocation)) {
+            // set the owning side to null (unless already changed)
+            if ($landmarkLocation->getRegion() === $this) {
+                $landmarkLocation->setRegion(null);
             }
         }
 
