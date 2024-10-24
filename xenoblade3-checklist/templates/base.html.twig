@@ -7,7 +7,7 @@
     <meta name="keywords" content="HTML, CSS, Template">
     <meta name="author" content="Kriol368">
     <title>{% block title %}XC3 Checklist{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" {% block stylesheets %}href="{{ asset('css/style.css') }}"{% endblock %}>
 </head>
 <body>
 <header>
@@ -33,7 +33,7 @@
 
 <nav id="sidebar">
     <ul>
-        <li><a href="#">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="#">Section 1</a></li>
         <li><a href="#">Section 2</a></li>
     </ul>

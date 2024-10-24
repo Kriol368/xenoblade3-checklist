@@ -5,10 +5,17 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: "Helvetica Black Oblique";
+    src: url("../fonts/HelveticaBlackOblique.otf") format("opentype");
+    font-weight: bold;
+    font-style: oblique;
+}
+
 /* Layout for the page */
 body {
     display: flex;
-    font-family: Arial, sans-serif;
+    font-family: "Helvetica Black Oblique", "Arial", sans-serif;
 }
 
 nav {
@@ -132,35 +139,34 @@ nav.collapsed ul li a:before {
 
 /* Search bar */
 header .search {
-    flex: 1;
+    position: relative;
     display: flex;
     align-items: center;
-    transition: width 0.3s ease;
+    justify-content: flex-end;
+    margin-right: 20px; /* Ensure space between the login buttons */
 }
 
 header .search input {
-    width: 0; /* Start hidden */
+    width: 0; /* Hidden initially */
     padding: 8px;
     border: none;
     border-radius: 4px;
     opacity: 0;
-    transition: width 0.3s ease, opacity 0.3s ease;
-    visibility: hidden; /* Hide initially */
+    visibility: hidden;
+    transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    position: absolute;
+    right: 30px; /* Always position relative to the search icon */
 }
 
 header .search.expanded input {
-    width: 100%; /* Full width when expanded */
+    width: 135%; /* Set larger width when expanded */
     opacity: 1;
-    visibility: visible; /* Show when expanded */
+    visibility: visible;
 }
 
 header .search .search-icon {
     cursor: pointer;
-    margin-left: 10px; /* Space between search and icon */
     font-size: 20px;
+    position: relative; /* Keep it in the same position */
+    z-index: 10; /* Keep above the input */
 }
-
-header .search.expanded .search-icon {
-    content: "❌"; /* Change icon to 'X' when expanded */
-}
-
