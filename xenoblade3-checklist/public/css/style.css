@@ -159,7 +159,7 @@ header .search input {
 }
 
 header .search.expanded input {
-    width: 135%; /* Set larger width when expanded */
+    width: 125%; /* Set larger width when expanded */
     opacity: 1;
     visibility: visible;
 }
