@@ -137,6 +137,7 @@ nav.collapsed ul li a:before {
     content: ""; /* You can replace this with icons */
 }
 
+
 /* Search bar */
 header .search {
     position: relative;
@@ -169,4 +170,13 @@ header .search .search-icon {
     font-size: 20px;
     position: relative; /* Keep it in the same position */
     z-index: 10; /* Keep above the input */
+}
+
+
+#sidebar .food {
+    /* Position of the food icon in the spritesheet */
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+    width: 62px;
+    height: 48px;
+
 }
