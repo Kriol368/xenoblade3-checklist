@@ -26,8 +26,9 @@ nav {
     position: fixed;
     left: 0; /* Align to the left edge */
     top: 60px; /* Position below the header */
-    padding: 20px;
+    padding: 20px; /* Keep some padding for aesthetics */
     transition: width 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 /* Hide sidebar completely when collapsed */
