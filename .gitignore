@@ -1,54 +1,20 @@
-# Ignore Composer files
-/vendor/
-composer.lock
 
-# Ignore Symfony cache and logs
-/var/cache/
-/var/logs/
-/var/sessions/
-/var/tmp/
-/var/backups/
-
-# Ignore configuration files (if not committed)
-*.local.php
-
-# Ignore environment files
-.env
-.env.local
-.env.*.local
-
-# Ignore IDE specific files
-/.idea/
-/.vscode/
-
-# Ignore node modules (if using Node.js)
-node_modules/
-
-# Ignore build artifacts
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-public/build/
-public/uploads/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
 
-# Ignore macOS system files
-.DS_Store
-
-# Ignore other OS system files
-Thumbs.db
-ehthumbs.db
-Icon?
-Desktop.ini
-
-# Ignore PHPUnit result cache
+###> phpunit/phpunit ###
+/phpunit.xml
 .phpunit.result.cache
+###< phpunit/phpunit ###
 
-# Ignore phpstorm configuration files
-/.phpunit/
-
-# Ignore database dump files
-*.sql
-*.sql.gz
-
-# Ignore other common files
-*.log
-*.tmp
-
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
