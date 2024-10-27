@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project Description">
+    <meta name="keywords" content="HTML, CSS, Template">
+    <meta name="author" content="Kriol368">
+    <title>{% block title %}Log in!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+</head>
+
+{% block body %}
+    <div class="login-container">
+        <div class="login-card">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="logged-in-info">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <label for="username" class="form-label">Email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-input" autocomplete="email" required autofocus>
+
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="_password" id="password" class="form-input" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+
+                <div class="remember-me">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+
+                <button class="btn-primary" type="submit">Sign in</button>
+
+                <div class="register-link">
+                    <a href="{{ path('app_register') }}">Register</a>
+                </div>
+            </form>
+
+            <!-- Back to Home Button -->
+            <div class="back-link">
+                <a href="{{ path('app_home') }}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>

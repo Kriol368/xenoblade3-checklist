@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project Description">
+    <meta name="keywords" content="HTML, CSS, Template">
+    <meta name="author" content="Kriol368">
+    <title>{% block title %}Register!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+</head>
+
+{% block body %}
+    <div class="register-container">
+        <div class="register-card">
+            <h1 class="h3 mb-3 font-weight-normal">Create an Account</h1>
+
+            {{ form_start(registrationForm, { 'attr': {'class': 'form-horizontal'} }) }}
+
+            <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                {{ form_widget(registrationForm.name, { 'attr': {'class': 'form-input', 'placeholder': 'Full Name'} }) }}
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-input', 'placeholder': 'Email Address'} }) }}
+            </div>
+
+            <div class="form-group">
+                <label for="plainPassword" class="form-label">Password</label>
+                {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-input', 'placeholder': 'Password'} }) }}
+            </div>
+
+            <div class="terms">
+                {{ form_widget(registrationForm.agreeTerms, { 'attr': {'class': 'form-check-input'} }) }}
+                <label for="{{ registrationForm.agreeTerms.vars.id }}" class="form-check-label">
+                    I agree to the terms and conditions
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary">Register</button>
+
+            {{ form_end(registrationForm) }}
+
+            <div class="login-link">
+                <a href="{{ path('app_login') }}">Already have an account? Sign in</a>
+            </div>
+
+            <!-- Back to Home Button -->
+            <div class="back-link">
+                <a href="{{ path('app_home') }}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>
