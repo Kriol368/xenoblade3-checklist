@@ -1,10 +1,7 @@
-{# templates/food/list.html.twig #}
 {% extends 'base.html.twig' %}
-
-{% block title %}Food List{% endblock %}
-
+{% block title %}XC3 Checklist - Food{% endblock %}
 {% block body %}
-    <h1>Food List</h1>
+    <h1>Food Items</h1>
 
     <table>
         <thead>
@@ -15,58 +12,24 @@
         </thead>
         <tbody>
         {% for food in foods %}
-            <tr>
-                <td>
-                    <a href="#" class="food-item" data-id="{{ food.id }}" data-name="{{ food.name }}" data-effects="{{ food.effects }}" data-duration="{{ food.duration }}" data-location="{{ food.location }}" data-img-index="{{ food.imgIndex }}">
-                        {{ food.name }}
-                    </a>
-                </td>
+            <tr class="food-row" data-id="{{ food.id }}" data-name="{{ food.name }}" data-effects="{{ food.effects }}" data-duration="{{ food.duration }}" data-location="{{ food.location }}">
+                <td>{{ food.name }}</td>
                 <td>{{ food.effects }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <div id="foodDetailCard" class="food-detail-card" style="display: none;">
-        <h2 id="foodName"></h2>
-        <p><strong>Effects:</strong> <span id="foodEffects"></span></p>
-        <p><strong>Duration:</strong> <span id="foodDuration"></span></p>
-        <p><strong>Location:</strong> <span id="foodLocation"></span></p>
-        <p><strong>Image Index:</strong> <span id="foodImgIndex"></span></p>
-        <button id="closeCardButton">Close</button>
+    <!-- Card for displaying detailed food info -->
+    <div id="food-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="food-name"></h2>
+        <p><strong>Effects:</strong> <span id="food-effects"></span></p>
+        <p><strong>Duration:</strong> <span id="food-duration"></span></p>
+        <p><strong>Location:</strong> <span id="food-location"></span></p>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.food-item').forEach(item => {
-                item.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    console.log("Item clicked:", this.getAttribute('data-name'));
-
-                    const foodName = this.getAttribute('data-name');
-                    const foodEffects = this.getAttribute('data-effects');
-                    const foodDuration = this.getAttribute('data-duration');
-                    const foodLocation = this.getAttribute('data-location');
-                    const foodImgIndex = this.getAttribute('data-img-index');
-
-                    document.getElementById('foodName').textContent = foodName;
-                    document.getElementById('foodEffects').textContent = foodEffects;
-                    document.getElementById('foodDuration').textContent = foodDuration;
-                    document.getElementById('foodLocation').textContent = foodLocation;
-                    document.getElementById('foodImgIndex').textContent = foodImgIndex;
-
-                    document.getElementById('foodDetailCard').style.display = 'block';
-                });
-            });
-
-            document.getElementById('closeCardButton').addEventListener('click', function() {
-                document.getElementById('foodDetailCard').style.display = 'none';
-            });
-        });
-    </script>
-
-
+    <script src="{{ asset('js/food.js') }}"></script>
 {% endblock %}
