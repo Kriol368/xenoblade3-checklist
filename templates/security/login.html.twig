@@ -7,10 +7,11 @@
     <meta name="keywords" content="HTML, CSS, Template">
     <meta name="author" content="Kriol368">
     <title>{% block title %}Log in!{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/security.css') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
 
+<body>
 {% block body %}
     <div class="login-container">
         <div class="login-card">
@@ -57,4 +58,5 @@
         </div>
     </div>
 {% endblock %}
+</body>
 </html>
