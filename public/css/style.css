@@ -173,11 +173,82 @@ header .search .search-icon {
     z-index: 10; /* Keep above the input */
 }
 
-
-#sidebar .food {
-    /* Position of the food icon in the spritesheet */
+.home-icon {
     background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-    width: 62px;
-    height: 48px;
+}
+
+.food-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.art-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.challenge-mode-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.character-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.character-class-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.collectible-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.end-game-accessory-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.gauntlet-emblem-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.gem-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -264px -4px;
+}
+
+.hero-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.landmark-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.quest-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.skill-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.soul-tree-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+.unique-monster-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+}
+
+/* Common styles for all icons */
+#sidebar a span{
+    position: relative; /* Allow positioning of the icon */
+    width: 62px; /* Set width to match the icon */
+    height: 48px; /* Set height to match the icon */
+    display: inline-block; /* Make it inline-block to sit next to text */
+    margin-right: 8px; /* Space between icon and text */
+    vertical-align: middle; /* Align the icon with the text */
+}
+
+#sidebar a {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align icon and text */
 
 }
