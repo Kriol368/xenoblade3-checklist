@@ -252,3 +252,26 @@ header .search .search-icon {
     align-items: center; /* Align icon and text */
 
 }
+/* Add this CSS to your styles.css file */
+.food-detail-card {
+    position: fixed; /* Make it overlay */
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none; /* Initially hidden */
+}
+
+
+.food-detail-card h2 {
+    margin-top: 0;
+}
+
+.food-detail-card button {
+    margin-top: 10px;
+}

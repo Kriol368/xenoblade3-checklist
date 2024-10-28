@@ -1,20 +1,72 @@
+{# templates/food/list.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FoodController!{% endblock %}
+{% block title %}Food List{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Food List</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Effects</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for food in foods %}
+            <tr>
+                <td>
+                    <a href="#" class="food-item" data-id="{{ food.id }}" data-name="{{ food.name }}" data-effects="{{ food.effects }}" data-duration="{{ food.duration }}" data-location="{{ food.location }}" data-img-index="{{ food.imgIndex }}">
+                        {{ food.name }}
+                    </a>
+                </td>
+                <td>{{ food.effects }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/FoodController.php'|file_link(0) }}">src/Controller/FoodController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/food/index.html.twig'|file_link(0) }}">templates/food/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div id="foodDetailCard" class="food-detail-card" style="display: none;">
+        <h2 id="foodName"></h2>
+        <p><strong>Effects:</strong> <span id="foodEffects"></span></p>
+        <p><strong>Duration:</strong> <span id="foodDuration"></span></p>
+        <p><strong>Location:</strong> <span id="foodLocation"></span></p>
+        <p><strong>Image Index:</strong> <span id="foodImgIndex"></span></p>
+        <button id="closeCardButton">Close</button>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.food-item').forEach(item => {
+                item.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    console.log("Item clicked:", this.getAttribute('data-name'));
+
+                    const foodName = this.getAttribute('data-name');
+                    const foodEffects = this.getAttribute('data-effects');
+                    const foodDuration = this.getAttribute('data-duration');
+                    const foodLocation = this.getAttribute('data-location');
+                    const foodImgIndex = this.getAttribute('data-img-index');
+
+                    document.getElementById('foodName').textContent = foodName;
+                    document.getElementById('foodEffects').textContent = foodEffects;
+                    document.getElementById('foodDuration').textContent = foodDuration;
+                    document.getElementById('foodLocation').textContent = foodLocation;
+                    document.getElementById('foodImgIndex').textContent = foodImgIndex;
+
+                    document.getElementById('foodDetailCard').style.display = 'block';
+                });
+            });
+
+            document.getElementById('closeCardButton').addEventListener('click', function() {
+                document.getElementById('foodDetailCard').style.display = 'none';
+            });
+        });
+    </script>
+
+
 {% endblock %}
