@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("JavaScript loaded"); // Add this to confirm JS is loading
-    alert("Hello JavaScript!");
 
     document.querySelectorAll('.food-row').forEach(row => {
         row.addEventListener('click', () => {
@@ -9,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('food-effects').textContent = row.dataset.effects;
             document.getElementById('food-duration').textContent = row.dataset.duration + ' minutes';
             document.getElementById('food-location').textContent = row.dataset.location;
+
+            // Dynamically set the image path
+            const index = row.dataset.id.padStart(3, '0');
+            document.getElementById('food-img').src = `/img/food/strm_dish_thmb_${index}_0.png`;
 
             foodCard.style.display = 'block';
         });
