@@ -13,6 +13,9 @@
         <tbody>
         {% for hero in heroes %}
             <tr class="hero-row" data-id="{{ hero.id }}" data-name="{{ hero.name }}" data-class="{{ hero.class.name }}" data-imgIndex="{{ hero.imgIndex }}">
+                <td>
+                    <img src="{{ asset('img/characters/icon/icon_' ~ '%02d'|format(hero.imgIndex) ~ '.png') }}" alt="{{ hero.name }}">
+                </td>
                 <td>{{ hero.name }}</td>
                 <td>{{ hero.class.name }}</td>
             </tr>
