@@ -1,20 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CharacterClassController!{% endblock %}
+{% block title %}XC3 Checklist - Character Classes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Character Classes</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for characterClass in characterClasses %}
+            <tr class="character-class-row"
+                data-name="{{ characterClass.name }}"
+                data-role="{{ characterClass.role }}"
+                data-weapon="{{ characterClass.weapon }}"
+                data-nation="{{ characterClass.nation }}"
+                data-offense="{{ characterClass.offense }}"
+                data-defense="{{ characterClass.defense }}"
+                data-healing="{{ characterClass.healing }}"
+                data-difficulty="{{ characterClass.difficulty }}"
+                data-img-index="{{ characterClass.imgIndex }}">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/CharacterClassController.php'|file_link(0) }}">src/Controller/CharacterClassController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/character_class/index.html.twig'|file_link(0) }}">templates/character_class/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <td>
+                    <img src="{{ asset('img/classes/' ~ characterClass.imgIndex ~ '.png') }}" alt="{{ characterClass.name }}">
+                </td>
+                <td>{{ characterClass.name }}</td>
+                <td>
+                    <img src="{{ asset('img/roles/' ~ characterClass.role ~ '.png') }}" alt="{{ characterClass.role }}">
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Card for displaying detailed character class info -->
+    <div id="character-class-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="class-name"></h2>
+        <img src="" alt="" id="img-index" height="250px">
+        <img src="" alt="" id="role-img" height="100px">
+        <p><strong>Weapon:</strong> <span id="class-weapon"></span></p>
+        <p><strong>Nation:</strong> <span id="class-nation"></span></p>
+        <p><strong>Offense:</strong> <span id="class-offense"></span></p>
+        <p><strong>Defense:</strong> <span id="class-defense"></span></p>
+        <p><strong>Healing:</strong> <span id="class-healing"></span></p>
+        <p><strong>Difficulty:</strong> <span id="class-difficulty"></span></p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/character_class.js') }}"></script>
 {% endblock %}

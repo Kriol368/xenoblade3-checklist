@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             heroName.textContent = name;
             heroClass.textContent = heroClassData;
             const index = row.dataset.id.padStart(2, '0');
-            heroImg.src = `/img/characters/artwork/strm_hero_book_${index}_01_0.png`; // Adjust the path as needed
+            heroImg.src = `/img/characters/artwork/strm_hero_book_${index}_01_0.png`;
             heroImg.alt = name;
 
             heroCard.style.display = 'block';
