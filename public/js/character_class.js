@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const classCard = document.getElementById('character-class-card');
     const className = document.getElementById('class-name');
     const roleImg = document.getElementById('role-img');
-    const imgIndex = document.getElementById('img-index'); // New image element for imgIndex
+    const imgIndex = document.getElementById('img-index');
     const closeCardButton = document.getElementById('close-card');
 
     // New fields
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const classHealing = document.getElementById('class-healing');
     const classDifficulty = document.getElementById('class-difficulty');
 
+    // Add event listeners to each class row
     classRows.forEach(row => {
         row.addEventListener('click', function() {
             const name = row.dataset.name;
@@ -46,12 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Close the character class card
     closeCardButton.addEventListener('click', function() {
         classCard.style.display = 'none';
     });
 
-    const checkboxes = document.querySelectorAll('.status-checkbox');
+    // Select all checkboxes with class 'character-checkbox'
+    const checkboxes = document.querySelectorAll('.character-checkbox');
 
+    // Add event listeners to each checkbox
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             const row = this.closest('.character-class-row');
@@ -64,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest' // Necessary for Symfony's request handling
+                    'X-Requested-With': 'XMLHttpRequest', // Indicate that the request is AJAX
+                    'X-CSRF-Token': csrfToken // Include CSRF token in the headers
                 },
                 body: JSON.stringify({
                     field: field,

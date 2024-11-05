@@ -38,10 +38,13 @@
                 <td>
                     <img src="{{ asset('img/classes/' ~ characterClass.imgIndex ~ '.png') }}" alt="{{ characterClass.name }}">
                 </td>
+
                 <td>{{ characterClass.name }}</td>
+
                 <td>
                     <img src="{{ asset('img/roles/' ~ characterClass.role ~ '.png') }}" alt="{{ characterClass.role }}">
                 </td>
+
                 {% set attributes = ['unlocked', 'ascended', 'noah', 'mio', 'eunie', 'taion', 'lanz', 'sena'] %}
                 {% for attribute in attributes %}
                     <td>
@@ -49,7 +52,8 @@
                                class="character-checkbox"
                                data-attribute="{{ attribute }}"
                                data-id="{{ characterClass.id }}"
-                               {% if attribute == true %}checked{% endif %}>
+                               {% if attribute(characterClass, attribute) %}checked{% endif %}
+                               onchange="updateCharacterStatus(this)">
                     </td>
                 {% endfor %}
             </tr>
@@ -57,7 +61,6 @@
         </tbody>
     </table>
 
-    <!-- Card for displaying detailed character class info -->
     <div id="character-class-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>
         <h2 id="class-name"></h2>
@@ -73,5 +76,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        const csrfToken = '{{ csrf_token('update_character_status') }}'; // Generate the CSRF token for the update_character_status route
+    </script>
     <script src="{{ asset('js/character_class.js') }}"></script>
 {% endblock %}

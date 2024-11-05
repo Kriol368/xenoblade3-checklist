@@ -43,6 +43,18 @@ class UserCharacterClass
     #[ORM\Column(type: 'boolean')]
     private bool $sena;
 
+    public function __construct()
+    {
+        $this->unlocked = false; // or true, depending on your logic
+        $this->ascended = false;
+        $this->noah = false;
+        $this->mio = false;
+        $this->eunie = false;
+        $this->taion = false;
+        $this->lanz = false;
+        $this->sena = false;
+    }
+
     public function getUser(): User
     {
         return $this->user;
