@@ -49,4 +49,44 @@ document.addEventListener('DOMContentLoaded', function() {
     closeCardButton.addEventListener('click', function() {
         classCard.style.display = 'none';
     });
+
+    const checkboxes = document.querySelectorAll('.status-checkbox');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const row = this.closest('.character-class-row');
+            const characterId = row.dataset.characterId;
+            const field = this.dataset.field;
+            const value = this.checked ? 1 : 0;
+
+            // Send AJAX request to update database
+            fetch(`/update-character-status/${characterId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest' // Necessary for Symfony's request handling
+                },
+                body: JSON.stringify({
+                    field: field,
+                    value: value
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        console.log(`${field} updated successfully for character ID: ${characterId}`);
+                    } else {
+                        alert('Failed to update status');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
 });
