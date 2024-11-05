@@ -29,14 +29,17 @@ class CharacterClassController extends AbstractController
         $this->characterClassRepository = $characterClassRepository;
         $this->userCharacterClassRepository = $userCharacterClassRepository;
         $this->entityManager = $entityManager;
-        $this->csrfTokenManager = $csrfTokenManager; // Store it in a property for use
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     #[Route('/characterClass', name: 'app_character_class')]
     public function index(): Response
     {
-        // Assuming you have a way to get the current user
+        // Retrieve the current user
         $currentUser = $this->getUser();
+        if (!$currentUser) {
+            throw $this->createAccessDeniedException('User not logged in');
+        }
 
         // Fetch all character classes
         $characterClasses = $this->characterClassRepository->findAll();
@@ -44,21 +47,42 @@ class CharacterClassController extends AbstractController
         // Fetch UserCharacterClass records for the current user
         $userCharacterClasses = $this->userCharacterClassRepository->findBy(['user' => $currentUser]);
 
+        // Create a mapping of characterClassId to UserCharacterClass
+        $userCharacterClassesMap = [];
+        foreach ($userCharacterClasses as $userCharacterClass) {
+            $charClassId = $userCharacterClass->getCharacterClass()->getId();
+            $userCharacterClassesMap[$charClassId] = $userCharacterClass;
+        }
+
         return $this->render('character_class/index.html.twig', [
             'characterClasses' => $characterClasses,
-            'userCharacterClasses' => $userCharacterClasses,
+            'userCharacterClassesMap' => $userCharacterClassesMap,
         ]);
     }
 
-    #[Route('/update-character-status/{id}', name: 'update_character_status', methods: ['POST'])]
-    public function updateStatus(int $id, Request $request): Response
+    #[Route('/update-character-status/{characterClassId}', name: 'update_character_status', methods: ['POST'])]
+    public function updateStatus(int $characterClassId, Request $request): Response
     {
-        // Retrieve the UserCharacterClass entity
-        $userCharacterClass = $this->userCharacterClassRepository->find($id);
+        // Retrieve the current user
+        $currentUser = $this->getUser();
+        if (!$currentUser) {
+            return $this->json(['success' => false, 'error' => 'User not logged in'], Response::HTTP_FORBIDDEN);
+        }
+
+        // Fetch the UserCharacterClass entity for the current user and the given character class
+        $userCharacterClass = $this->userCharacterClassRepository->findOneBy([
+            'user' => $currentUser,
+            'characterClass' => $characterClassId
+        ]);
 
         if (!$userCharacterClass) {
-            $this->addFlash('error', 'User character class not found');
-            return $this->redirectToRoute('app_character_class');
+            return $this->json(['success' => false, 'error' => 'User character class not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        // Validate CSRF token
+        $csrfToken = $request->request->get('_csrf_token');
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('update_character_status', $csrfToken))) {
+            return $this->json(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         }
 
         // Get the field and its new value from the form data
@@ -71,19 +95,17 @@ class CharacterClassController extends AbstractController
         if ($field && in_array($field, $validFields, true)) {
             $setter = 'set' . ucfirst($field);
             if (method_exists($userCharacterClass, $setter)) {
+                // Update the field's value
                 $userCharacterClass->$setter((bool)$value);
                 $this->entityManager->persist($userCharacterClass);
                 $this->entityManager->flush();
 
-                $this->addFlash('success', ucfirst($field) . ' status updated');
+                return $this->json(['success' => true, 'message' => ucfirst($field) . ' status updated']);
             } else {
-                $this->addFlash('error', 'Invalid field');
+                return $this->json(['success' => false, 'error' => 'Invalid field'], Response::HTTP_BAD_REQUEST);
             }
-        } else {
-            $this->addFlash('error', 'Invalid request');
         }
 
-        return $this->redirectToRoute('app_character_class');
+        return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
-
 }
