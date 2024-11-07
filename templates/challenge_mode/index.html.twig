@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello ChallengeModeController!{% endblock %}
-
+{% block title %}XC3 Checklist - Challenge Modes{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Challenge Modes</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Difficulty</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for challengeMode in challengeModes %}
+            <tr class="challenge-mode-row" data-id="{{ challengeMode.id }}" data-name="{{ challengeMode.name }}" data-difficulty="{{ challengeMode.difficulty }}" data-waves="{{ challengeMode.waves }}" data-levelRestriction="{{ challengeMode.levelRestriction }}">
+                <td>{{ challengeMode.name }}</td>
+                <td>{{ challengeMode.difficulty }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/ChallengeModeController.php'|file_link(0) }}">src/Controller/ChallengeModeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/challenge_mode/index.html.twig'|file_link(0) }}">templates/challenge_mode/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- Card for displaying detailed challenge mode info -->
+    <div id="challenge-mode-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="challenge-mode-name"></h2>
+        <p><strong>Difficulty:</strong> <span id="challenge-mode-difficulty"></span></p>
+        <p><strong>Waves:</strong> <span id="challenge-mode-waves"></span></p>
+        <p><strong>Level Restriction:</strong> <span id="challenge-mode-levelRestriction"></span></p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/challenge_mode.js') }}"></script>
 {% endblock %}
