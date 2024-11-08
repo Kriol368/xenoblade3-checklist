@@ -20,11 +20,12 @@ class ChallengeModeController extends AbstractController
     private CsrfTokenManagerInterface $csrfTokenManager;
 
     public function __construct(
-        ChallengeModeRepository $challengeModeRepository,
+        ChallengeModeRepository     $challengeModeRepository,
         UserChallengeModeRepository $userChallengeModeRepository,
-        EntityManagerInterface $entityManager,
-        CsrfTokenManagerInterface $csrfTokenManager
-    ) {
+        EntityManagerInterface      $entityManager,
+        CsrfTokenManagerInterface   $csrfTokenManager
+    )
+    {
         $this->challengeModeRepository = $challengeModeRepository;
         $this->userChallengeModeRepository = $userChallengeModeRepository;
         $this->entityManager = $entityManager;
