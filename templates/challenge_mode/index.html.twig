@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}XC3 Checklist - Challenge Modes{% endblock %}
+
 {% block body %}
     <h1>Challenge Modes</h1>
 
@@ -16,26 +17,29 @@
         <tbody>
         {% for challengeMode in challengeModes %}
             {% set userChallengeMode = userChallengeModeMap[challengeMode.id] ?? null %}
-            <tr class="challenge-mode-row" data-id="{{ challengeMode.id }}" data-name="{{ challengeMode.name }}"
-                data-difficulty="{{ challengeMode.difficulty }}" data-waves="{{ challengeMode.waves }}"
-                data-levelRestriction="{{ challengeMode.levelRestriction }}">
+            <tr class="challenge-mode-row"
+                data-id="{{ challengeMode.id }}"
+                data-name="{{ challengeMode.name }}"
+                data-difficulty="{{ challengeMode.difficulty }}"
+                data-waves="{{ challengeMode.waves }}"
+                data-level-restriction="{{ challengeMode.levelRestriction }}">
                 <td>{{ challengeMode.name }}</td>
                 <td>{{ challengeMode.difficulty }}</td>
-                {% set attributes = ['easy','normal','hard'] %}
+                {% set attributes = ['easy', 'normal', 'hard'] %}
                 {% for attribute in attributes %}
                     <td>
                         <input type="checkbox"
-                        class="challenge-mode-checkbox">
-                        data-attribute="{{attribute}}"
-                        data-id="{{ challengeMode.id }}"
-                        {%  if attribute == 'easy' and userChallengeMode.isEasy %}
-                            checked
-                        {% elseif attribute == 'normal' and userChallengeMode.isNormal %}
-                            checked
-                        {% elseif attribute == 'hard' and userChallengeMode.isHard %}
-                            checked
-                        {% endif %}
-                        onchange="updateChallengeModeStatus(this)">
+                               class="challenge-mode-checkbox"
+                               data-attribute="{{ attribute }}"
+                               data-id="{{ challengeMode.id }}"
+                                {% if attribute == 'easy' and userChallengeMode.isEasy %}
+                                    checked
+                                {% elseif attribute == 'normal' and userChallengeMode.isNormal %}
+                                    checked
+                                {% elseif attribute == 'hard' and userChallengeMode.isHard %}
+                                    checked
+                                {% endif %}
+                               onchange="updateChallengeModeStatus(this)">
                     </td>
                 {% endfor %}
             </tr>

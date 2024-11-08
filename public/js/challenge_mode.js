@@ -8,27 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("challenge-mode-name").textContent = row.dataset.name;
             document.getElementById("challenge-mode-difficulty").textContent = row.dataset.difficulty;
             document.getElementById("challenge-mode-waves").textContent = row.dataset.waves;
-            document.getElementById("challenge-mode-levelRestriction").textContent = row.dataset.levelrestriction;
-
+            document.getElementById("challenge-mode-levelRestriction").textContent = row.dataset.levelRestriction;
             card.style.display = "block";
         });
     });
-
 
     closeCardBtn.addEventListener("click", () => {
         card.style.display = "none";
     });
 
-
-
     const checkboxes = document.querySelectorAll('.challenge-mode-checkbox');
-
-    // Add event listeners to each checkbox
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function (event) {
             event.stopPropagation();
-
-            const characterId = this.dataset.id;
+            const challengeModeId = this.dataset.id;
             const field = this.dataset.attribute;
             const value = this.checked ? 1 : 0;
 
@@ -37,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append('value', value);
             formData.append('_csrf_token', csrfToken);
 
-            fetch(`/update-challenge-status/${characterId}`, {
+            fetch(`/update-challenge-status/${challengeModeId}`, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -46,9 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        console.log(data.message);
-                    } else {
+                    if (!data.success) {
                         alert(data.error || 'Failed to update status');
                         this.checked = !this.checked;
                     }
@@ -60,9 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         });
     });
-
-
-
-
-
 });
