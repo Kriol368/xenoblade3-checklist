@@ -12,7 +12,9 @@
         </thead>
         <tbody>
         {% for challengeMode in challengeModes %}
-            <tr class="challenge-mode-row" data-id="{{ challengeMode.id }}" data-name="{{ challengeMode.name }}" data-difficulty="{{ challengeMode.difficulty }}" data-waves="{{ challengeMode.waves }}" data-levelRestriction="{{ challengeMode.levelRestriction }}">
+            <tr class="challenge-mode-row" data-id="{{ challengeMode.id }}" data-name="{{ challengeMode.name }}"
+                data-difficulty="{{ challengeMode.difficulty }}" data-waves="{{ challengeMode.waves }}"
+                data-levelRestriction="{{ challengeMode.levelRestriction }}">
                 <td>{{ challengeMode.name }}</td>
                 <td>{{ challengeMode.difficulty }}</td>
             </tr>

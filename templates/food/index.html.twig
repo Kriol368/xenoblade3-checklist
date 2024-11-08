@@ -12,7 +12,8 @@
         </thead>
         <tbody>
         {% for food in foods %}
-            <tr class="food-row" data-id="{{ food.id }}" data-name="{{ food.name }}" data-effects="{{ food.effects }}" data-duration="{{ food.duration }}" data-location="{{ food.location }}">
+            <tr class="food-row" data-id="{{ food.id }}" data-name="{{ food.name }}" data-effects="{{ food.effects }}"
+                data-duration="{{ food.duration }}" data-location="{{ food.location }}">
                 <td>{{ food.name }}</td>
                 <td>{{ food.effects }}</td>
             </tr>

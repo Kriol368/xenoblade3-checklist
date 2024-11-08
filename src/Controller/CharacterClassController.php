@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\CharacterClass;
 use App\Repository\CharacterClassRepository;
 use App\Repository\UserCharacterClassRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,8 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class CharacterClassController extends AbstractController
 {
@@ -21,11 +20,12 @@ class CharacterClassController extends AbstractController
     private CsrfTokenManagerInterface $csrfTokenManager;
 
     public function __construct(
-        CharacterClassRepository $characterClassRepository,
+        CharacterClassRepository     $characterClassRepository,
         UserCharacterClassRepository $userCharacterClassRepository,
-        EntityManagerInterface $entityManager,
-        CsrfTokenManagerInterface $csrfTokenManager // Inject CSRF token manager
-    ) {
+        EntityManagerInterface       $entityManager,
+        CsrfTokenManagerInterface    $csrfTokenManager // Inject CSRF token manager
+    )
+    {
         $this->characterClassRepository = $characterClassRepository;
         $this->userCharacterClassRepository = $userCharacterClassRepository;
         $this->entityManager = $entityManager;

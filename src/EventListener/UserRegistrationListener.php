@@ -2,25 +2,25 @@
 // src/EventListener/UserRegistrationListener.php
 namespace App\EventListener;
 
-use App\Entity\User;
-use App\Entity\Gem;
-use App\Entity\UserGem;
-use App\Entity\SoulTree;
-use App\Entity\UserSoulTree;
 use App\Entity\ChallengeMode;
-use App\Entity\UserChallengeMode;
 use App\Entity\CharacterClass;
-use App\Entity\UserCharacterClass;
 use App\Entity\GauntletEmblem;
-use App\Entity\UserGauntletEmblem;
+use App\Entity\Gem;
 use App\Entity\LandmarkLocation;
-use App\Entity\UserLandmarkLocation;
 use App\Entity\Quest;
-use App\Entity\UserQuest;
+use App\Entity\SoulTree;
 use App\Entity\UniqueMonster;
+use App\Entity\User;
+use App\Entity\UserChallengeMode;
+use App\Entity\UserCharacterClass;
+use App\Entity\UserGauntletEmblem;
+use App\Entity\UserGem;
+use App\Entity\UserLandmarkLocation;
+use App\Entity\UserQuest;
+use App\Entity\UserSoulTree;
 use App\Entity\UserUniqueMonster;
-use Doctrine\ORM\Event\PostPersistEventArgs;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Event\PostPersistEventArgs;
 
 class UserRegistrationListener
 {

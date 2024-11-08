@@ -37,7 +37,8 @@
                 data-img-index="{{ characterClass.imgIndex }}">
 
                 <td>
-                    <img src="{{ asset('img/classes/' ~ characterClass.imgIndex ~ '.png') }}" alt="{{ characterClass.name }}">
+                    <img src="{{ asset('img/classes/' ~ characterClass.imgIndex ~ '.png') }}"
+                         alt="{{ characterClass.name }}">
                 </td>
 
                 <td>{{ characterClass.name }}</td>
@@ -98,7 +99,7 @@
         const csrfToken = '{{ csrf_token('update_character_status') }}'; // Generate the CSRF token for the update_character_status route
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const classRows = document.querySelectorAll('.character-class-row');
             const classCard = document.getElementById('character-class-card');
             const className = document.getElementById('class-name');
@@ -115,7 +116,7 @@
             const classDifficulty = document.getElementById('class-difficulty');
 
             classRows.forEach(row => {
-                row.addEventListener('click', function(event) {
+                row.addEventListener('click', function (event) {
                     // Prevent the row click from triggering when clicking on the checkbox
                     if (event.target.tagName.toLowerCase() === 'input') {
                         return;
@@ -151,7 +152,7 @@
                 });
             });
 
-            closeCardButton.addEventListener('click', function() {
+            closeCardButton.addEventListener('click', function () {
                 classCard.style.display = 'none';
             });
 
@@ -160,7 +161,7 @@
 
             // Add event listeners to each checkbox
             checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function(event) {
+                checkbox.addEventListener('change', function (event) {
                     event.stopPropagation(); // Prevent the row click event
 
                     const characterId = this.dataset.id;
