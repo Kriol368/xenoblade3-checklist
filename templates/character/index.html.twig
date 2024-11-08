@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello CharacterController!{% endblock %}
-
+{% block title %}XC3 Checklist - Characters{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Characters</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Class</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for character in characters %}
+            <tr class="character-row" data-id="{{ character.id }}" data-name="{{ character.name }}" data-class="{{ character.class.name }}" data-imgIndex="{{ character.imgIndex }}">
+                <td>
+                    <img src="{{ asset('img/characters/icon/icon_' ~ '%02d'|format(character.imgIndex) ~ '.png') }}" alt="{{ character.name }}">
+                </td>
+                <td>{{ character.name }}</td>
+                <td>{{ character.class.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/CharacterController.php'|file_link(0) }}">src/Controller/CharacterController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/character/index.html.twig'|file_link(0) }}">templates/character/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- Card for displaying detailed character info -->
+    <div id="character-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="character-name"></h2>
+        <img src="" alt="" id="character-img" height="250px">
+        <p><strong>Class:</strong> <span id="character-class"></span></p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/character.js') }}"></script>
 {% endblock %}
