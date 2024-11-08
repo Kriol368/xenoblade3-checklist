@@ -8,15 +8,36 @@
         <tr>
             <th>Name</th>
             <th>Difficulty</th>
+            <th>Easy</th>
+            <th>Normal</th>
+            <th>Hard</th>
         </tr>
         </thead>
         <tbody>
         {% for challengeMode in challengeModes %}
+            {% set userChallengeMode = userChallengeModeMap[challengeMode.id] ?? null %}
             <tr class="challenge-mode-row" data-id="{{ challengeMode.id }}" data-name="{{ challengeMode.name }}"
                 data-difficulty="{{ challengeMode.difficulty }}" data-waves="{{ challengeMode.waves }}"
                 data-levelRestriction="{{ challengeMode.levelRestriction }}">
                 <td>{{ challengeMode.name }}</td>
                 <td>{{ challengeMode.difficulty }}</td>
+                {% set attributes = ['easy','normal','hard'] %}
+                {% for attribute in attributes %}
+                    <td>
+                        <input type="checkbox"
+                        class="challenge-mode-checkbox">
+                        data-attribute="{{attribute}}"
+                        data-id="{{ challengeMode.id }}"
+                        {%  if attribute == 'easy' and userChallengeMode.isEasy %}
+                            checked
+                        {% elseif attribute == 'normal' and userChallengeMode.isNormal %}
+                            checked
+                        {% elseif attribute == 'hard' and userChallengeMode.isHard %}
+                            checked
+                        {% endif %}
+                        onchange="updateChallengeModeStatus(this)">
+                    </td>
+                {% endfor %}
             </tr>
         {% endfor %}
         </tbody>
@@ -31,7 +52,9 @@
         <p><strong>Level Restriction:</strong> <span id="challenge-mode-levelRestriction"></span></p>
     </div>
 {% endblock %}
-
 {% block javascripts %}
+    <script>
+        const csrfToken = '{{ csrf_token('update_challenge_status') }}'; // Generate the CSRF token for the update_character_status route
+    </script>
     <script src="{{ asset('js/challenge_mode.js') }}"></script>
 {% endblock %}

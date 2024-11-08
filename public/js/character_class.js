@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
         classCard.style.display = 'none';
     });
 
+
+
     // Select all checkboxes with class 'character-checkbox'
     const checkboxes = document.querySelectorAll('.character-checkbox');
 
