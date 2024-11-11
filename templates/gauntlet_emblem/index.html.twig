@@ -15,13 +15,16 @@
     {% for gauntletEmblem in gauntletEmblems %}
     {% set userGauntletEmblems = userGauntletEmblemMap[gauntletEmblem.id] ?? null %}
     <tr class="gauntlet-emblem-row"
-        data-id="{{ challengeMode.id }}"
-        data-name="{{ challengeMode.name }}"
-        data-difficulty="{{ challengeMode.difficulty }}"
-        data-waves="{{ challengeMode.waves }}"
-        data-level-restriction="{{ challengeMode.levelRestriction }}">
-        <td>{{ challengeMode.name }}</td>
-        <td>{{ challengeMode.difficulty }}</td>
+        data-id="{{ gauntletEmblem.id }}"
+        data-name="{{ gauntletEmblem.name }}"
+        data-rarity="{{ gauntletEmblem.rarity }}"
+        data-description="{{ gauntletEmblem.description }}"
+        data-effects="{{ gauntletEmblem.effects }}"
+        data-img-index="{{ gauntletEmblem.imgIndex }}">
+        <td>{{ gauntletEmblem.name }}</td>
+        <td>{{ gauntletEmblem.rarity }}</td>
+        <td>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
