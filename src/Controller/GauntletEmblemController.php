@@ -41,18 +41,28 @@ class GauntletEmblemController extends AbstractController
             throw $this->createAccessDeniedException('User not logged in');
         }
 
+        // Fetch all gauntlet emblems
         $gauntletEmblems = $this->gauntletEmblemRepository->findAll();
+
+        // Fetch user gauntlet emblems and map them by gauntletEmblem id
         $userGauntletEmblems = $this->userGauntletEmblemRepository->findBy(['user' => $currentUser]);
         $userGauntletEmblemMap = [];
 
+        // Map gauntletEmblem id to their corresponding userGauntletEmblem entity with level
         foreach ($userGauntletEmblems as $userGauntletEmblem) {
-            $userGauntletEmblemMap[$userGauntletEmblem->getGauntletEmblem()->getId()] = $userGauntletEmblem;
+            $gauntletEmblemId = $userGauntletEmblem->getGauntletEmblem()->getId();
+            $userGauntletEmblemMap[$gauntletEmblemId] = [
+                'userGauntletEmblem' => $userGauntletEmblem,  // Store the full UserGauntletEmblem object
+                'level' => $userGauntletEmblem->getLevel()   // Store the level directly
+            ];
         }
+
         return $this->render('gauntlet_emblem/index.html.twig', [
             'gauntletEmblems' => $gauntletEmblems,
             'userGauntletEmblemMap' => $userGauntletEmblemMap
         ]);
     }
+
 
     #[Route('/update-emblem-status/{gauntletEmblemId}', name: 'update_emblem_status', methods: ['POST'])]
     public function updateStatus(int $gauntletEmblemId, Request $request): Response
