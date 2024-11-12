@@ -3,35 +3,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.getElementById("gauntlet-emblem-card");
     const closeCardBtn = document.getElementById("close-card");
 
+    // Open card on row click
     rows.forEach(row => {
         row.addEventListener("click", () => {
-            // Set the card's details from the selected row
             document.getElementById("gauntlet-emblem-name").textContent = row.dataset.name;
+            document.getElementById("gauntlet-emblem-rarity").textContent = row.dataset.rarity;
             document.getElementById("gauntlet-emblem-description").textContent = row.dataset.description;
             document.getElementById("gauntlet-emblem-effects").textContent = row.dataset.effects;
+            document.getElementById("gauntlet-emblem-img").src = "/img/gauntlet/" + "" /*row.dataset.imgIndex*/ + 'icon_emblem_0.png';
 
-            // Set the level select field to match the current level
-            const levelSelect = document.getElementById("gauntlet-emblem-level-select");
-            levelSelect.value = row.dataset.level; // Set to the current emblem level
-
-            // Show the card
             card.style.display = "block";
         });
     });
 
+    // Close card
     closeCardBtn.addEventListener("click", () => {
-        card.style.display = "none"; // Close the card
+        card.style.display = "none";
     });
 
-    const levelSelects = document.querySelectorAll('.gauntlet-emblem-level');
-    levelSelects.forEach(select => {
-        select.addEventListener('change', (event) => {
-            const emblemId = select.dataset.id;
-            const newLevel = select.value;
+    // Handle level change
+    const levelInputs = document.querySelectorAll('.gauntlet-emblem-level');
+    levelInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const emblemId = this.dataset.id;
+            const level = this.value;
 
             const formData = new FormData();
-            formData.append('level', newLevel); // Send the new level
-            formData.append('_csrf_token', csrfToken); // CSRF token
+            formData.append('level', level);
+            formData.append('_csrf_token', document.getElementById('csrf-token').value);
 
             fetch(`/update-gauntlet-emblem-level/${emblemId}`, {
                 method: 'POST',
@@ -43,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if (!data.success) {
-                        alert(data.error || 'Failed to update the emblem level.');
+                        alert(data.error || 'Failed to update level');
+                        this.value = this.oldValue;  // Revert to old value on failure
                     }
                 })
                 .catch(error => {

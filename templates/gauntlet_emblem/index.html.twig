@@ -1,62 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}XC3 Checklist - Gauntlet Emblems{% endblock %}
+{% block title %}Gauntlet Emblems{% endblock %}
 
 {% block body %}
     <h1>Gauntlet Emblems</h1>
 
+    <!-- Table with Image, Name, and Level -->
     <table>
         <thead>
         <tr>
+            <th>Image</th>
             <th>Name</th>
-            <th>Rarity</th>
             <th>Level</th>
         </tr>
         </thead>
         <tbody>
         {% for gauntletEmblem in gauntletEmblems %}
-            {% set userGauntletEmblem = userGauntletEmblemMap[gauntletEmblem.id] ?? null %}
             <tr class="gauntlet-emblem-row"
                 data-id="{{ gauntletEmblem.id }}"
                 data-name="{{ gauntletEmblem.name }}"
                 data-rarity="{{ gauntletEmblem.rarity }}"
                 data-description="{{ gauntletEmblem.description }}"
                 data-effects="{{ gauntletEmblem.effects }}"
-                data-img-index="{{ gauntletEmblem.imgIndex }}"
-                data-level="{{ userGauntletEmblem.level ?? 0 }}"> <!-- Default to level 0 if not set -->
+                data-img-index="{{ gauntletEmblem.imgIndex }}">
+                <td><img src="{{ asset('img/gauntlet_emblems/' ~ gauntletEmblem.imgIndex ~ '.png') }}" alt="{{ gauntletEmblem.name }}" width="50"></td>
                 <td>{{ gauntletEmblem.name }}</td>
-                <td>{{ gauntletEmblem.rarity }}</td>
                 <td>
-                    <!-- Level selector for each emblem -->
-                    <select class="gauntlet-emblem-level" data-id="{{ gauntletEmblem.id }}" data-current-level="{{ userGauntletEmblem.level ?? 0 }}">
-                        <option value="0" {% if userGauntletEmblem.level == 0 %}selected{% endif %}>0</option>
-                        <option value="1" {% if userGauntletEmblem.level == 1 %}selected{% endif %}>1</option>
-                        <option value="2" {% if userGauntletEmblem.level == 2 %}selected{% endif %}>2</option>
-                        <option value="3" {% if userGauntletEmblem.level == 3 %}selected{% endif %}>3</option>
-                        <option value="4" {% if userGauntletEmblem.level == 4 %}selected{% endif %}>4</option>
-                        <option value="5" {% if userGauntletEmblem.level == 5 %}selected{% endif %}>5</option>
-                    </select>
+                    <input type="number" min="0" max="3" class="gauntlet-emblem-level"
+                           data-id="{{ gauntletEmblem.id }}"
+                           value="{{ gauntletEmblem.level ?? 0 }}">
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <!-- Hidden card to display Gauntlet Emblem details -->
-    <div id="gauntlet-emblem-card" style="display: none;">
+    <!-- Card for displaying full gauntlet emblem details -->
+    <div id="gauntlet-emblem-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
         <h2 id="gauntlet-emblem-name"></h2>
-        <p id="gauntlet-emblem-description"></p>
-        <p id="gauntlet-emblem-effects"></p>
-        <label for="gauntlet-emblem-level">Level:</label>
-        <select id="gauntlet-emblem-level-select">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <button id="close-card">Close</button>
+        <p><strong>Rarity:</strong> <span id="gauntlet-emblem-rarity"></span></p>
+        <p><strong>Description:</strong> <span id="gauntlet-emblem-description"></span></p>
+        <p><strong>Effects:</strong> <span id="gauntlet-emblem-effects"></span></p>
+        <img id="gauntlet-emblem-img" src="" alt="Emblem Image" width="100">
     </div>
 
 {% endblock %}
