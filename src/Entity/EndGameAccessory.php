@@ -25,6 +25,9 @@ class EndGameAccessory
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $category = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $imgIndex = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class EndGameAccessory
     public function setCategory(?string $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getImgIndex(): ?int
+    {
+        return $this->imgIndex;
+    }
+
+    public function setImgIndex(?int $imgIndex): static
+    {
+        $this->imgIndex = $imgIndex;
 
         return $this;
     }

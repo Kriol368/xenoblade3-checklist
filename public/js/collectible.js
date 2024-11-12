@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
     collectibleRows.forEach(row => {
         row.addEventListener('click', function () {
             const name = row.dataset.name || 'Unknown';
-            const collectibleRarityData = row.dataset.class || 'Unknown';
+            const rarity = row.dataset.rarity || 'Unknown';
             const location = row.dataset.location || 'Unknown';
             const imgIndex = (row.dataset.imgIndex || '0').padStart(1, '0');  // Ensures 3-digit formatting
 
             collectibleName.textContent = name;
-            collectibleRarity.textContent = collectibleRarityData;
+            collectibleRarity.textContent = rarity;
             collectibleLocation.textContent = location;
             collectibleImg.src = `/img/collectibles/icon_item_glow_g_${imgIndex}.png`;
             collectibleImg.alt = name;
