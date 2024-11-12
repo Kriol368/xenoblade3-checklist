@@ -22,6 +22,9 @@ class   Collectible
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $imgIndex = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class   Collectible
     public function setLocation(?string $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getImgIndex(): ?int
+    {
+        return $this->imgIndex;
+    }
+
+    public function setImgIndex(?int $imgIndex): static
+    {
+        $this->imgIndex = $imgIndex;
 
         return $this;
     }

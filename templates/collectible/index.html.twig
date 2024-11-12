@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello CollectibleController!{% endblock %}
-
+{% block title %}XC3 Checklist - Collectibles{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Collectibles</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for collectible in collectibles %}
+            <tr class="collectible-row" data-id="{{ collectible.id }}" data-name="{{ collectible.name }}" data-rarity="{{ collectible.rarity }}" data-location="{{ collectible.location }}" data-imgIndex="{{ collectible.imgIndex }}">
+                <td>
+                    <img src="{{ asset('img/collectibles/icon_item_glow_g_' ~ collectible.imgIndex ~ '.png') }}" alt="{{ collectible.name }}">
+                </td>
+                <td>{{ collectible.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/CollectibleController.php'|file_link(0) }}">src/Controller/CollectibleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/collectible/index.html.twig'|file_link(0) }}">templates/collectible/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- Card for displaying detailed collectible info -->
+    <div id="collectible-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="collectible-name"></h2>
+        <img src="" alt="" id="collectible-img" height="250px">
+        <p><strong>Rarity:</strong> <span id="collectible-rarity"></span></p>
+        <p><strong>Location:</strong> <span id="collectible-location"></span></p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/collectible.js') }}"></script>
 {% endblock %}
