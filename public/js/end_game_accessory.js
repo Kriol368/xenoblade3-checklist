@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const name = row.dataset.name || 'Unknown';
             const effect = row.dataset.effect || 'Unknown';
             const location = row.dataset.location || 'Unknown';
-            const imgIndex = (row.dataset.imgIndex || '0').padStart(1, '0');  // Ensures 3-digit formatting
+            const imgIndex = row.dataset.imgIndex || 0;
 
             accessoryName.textContent = name;
             accessoryEffect.textContent = effect;
             accessoryLocation.textContent = location;
-            accessoryImg.src = `/img/accessories/icon_item_glow_g_${imgIndex}.png`;
+            accessoryImg.src = `/img/accessories/icon_accessory_glow_r_${imgIndex}.png`;
             accessoryImg.alt = name;
 
             accessoryCard.style.display = 'block';
