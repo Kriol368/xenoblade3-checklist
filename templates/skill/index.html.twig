@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello SkillController!{% endblock %}
-
+{% block title %}XC3 Checklist - Skills{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Skills</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Class</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for skill in skills %}
+            <tr class="skill-row" data-id="{{ skill.id }}" data-name="{{ skill.name }}" data-class="{{ skill.class.name }}" data-effect="{{ skill.effect }}" data-master-level="{{ skill.masterLevel }}" data-imgIndex="{{ skill.imgIndex }}">
+                <td>
+                    <img src="{{ asset('img/skills/icon_skill3_' ~ skill.imgIndex ~ '.png') }}" alt="{{ skill.name }}">
+                </td>
+                <td>{{ skill.name }}</td>
+                <td>{{ skill.class.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/SkillController.php'|file_link(0) }}">src/Controller/SkillController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/skill/index.html.twig'|file_link(0) }}">templates/skill/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- Card for displaying detailed skill info -->
+    <div id="skill-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="skill-name"></h2>
+        <img src="" alt="" id="skill-img" height="250px">
+        <p><strong>Effect:</strong> <span id="skill-effect"></span></p>
+        <p><strong>Master Level:</strong> <span id="skill-master-level"></span></p>
+        <p><strong>Class:</strong> <span id="skill-class"></span></p>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/skill.js') }}"></script>
 {% endblock %}

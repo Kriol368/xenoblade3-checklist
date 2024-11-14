@@ -14,7 +14,7 @@
         {% for collectible in collectibles %}
             <tr class="collectible-row" data-id="{{ collectible.id }}" data-name="{{ collectible.name }}" data-rarity="{{ collectible.rarity }}" data-location="{{ collectible.location }}" data-img-index="{{ collectible.imgIndex }}">
                 <td>
-                    <img src="{{ asset('img/collectibles/icon_accessory_glow_r_' ~ collectible.imgIndex ~ '.png') }}" alt="{{ collectible.name }}">
+                    <img src="{{ asset('img/collectibles/icon_collectible_glow_r_' ~ collectible.imgIndex ~ '.png') }}" alt="{{ collectible.name }}">
                 </td>
                 <td>{{ collectible.name }}</td>
             </tr>
