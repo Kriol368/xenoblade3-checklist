@@ -1,20 +1,64 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello UniqueMonsterController!{% endblock %}
+{% block title %}XC3 Checklist - Unique Monsters{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Unique Monsters</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Defeated</th>
+            <th>SoulHacked</th>
+            <th>Ability Upgraded</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for uniqueMonster in uniqueMonsters %}
+            {% set userUniqueMonster = userUniqueMonsterMap[uniqueMonster.id] ?? null %}
+            <tr class="unique-monster-row"
+                data-id="{{ uniqueMonster.id }}"
+                data-name="{{ uniqueMonster.name }}"
+                data-level="{{ uniqueMonster.level }}"
+                data-location="{{ uniqueMonster.location }}"
+                data-soulhacker-ability="{{ uniqueMonster.soulhackerAbility }}">
+                <td>{{ uniqueMonster.name }}</td>
+                <td>{{ uniqueMonster.level }}</td>
+                {% set attributes = ['defeated', 'soul_hacked', 'ability_upgraded'] %}
+                {% for attribute in attributes %}
+                    <td>
+                        <input type="checkbox"
+                               class="unique-monster-checkbox"
+                               data-attribute="{{ attribute }}"
+                               data-id="{{ uniqueMonster.id }}"
+                                {% if attribute == 'defeated' and userUniqueMonster.isDefeated %}
+                                    checked
+                                {% elseif attribute == 'soul_hacked' and userUniqueMonster.isSoulHacked %}
+                                    checked
+                                {% elseif attribute == 'ability_upgraded' and useerUniqueMonster.isAbilityUpgraded %}
+                                    checked
+                                {% endif %}
+                               onchange="updateUniqueMonsterStatus(this)">
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/UniqueMonsterController.php'|file_link(0) }}">src/Controller/UniqueMonsterController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/unique_monster/index.html.twig'|file_link(0) }}">templates/unique_monster/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- Card for displaying detailed challenge mode info -->
+    <div id="challenge-mode-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="challenge-mode-name"></h2>
+        <p><strong>Difficulty:</strong> <span id="challenge-mode-difficulty"></span></p>
+        <p><strong>Waves:</strong> <span id="challenge-mode-waves"></span></p>
+        <p><strong>Level Restriction:</strong> <span id="challenge-mode-levelRestriction"></span></p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        const csrfToken = '{{ csrf_token('update_challenge_status') }}'; // Generate the CSRF token for the update_character_status route
+    </script>
+    <script src="{{ asset('js/challenge_mode.js') }}"></script>
 {% endblock %}
