@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello LandmarkLocationController!{% endblock %}
-
+{% block title %}XC3 Checklist - Landmarks / Locations{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Landmarks And Locations</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for landmarkLocation in landmarkLocations %}
+            <tr class="landmark-location-row" data-id="{{ landmarkLocation.id }}" data-name="{{ landmarkLocation.name }}" data-type="{{ landmarkLocation.type }}" data-region="{{ landmarkLocation.region.name }}" data-area="{{ landmarkLocation.area.name }}">
+                <td>{{ landmarkLocation.name }}</td>
+                <td>{{ landmarkLocation.type }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/src/Controller/LandmarkLocationController.php'|file_link(0) }}">src/Controller/LandmarkLocationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/kriol/Nuevo vol 3/xenoblade3-checklist/xenoblade3-checklist/templates/landmark_location/index.html.twig'|file_link(0) }}">templates/landmark_location/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- Card for displaying detailed landmark and location info -->
+    <div id="landmark-location-card" class="card" style="display: none;">
+        <button id="close-card" class="close-btn">X</button>
+        <h2 id="landmark-location-name"></h2>
+        <p><strong>Type:</strong> <span id="landmark-location-type"></span></p>
+        <p><strong>Area:</strong> <span id="landmark-location-area"></span></p>
+        <p><strong>Region:</strong> <span id="landmark-location-region"></span></p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/landmark_location.js') }}"></script>
 {% endblock %}
