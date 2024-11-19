@@ -18,11 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
         card.style.display = "none";
     });
 
-    const checkboxes = document.querySelectorAll('.challenge-mode-checkbox');
+    const checkboxes = document.querySelectorAll('.unique-monster-checkbox');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function (event) {
             event.stopPropagation();
-            const challengeModeId = this.dataset.id;
+            const uniqueMonsterId = this.dataset.id;
             const field = this.dataset.attribute;
             const value = this.checked ? 1 : 0;
 
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append('value', value);
             formData.append('_csrf_token', csrfToken);
 
-            fetch(`/update-challenge-status/${challengeModeId}`, {
+            fetch(`/update-monster-status/${uniqueMonsterId}`, {
                 method: 'POST',
                 body: formData,
                 headers: {
