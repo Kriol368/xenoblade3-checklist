@@ -77,7 +77,7 @@ class UserRegistrationListener
             $userSoulTree = new UserSoulTree();
             $userSoulTree->setUser($user);
             $userSoulTree->setSoulTree($soulTree);
-            $userSoulTree->setCheck(false); // Default check value
+            $userSoulTree->setCheck(false); // Default checked value
 
             $this->entityManager->persist($userSoulTree);
         }
@@ -142,7 +142,7 @@ class UserRegistrationListener
             $userLandmarkLocation = new UserLandmarkLocation();
             $userLandmarkLocation->setUser($user);
             $userLandmarkLocation->setLandmarkLocation($landmarkLocation);
-            $userLandmarkLocation->setCheck(false); // Default check value
+            $userLandmarkLocation->setChecked(false); // Default checked value
 
             $this->entityManager->persist($userLandmarkLocation);
         }
@@ -156,7 +156,7 @@ class UserRegistrationListener
             $userQuest = new UserQuest();
             $userQuest->setUser($user);
             $userQuest->setQuest($quest);
-            $userQuest->setCheck(false); // Default check value
+            $userQuest->setCheck(false); // Default checked value
 
             $this->entityManager->persist($userQuest);
         }

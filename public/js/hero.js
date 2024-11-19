@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeCardButton = document.getElementById('close-card');
 
     heroRows.forEach(row => {
-        row.addEventListener('click', function () {
+        row.addEventListener('click',   function () {
             const name = row.dataset.name;
             const heroClassData = row.dataset.class;
             const imgIndex = row.dataset.imgIndex;
