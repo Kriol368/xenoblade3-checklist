@@ -20,6 +20,7 @@
             <tr class="unique-monster-row"
                 data-id="{{ uniqueMonster.id }}"
                 data-name="{{ uniqueMonster.name }}"
+                data-area="{{ uniqueMonster.area.name }}"
                 data-level="{{ uniqueMonster.level }}"
                 data-location="{{ uniqueMonster.location }}"
                 data-soulhacker-ability="{{ uniqueMonster.soulhackerAbility }}">
@@ -36,7 +37,7 @@
                                     checked
                                 {% elseif attribute == 'soul_hacked' and userUniqueMonster.isSoulHacked %}
                                     checked
-                                {% elseif attribute == 'ability_upgraded' and useerUniqueMonster.isAbilityUpgraded %}
+                                {% elseif attribute == 'ability_upgraded' and userUniqueMonster.isAbilityUpgraded %}
                                     checked
                                 {% endif %}
                                onchange="updateUniqueMonsterStatus(this)">
@@ -47,18 +48,19 @@
         </tbody>
     </table>
 
-    <!-- Card for displaying detailed challenge mode info -->
-    <div id="challenge-mode-card" class="card" style="display: none;">
+    <!-- Card for displaying detailed unique monster info -->
+    <div id="unique-monster-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>
-        <h2 id="challenge-mode-name"></h2>
-        <p><strong>Difficulty:</strong> <span id="challenge-mode-difficulty"></span></p>
-        <p><strong>Waves:</strong> <span id="challenge-mode-waves"></span></p>
-        <p><strong>Level Restriction:</strong> <span id="challenge-mode-levelRestriction"></span></p>
+        <h2 id="unique-monster-name"></h2>
+        <p><strong>Location:</strong> <span id="unique-monster-location"></span></p>
+        <p><strong>Area:</strong> <span id="unique-monster-area"></span></p>
+        <p><strong>Level:</strong> <span id="unique-monster-level"></span></p>
+        <p><strong>Soulhacker Ability:</strong> <span id="unique-monster-soulhacker-ability"></span></p>
     </div>
 {% endblock %}
 {% block javascripts %}
     <script>
-        const csrfToken = '{{ csrf_token('update_challenge_status') }}'; // Generate the CSRF token for the update_character_status route
+        const csrfToken = '{{ csrf_token('update_monster_status') }}'; // Generate the CSRF token for the update_character_status route
     </script>
-    <script src="{{ asset('js/challenge_mode.js') }}"></script>
+    <script src="{{ asset('js/unique_monster.js') }}"></script>
 {% endblock %}
