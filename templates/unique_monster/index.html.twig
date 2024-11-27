@@ -26,7 +26,7 @@
                 data-soulhacker-ability="{{ uniqueMonster.soulhackerAbility }}">
                 <td>{{ uniqueMonster.name }}</td>
                 <td>{{ uniqueMonster.level }}</td>
-                {% set attributes = ['defeated', 'soul_hacked', 'ability_upgraded'] %}
+                {% set attributes = ['defeated', 'soulHacked', 'abilityUpgraded'] %}
                 {% for attribute in attributes %}
                     <td>
                         <input type="checkbox"
@@ -35,12 +35,12 @@
                                data-id="{{ uniqueMonster.id }}"
                                 {% if attribute == 'defeated' and userUniqueMonster.isDefeated %}
                                     checked
-                                {% elseif attribute == 'soul_hacked' and userUniqueMonster.isSoulHacked %}
+                                {% elseif attribute == 'soulHacked' and userUniqueMonster.isSoulHacked %}
                                     checked
-                                {% elseif attribute == 'ability_upgraded' and userUniqueMonster.isAbilityUpgraded %}
+                                {% elseif attribute == 'abilityU    pgraded' and userUniqueMonster.isAbilityUpgraded %}
                                     checked
                                 {% endif %}
-                               onchange="updateUniqueMonsterStatus(this)">
+                               >
                     </td>
                 {% endfor %}
             </tr>

@@ -75,7 +75,7 @@ class UniqueMonsterController extends AbstractController
 
         $field = $request->request->get('field');
         $value = $request->request->get('value');
-        $validFields = ['defeated', 'soul_hacked', 'ability_upgraded'];
+        $validFields = ['defeated', 'soulHacked', 'abilityUpgraded'];
 
         if ($field && in_array($field, $validFields, true)) {
             $setter = 'set' . ucfirst($field);
