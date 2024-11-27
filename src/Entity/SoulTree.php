@@ -19,7 +19,8 @@ class SoulTree
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $effect = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    // Change from OneToOne to ManyToOne
+    #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'soulTrees')]
     private ?Character $related_character = null;
 
     public function getId(): ?int

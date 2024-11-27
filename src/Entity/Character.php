@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
-#[ORM\Entity(repositoryClass: CharacterRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: '`character`')]
 class Character
 {
@@ -23,6 +24,16 @@ class Character
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?CharacterClass $class = null;
 
+    // OneToMany side for the soulTrees relationship
+    #[ORM\OneToMany(mappedBy: 'related_character', targetEntity: SoulTree::class)]
+    private Collection $soulTrees;
+
+    public function __construct()
+    {
+        // Initialize the collection to prevent null errors
+        $this->soulTrees = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,7 +47,6 @@ class Character
     public function setName(?string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -48,7 +58,6 @@ class Character
     public function setImgIndex(?int $imgIndex): static
     {
         $this->imgIndex = $imgIndex;
-
         return $this;
     }
 
@@ -60,7 +69,12 @@ class Character
     public function setClass(?CharacterClass $class): static
     {
         $this->class = $class;
-
         return $this;
+    }
+
+    // Getter for the soulTrees collection
+    public function getSoulTrees(): Collection
+    {
+        return $this->soulTrees;
     }
 }
