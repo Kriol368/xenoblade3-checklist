@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}XC3 Checklist - Landmarks / Locations{% endblock %}
+
 {% block body %}
     <h1>Landmarks And Locations</h1>
 
@@ -8,13 +10,29 @@
         <tr>
             <th>Name</th>
             <th>Type</th>
+            <th>Checked</th>
         </tr>
         </thead>
         <tbody>
         {% for landmarkLocation in landmarkLocations %}
-            <tr class="landmark-location-row" data-id="{{ landmarkLocation.id }}" data-name="{{ landmarkLocation.name }}" data-type="{{ landmarkLocation.type }}" data-region="{{ landmarkLocation.region.name }}" data-area="{{ landmarkLocation.area.name }}">
+            {% set userLandmarkLocation = userLandmarkLocationMap[landmarkLocation.id] ?? null %}
+            <tr class="landmark-location-row"
+                data-id="{{ landmarkLocation.id }}"
+                data-name="{{ landmarkLocation.name }}"
+                data-type="{{ landmarkLocation.type }}"
+                data-region="{{ landmarkLocation.region.name }}"
+                data-area="{{ landmarkLocation.area.name }}">
                 <td>{{ landmarkLocation.name }}</td>
                 <td>{{ landmarkLocation.type }}</td>
+                <td>
+                    <input type="checkbox"
+                           class="landmark-location-checkbox"
+                           data-id="{{ landmarkLocation.id }}"
+                            {% if userLandmarkLocation and userLandmarkLocation.isChecked %}
+                                checked
+                            {% endif %}
+                    >
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -31,5 +49,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        const csrfToken = '{{ csrf_token('update_landmark_status') }}'; // CSRF token for landmark update
+    </script>
     <script src="{{ asset('js/landmark_location.js') }}"></script>
 {% endblock %}
