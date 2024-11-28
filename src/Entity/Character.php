@@ -25,7 +25,7 @@ class Character
     private ?CharacterClass $class = null;
 
     // OneToMany side for the soulTrees relationship
-    #[ORM\OneToMany(mappedBy: 'related_character', targetEntity: SoulTree::class)]
+    #[ORM\OneToMany(mappedBy: 'character', targetEntity: SoulTree::class)]
     private Collection $soulTrees;
 
     public function __construct()

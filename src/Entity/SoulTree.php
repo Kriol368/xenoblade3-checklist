@@ -21,7 +21,7 @@ class SoulTree
 
     // Change from OneToOne to ManyToOne
     #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'soulTrees')]
-    private ?Character $related_character = null;
+    private ?Character $character = null;
 
     public function getId(): ?int
     {
@@ -52,14 +52,14 @@ class SoulTree
         return $this;
     }
 
-    public function getRelatedCharacter(): ?Character
+    public function getCharacter(): ?Character
     {
-        return $this->related_character;
+        return $this->character;
     }
 
-    public function setRelatedCharacter(?Character $related_character): static
+    public function setCharacter(?Character $character): static
     {
-        $this->related_character = $related_character;
+        $this->character = $character;
 
         return $this;
     }
