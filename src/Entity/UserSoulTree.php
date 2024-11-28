@@ -20,7 +20,7 @@ class UserSoulTree
     private SoulTree $soulTree;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $check;
+    private bool $checked;
 
     public function getUser(): User
     {
@@ -44,14 +44,14 @@ class UserSoulTree
         return $this;
     }
 
-    public function isCheck(): bool
+    public function isChecked(): bool
     {
-        return $this->check;
+        return $this->checked;
     }
 
-    public function setCheck(bool $check): self
+    public function setChecked(bool $checked): self
     {
-        $this->check = $check;
+        $this->checked = $checked;
         return $this;
     }
 }

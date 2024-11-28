@@ -77,7 +77,7 @@ class UserRegistrationListener
             $userSoulTree = new UserSoulTree();
             $userSoulTree->setUser($user);
             $userSoulTree->setSoulTree($soulTree);
-            $userSoulTree->setCheck(false); // Default checked value
+            $userSoulTree->setChecked(false); // Default checked value
 
             $this->entityManager->persist($userSoulTree);
         }
