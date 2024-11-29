@@ -156,7 +156,7 @@ class UserRegistrationListener
             $userQuest = new UserQuest();
             $userQuest->setUser($user);
             $userQuest->setQuest($quest);
-            $userQuest->setCheck(false); // Default checked value
+            $userQuest->setChecked(false); // Default checked value
 
             $this->entityManager->persist($userQuest);
         }
