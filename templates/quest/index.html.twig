@@ -9,6 +9,7 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Type</th>
             <th>Region</th>
             <th>Checked</th>
         </tr>
@@ -28,6 +29,7 @@
                 data-chapter="{{ quest.chapter }}"
                 data-region="{{ quest.region.name }}">
                 <td>{{ quest.name }}</td>
+                <td>{{ quest.type }}</td>
                 <td>{{ quest.region.name }}</td>
                 <td>
                     <input type="checkbox"
