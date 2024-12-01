@@ -63,7 +63,7 @@ class UserRegistrationListener
             $userGem = new UserGem();
             $userGem->setUser($user);
             $userGem->setGem($gem);
-            $userGem->setLevel(0); // Default level
+            $userGem->setLevel(0); // Default checked
 
             $this->entityManager->persist($userGem);
         }
@@ -128,7 +128,7 @@ class UserRegistrationListener
             $userGauntletEmblem = new UserGauntletEmblem();
             $userGauntletEmblem->setUser($user);
             $userGauntletEmblem->setGauntletEmblem($gauntletEmblem);
-            $userGauntletEmblem->setLevel(0); // Default level
+            $userGauntletEmblem->setChecked(false); // Default checked
 
             $this->entityManager->persist($userGauntletEmblem);
         }

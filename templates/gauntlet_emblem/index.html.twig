@@ -11,11 +11,12 @@
         <tr>
             <th>Image</th>
             <th>Name</th>
-            <th>Level</th>
+            <th>Checked</th>
         </tr>
         </thead>
         <tbody>
         {% for gauntletEmblem in gauntletEmblems %}
+            {% set userGauntletEmblem = userGauntletEmblemMap[gauntletEmblem.id] ?? null %}
             <tr class="gauntlet-emblem-row"
                 data-id="{{ gauntletEmblem.id }}"
                 data-name="{{ gauntletEmblem.name }}"
@@ -26,9 +27,13 @@
                 <td><img src="{{ asset('img/gauntlet_emblems/' ~ gauntletEmblem.imgIndex ~ '.png') }}" alt="{{ gauntletEmblem.name }}" width="50"></td>
                 <td>{{ gauntletEmblem.name }}</td>
                 <td>
-                    <input type="number" min="0" max="3" class="gauntlet-emblem-level"
+                    <input type="checkbox"
+                           class="gauntlet-emblem-checkbox"
                            data-id="{{ gauntletEmblem.id }}"
-                           value="{{ gauntletEmblem.level ?? 0 }}">
+                            {% if userGauntletEmblem and userGauntletEmblem.isChecked %}
+                                checked
+                            {% endif %}
+                    >
                 </td>
             </tr>
         {% endfor %}

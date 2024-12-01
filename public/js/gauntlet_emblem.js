@@ -21,19 +21,21 @@ document.addEventListener("DOMContentLoaded", () => {
         card.style.display = "none";
     });
 
-    // Handle level change
-    const levelInputs = document.querySelectorAll('.gauntlet-emblem-level');
-    levelInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            const emblemId = this.dataset.id;
-            const level = this.value;
+    const checkboxes = document.querySelectorAll('.gauntlet-emblem-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function (event) {
+            event.stopPropagation();
+            const gauntletEmblemId = this.dataset.id;
+            const field = 'checked'; // Field is always 'checked'
+            const value = this.checked ? 1 : 0;
 
             const formData = new FormData();
-            formData.append('level', level);
-            formData.append('_csrf_token', document.getElementById('csrf-token').value);
+            formData.append('field', field);
+            formData.append('value', value);
+            formData.append('_csrf_token', csrfToken); // CSRF token for security
 
-            fetch(`/update-gauntlet-emblem-level/${emblemId}`, {
-                method: 'POST',
+            fetch(`/update-emblem-status/${gauntletEmblemId}`, {
+                method: 'POST', // Correct POST method
                 body: formData,
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -42,13 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if (!data.success) {
-                        alert(data.error || 'Failed to update level');
-                        this.value = this.oldValue;  // Revert to old value on failure
+                        alert(data.error || 'Failed to update status');
+                        this.checked = !this.checked; // Revert the checkbox state on failure
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An error occurred while updating the level.');
+                    alert('An error occurred while updating the status.');
+                    this.checked = !this.checked; // Revert the checkbox state on error
                 });
         });
     });

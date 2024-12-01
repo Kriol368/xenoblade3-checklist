@@ -25,8 +25,7 @@ class GauntletEmblemController extends AbstractController
         UserGauntletEmblemRepository $userGauntletEmblemRepository,
         EntityManagerInterface      $entityManager,
         CsrfTokenManagerInterface   $csrfTokenManager
-    )
-    {
+    ){
         $this->gauntletEmblemRepository = $gauntletEmblemRepository;
         $this->userGauntletEmblemRepository = $userGauntletEmblemRepository;
         $this->entityManager = $entityManager;
@@ -48,13 +47,8 @@ class GauntletEmblemController extends AbstractController
         $userGauntletEmblems = $this->userGauntletEmblemRepository->findBy(['user' => $currentUser]);
         $userGauntletEmblemMap = [];
 
-        // Map gauntletEmblem id to their corresponding userGauntletEmblem entity with level
         foreach ($userGauntletEmblems as $userGauntletEmblem) {
-            $gauntletEmblemId = $userGauntletEmblem->getGauntletEmblem()->getId();
-            $userGauntletEmblemMap[$gauntletEmblemId] = [
-                'userGauntletEmblem' => $userGauntletEmblem,  // Store the full UserGauntletEmblem object
-                'level' => $userGauntletEmblem->getLevel()   // Store the level directly
-            ];
+            $userGauntletEmblemMap[$userGauntletEmblem->getGauntletEmblem()->getId()] = $userGauntletEmblem;
         }
 
         return $this->render('gauntlet_emblem/index.html.twig', [
@@ -88,17 +82,13 @@ class GauntletEmblemController extends AbstractController
 
         $field = $request->request->get('field');
         $value = $request->request->get('value');
-        $validFields = ['easy', 'normal', 'hard'];
 
-        if ($field && in_array($field, $validFields, true)) {
-            $setter = 'set' . ucfirst($field);
-            if (method_exists($userGauntletEmblem, $setter)) {
-                $userGauntletEmblem->$setter((bool)$value);
-                $this->entityManager->persist($userGauntletEmblem);
-                $this->entityManager->flush();
+        if ($field === 'checked') {
+            $userGauntletEmblem->setChecked((bool)$value);
+            $this->entityManager->persist($userGauntletEmblem);
+            $this->entityManager->flush();
 
-                return $this->json(['success' => true, 'message' => ucfirst($field) . ' status updated']);
-            }
+            return $this->json(['success' => true, 'message' => 'Soul tree status updated']);
         }
 
         return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);

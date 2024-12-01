@@ -19,8 +19,8 @@ class UserGauntletEmblem
     #[ORM\JoinColumn(name: "gauntlet_emblem_id", referencedColumnName: "id", nullable: false)]
     private GauntletEmblem $gauntletEmblem;
 
-    #[ORM\Column(type: 'integer')]
-    private ?int $level = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $checked;
 
     public function getUser(): User
     {
@@ -44,14 +44,14 @@ class UserGauntletEmblem
         return $this;
     }
 
-    public function getLevel(): ?int
+    public function isChecked(): bool
     {
-        return $this->level;
+        return $this->checked;
     }
 
-    public function setLevel(int $level): self
+    public function setChecked(bool $checked): self
     {
-        $this->level = $level;
+        $this->checked = $checked;
         return $this;
     }
 }
