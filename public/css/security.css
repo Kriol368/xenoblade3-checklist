@@ -1,4 +1,3 @@
-/* General body and container styling */
 @font-face {
     font-family: "Helvetica Black Oblique";
     src: url("../fonts/HelveticaBlackOblique.otf") format("opentype");
@@ -8,96 +7,18 @@
 
 body {
     font-family: "Helvetica Black Oblique", "Arial", sans-serif;
-    background-color: #0f0f0f; /* Very dark gray, almost black */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: #d3d3d3; /* Soft off-white text for readability */
 }
 
-.login-container, .register-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-}
-
-/* Card styling */
-.login-card, .register-card {
-    background-color: #1a1a1a; /* Charcoal dark gray */
-    color: #d3d3d3; /* Off-white text */
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
-}
-
-/* Heading styling */
-h1 {
-    font-size: 1.6em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #c1272d; /* Deep muted red */
-}
-
-/* Form elements styling */
-.form-label {
-    display: block;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #b3b3b3; /* Medium gray for labels */
+.login-card {
+    background-color: #222;
+    border-radius: 10px;
 }
 
 .form-input {
-    width: 100%;
+    border: 1px solid #444;
     padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #444; /* Dark gray border */
-    border-radius: 4px;
-    background-color: #2a2a2a; /* Dark background for inputs */
-    color: #e0e0e0; /* Light gray text */
 }
 
-/* Button styling */
-.btn-primary {
-    width: 100%;
-    padding: 10px;
-    background-color: #c1272d; /* Deep muted red */
-    color: #fff;
-    font-size: 1em;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 15px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #a51f23; /* Darker muted red on hover */
-}
-
-/* Links and additional elements styling */
-.register-link, .login-link, .back-link, .remember-me {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.register-link a, .login-link a, .back-link a {
-    color: #c1272d; /* Muted red for links */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.register-link a:hover, .login-link a:hover, .back-link a:hover {
-    color: #a51f23; /* Darker red on hover */
-}
-
-/* Additional form styles for checkboxes */
-.form-check-input {
-    margin-right: 10px;
+.text-danger {
+    color: #e74c3c !important;
 }
