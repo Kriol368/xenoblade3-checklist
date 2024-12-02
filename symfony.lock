@@ -243,7 +243,7 @@
         ]
     },
     "symfony/web-profiler-bundle": {
-        "version": "6.1",
+        "version": "7.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
