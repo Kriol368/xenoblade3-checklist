@@ -19,8 +19,8 @@ class UserGem
     #[ORM\JoinColumn(name: "gem_id", referencedColumnName: "id", nullable: false)]
     private Gem $gem;
 
-    #[ORM\Column(type: 'integer')]
-    private int $level;
+    #[ORM\Column(type: 'boolean')]
+    private bool $checked;
 
     public function getUser(): User
     {
@@ -44,14 +44,14 @@ class UserGem
         return $this;
     }
 
-    public function getLevel(): int
+    public function isChecked(): bool
     {
-        return $this->level;
+        return $this->checked;
     }
 
-    public function setLevel(int $level): self
+    public function setChecked(bool $checked): self
     {
-        $this->level = $level;
+        $this->checked = $checked;
         return $this;
     }
 }

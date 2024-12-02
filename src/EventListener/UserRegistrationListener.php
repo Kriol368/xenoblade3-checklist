@@ -63,7 +63,7 @@ class UserRegistrationListener
             $userGem = new UserGem();
             $userGem->setUser($user);
             $userGem->setGem($gem);
-            $userGem->setLevel(0); // Default checked
+            $userGem->setChecked(false); // Default checked
 
             $this->entityManager->persist($userGem);
         }
