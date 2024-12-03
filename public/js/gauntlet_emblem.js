@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("gauntlet-emblem-rarity").textContent = row.dataset.rarity;
             document.getElementById("gauntlet-emblem-description").textContent = row.dataset.description;
             document.getElementById("gauntlet-emblem-effects").textContent = row.dataset.effects;
-            document.getElementById("gauntlet-emblem-img").src = "/img/gauntlet/" + "" /*row.dataset.imgIndex*/ + 'icon_emblem_0.png';
+            document.getElementById("gauntlet-emblem-img").src = "/img/gauntlet/" + row.dataset.imgIndex + '.png';
 
             card.style.display = "block";
         });
