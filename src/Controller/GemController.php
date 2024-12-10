@@ -6,6 +6,7 @@ use App\Repository\GemRepository;
 use App\Repository\UserGemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,14 +45,19 @@ class GemController extends AbstractController
             $userGemMap[$userGem->getGem()->getId()] = $userGem;
         }}
 
+        $checkedGemsCount = count(array_filter($userGems, fn($userGem) => $userGem->isChecked()));
+        $totalGemsCount = count($gems);
+        $progress = $totalGemsCount > 0 ? ($checkedGemsCount / $totalGemsCount) * 100 : 0;
+
         return $this->render('gem/index.html.twig', [
             'gems' => $gems,
             'userGemMap' => $userGemMap,
-            ]);
+            'progress' => $progress,
+        ]);
     }
 
     #[Route('/update-gem-status/{gemId}', name: 'update_gem_status', methods: ['POST'])]
-    public function updateStatus(int $gemId, Request $request): Response
+    public function updateStatus(int $gemId, Request $request): JsonResponse
     {
         $currentUser = $this->getUser();
         if (!$currentUser) {
@@ -68,21 +74,27 @@ class GemController extends AbstractController
         }
 
         $csrfToken = $request->request->get('_csrf_token');
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('update_gem_status', $csrfToken))) {
+        if (!$this->isCsrfTokenValid('update_gem_status', $csrfToken)) {
             return $this->json(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         }
 
-        $field = $request->request->get('field');
-        $value = $request->request->get('value');
+        $isChecked = (bool) $request->request->get('value');
+        $userGem->setChecked($isChecked);
+        $this->entityManager->persist($userGem);
+        $this->entityManager->flush();
 
-        if ($field === 'checked') {
-            $userGem->setChecked((bool)$value);
-            $this->entityManager->persist($userGem);
-            $this->entityManager->flush();
+        $totalGems = $this->userGemRepository->count(['user' => $currentUser]); // Total gems for this user
+        $checkedGems = $this->userGemRepository->count([
+            'user' => $currentUser,
+            'checked' => true
+        ]); // Number of checked gems
+        $progress = $totalGems > 0 ? ($checkedGems / $totalGems) * 100 : 0;
 
-            return $this->json(['success' => true, 'message' => 'Soul tree status updated']);
-        }
-
-        return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
+        return $this->json([
+            'success' => true,
+            'message' => 'Gem status updated',
+            'progress' => $progress
+        ]);
     }
+
 }

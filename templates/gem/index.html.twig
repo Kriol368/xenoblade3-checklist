@@ -4,6 +4,10 @@
 
 {% block body %}
     <h1>Gems</h1>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ progress }}%;" id="progress-bar"></div>
+        <p class="progress-label">{{ progress|round(2) }}% Complete</p>
+    </div>
 
     <table>
         <thead>
@@ -20,7 +24,7 @@
                 data-id="{{ gem.id }}"
                 data-name="{{ gem.name }}"
                 data-type="{{ gem.type }}"
-                data-effect="{{ gem.effect}}">
+                data-effect="{{ gem.effect }}">
                 <td>{{ gem.name }}</td>
                 <td>{{ gem.type }}</td>
                 <td>
@@ -48,7 +52,7 @@
 
 {% block javascripts %}
     <script>
-        const csrfToken = '{{ csrf_token('update_gem_status') }}'; // CSRF token for landmark update
+        const csrfToken = '{{ csrf_token('update_gem_status') }}';
     </script>
     <script src="{{ asset('js/gem.js') }}"></script>
 {% endblock %}
