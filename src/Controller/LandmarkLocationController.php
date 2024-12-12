@@ -47,9 +47,14 @@ class LandmarkLocationController extends AbstractController
             $userLandmarkLocationMap[$userLandmarkLocation->getLandmarkLocation()->getId()] = $userLandmarkLocation;
         }
 
+        $checkedLandmarkLocationsCount = count(array_filter($userLandmarkLocations, fn($userLandmarkLocation) => $userLandmarkLocation->isChecked()));
+        $totalLandmarkLocationsCount = count($landmarkLocations);
+        $progress = $totalLandmarkLocationsCount > 0 ? ($checkedLandmarkLocationsCount / $totalLandmarkLocationsCount) * 100 : 0;
+
         return $this->render('landmark_location/index.html.twig', [
             'landmarkLocations' => $landmarkLocations,
-            'userLandmarkLocationMap' => $userLandmarkLocationMap
+            'userLandmarkLocationMap' => $userLandmarkLocationMap,
+            'progress' => $progress,
         ]);
     }
 
@@ -75,17 +80,22 @@ class LandmarkLocationController extends AbstractController
             return $this->json(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         }
 
-        $field = $request->request->get('field');
-        $value = $request->request->get('value');
+        $isChecked = (bool) $request->request->get('value');
+        $userLandmarkLocation->setChecked($isChecked);
+        $this->entityManager->persist($userLandmarkLocation);
+        $this->entityManager->flush();
 
-        if ($field === 'checked') {
-            $userLandmarkLocation->setChecked((bool)$value);
-            $this->entityManager->persist($userLandmarkLocation);
-            $this->entityManager->flush();
+        $totalLandmarkLocationsCount = $this->userLandmarkLocationRepository->count(['user' => $currentUser]); // Total landmark locations for this user
+        $checkedLandmarkLocations = $this->userLandmarkLocationRepository->count([
+            'user' => $currentUser,
+            'checked' => true
+        ]); // Number of checked landmark locations
+        $progress = $totalLandmarkLocationsCount > 0 ? round(($checkedLandmarkLocations / $totalLandmarkLocationsCount) * 100) : 0;
 
-            return $this->json(['success' => true, 'message' => 'Landmark location status updated']);
-        }
-
-        return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
+        return $this->json([
+            'success' => true,
+            'message' => 'Landmark locations status updated',
+            'progress' => $progress
+        ]);
     }
 }

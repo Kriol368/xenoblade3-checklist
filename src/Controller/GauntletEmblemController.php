@@ -50,6 +50,7 @@ class GauntletEmblemController extends AbstractController
         foreach ($userGauntletEmblems as $userGauntletEmblem) {
             $userGauntletEmblemMap[$userGauntletEmblem->getGauntletEmblem()->getId()] = $userGauntletEmblem;
         }
+
         $checkedGauntletEmblemsCount = count(array_filter($userGauntletEmblems, fn($userGauntletEmblem) => $userGauntletEmblem->isChecked()));
         $totalGauntletEmblemsCount = count($gauntletEmblems);
         $progress = $totalGauntletEmblemsCount > 0 ? ($checkedGauntletEmblemsCount / $totalGauntletEmblemsCount) * 100 : 0;
