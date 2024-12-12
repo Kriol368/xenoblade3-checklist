@@ -45,10 +45,14 @@ class SoulTreeController extends AbstractController
         foreach ($userSoulTrees as $userSoulTree) {
             $userSoulTreeMap[$userSoulTree->getSoulTree()->getId()] = $userSoulTree;
         }
+        $checkedSoulTreesCount = count(array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked()));
+        $totalSoulTreesCount = count($soulTrees);
+        $progress = $totalSoulTreesCount > 0 ? ($checkedSoulTreesCount / $totalSoulTreesCount) * 100 : 0;
 
         return $this->render('soul_tree/index.html.twig', [
             'soulTrees' => $soulTrees,
             'userSoulTreesMap' => $userSoulTreeMap,
+            'progress' => $progress,
         ]);
     }
 
@@ -74,17 +78,23 @@ class SoulTreeController extends AbstractController
             return $this->json(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         }
 
-        $field = $request->request->get('field');
-        $value = $request->request->get('value');
+        $isChecked = (bool) $request->request->get('value');
+        $userSoulTree->setChecked($isChecked);
+        $this->entityManager->persist($userSoulTree);
+        $this->entityManager->flush();
 
-        if ($field === 'checked') {
-            $userSoulTree->setChecked((bool)$value);
-            $this->entityManager->persist($userSoulTree);
-            $this->entityManager->flush();
+        $totalSoulTreesCount = $this->userSoulTreeRepository->count(['user' => $currentUser]); // Total soul trees for this user
+        $checkedSoulTrees = $this->userSoulTreeRepository->count([
+            'user' => $currentUser,
+            'checked' => true
+        ]); // Number of checked soul trees
+        $progress = $totalSoulTreesCount > 0 ? round(($checkedSoulTrees / $totalSoulTreesCount) * 100) : 0;
 
-            return $this->json(['success' => true, 'message' => 'Soul tree status updated']);
-        }
+        return $this->json([
+            'success' => true,
+            'message' => 'Soul trees status updated',
+            'progress' => $progress
+        ]);
 
-        return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 }

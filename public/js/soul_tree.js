@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!data.success) {
                         alert(data.error || 'Failed to update status');
                         this.checked = !this.checked; // Revert the checkbox state on failure
+                    }else {
+                        updateProgressBar(); // Update progress bar on success
                     }
                 })
                 .catch(error => {
@@ -55,3 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+function updateProgressBar() {
+    const checkboxes = document.querySelectorAll('.soul-tree-checkbox');
+    const totalSoulTrees = checkboxes.length;
+    const checkedSoulTrees = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const progress = Math.round(totalSoulTrees > 0 ? (checkedSoulTrees / totalSoulTrees) * 100 : 0);
+
+    const progressBar = document.getElementById('progress-bar');
+    const progressLabel = document.querySelector('.progress-label');
+
+    progressBar.style.width = `${progress}%`;
+    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+}
