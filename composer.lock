@@ -2557,16 +2557,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v7.2.0",
+            "version": "v7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "09dbb7c731430335e9ae89ee5054b5f5580c49bf"
+                "reference": "b492be51eb703723d682851a0c9fb39b9d1a7bfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/09dbb7c731430335e9ae89ee5054b5f5580c49bf",
-                "reference": "09dbb7c731430335e9ae89ee5054b5f5580c49bf",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/b492be51eb703723d682851a0c9fb39b9d1a7bfb",
+                "reference": "b492be51eb703723d682851a0c9fb39b9d1a7bfb",
                 "shasum": ""
             },
             "require": {
@@ -2646,7 +2646,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v7.2.0"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v7.2.1"
             },
             "funding": [
                 {
@@ -2662,7 +2662,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-25T12:10:02+00:00"
+            "time": "2024-12-07T08:50:44+00:00"
         },
         {
             "name": "symfony/doctrine-messenger",
@@ -3552,23 +3552,23 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v7.2.0",
+            "version": "v7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "955e43336aff03df1e8a8e17daefabb0127a313b"
+                "reference": "ff4df2b68d1c67abb9fef146e6540ea16b58d99e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/955e43336aff03df1e8a8e17daefabb0127a313b",
-                "reference": "955e43336aff03df1e8a8e17daefabb0127a313b",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/ff4df2b68d1c67abb9fef146e6540ea16b58d99e",
+                "reference": "ff4df2b68d1c67abb9fef146e6540ea16b58d99e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
                 "psr/log": "^1|^2|^3",
                 "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/http-client-contracts": "~3.4.3|^3.5.1",
+                "symfony/http-client-contracts": "~3.4.4|^3.5.2",
                 "symfony/service-contracts": "^2.5|^3"
             },
             "conflict": {
@@ -3627,7 +3627,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v7.2.0"
+                "source": "https://github.com/symfony/http-client/tree/v7.2.1"
             },
             "funding": [
                 {
@@ -3643,20 +3643,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-29T08:22:02+00:00"
+            "time": "2024-12-07T08:50:44+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
-            "version": "v3.5.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client-contracts.git",
-                "reference": "c2f3ad828596624ca39ea40f83617ef51ca8bbf9"
+                "reference": "ee8d807ab20fcb51267fdace50fbe3494c31e645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/c2f3ad828596624ca39ea40f83617ef51ca8bbf9",
-                "reference": "c2f3ad828596624ca39ea40f83617ef51ca8bbf9",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/ee8d807ab20fcb51267fdace50fbe3494c31e645",
+                "reference": "ee8d807ab20fcb51267fdace50fbe3494c31e645",
                 "shasum": ""
             },
             "require": {
@@ -3705,7 +3705,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client-contracts/tree/v3.5.1"
+                "source": "https://github.com/symfony/http-client-contracts/tree/v3.5.2"
             },
             "funding": [
                 {
@@ -3721,7 +3721,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-25T12:02:18+00:00"
+            "time": "2024-12-07T08:49:48+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -4083,16 +4083,16 @@
         },
         {
             "name": "symfony/messenger",
-            "version": "v7.2.0",
+            "version": "v7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/messenger.git",
-                "reference": "2512b9bc1e7093c8bd5adec579a364a198059f4d"
+                "reference": "cc0e820c02a0a887a88ddb52b7c4de4634677ce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/messenger/zipball/2512b9bc1e7093c8bd5adec579a364a198059f4d",
-                "reference": "2512b9bc1e7093c8bd5adec579a364a198059f4d",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/cc0e820c02a0a887a88ddb52b7c4de4634677ce6",
+                "reference": "cc0e820c02a0a887a88ddb52b7c4de4634677ce6",
                 "shasum": ""
             },
             "require": {
@@ -4150,7 +4150,7 @@
             "description": "Helps applications send and receive messages to/from other applications or via message queues",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/messenger/tree/v7.2.0"
+                "source": "https://github.com/symfony/messenger/tree/v7.2.1"
             },
             "funding": [
                 {
@@ -4166,20 +4166,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-26T10:00:31+00:00"
+            "time": "2024-12-07T08:08:50+00:00"
         },
         {
             "name": "symfony/mime",
-            "version": "v7.2.0",
+            "version": "v7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "cc84a4b81f62158c3846ac7ff10f696aae2b524d"
+                "reference": "7f9617fcf15cb61be30f8b252695ed5e2bfac283"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/cc84a4b81f62158c3846ac7ff10f696aae2b524d",
-                "reference": "cc84a4b81f62158c3846ac7ff10f696aae2b524d",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/7f9617fcf15cb61be30f8b252695ed5e2bfac283",
+                "reference": "7f9617fcf15cb61be30f8b252695ed5e2bfac283",
                 "shasum": ""
             },
             "require": {
@@ -4234,7 +4234,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v7.2.0"
+                "source": "https://github.com/symfony/mime/tree/v7.2.1"
             },
             "funding": [
                 {
@@ -4250,7 +4250,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-23T09:19:39+00:00"
+            "time": "2024-12-07T08:50:44+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
@@ -4814,8 +4814,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -5755,16 +5755,16 @@
         },
         {
             "name": "symfony/security-http",
-            "version": "v7.2.0",
+            "version": "v7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
-                "reference": "0d0ab4d491f22306c893b2d30ce73ea911201a61"
+                "reference": "125844598d9cef4fe72a9f6c4a78ac7c59c3f532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/0d0ab4d491f22306c893b2d30ce73ea911201a61",
-                "reference": "0d0ab4d491f22306c893b2d30ce73ea911201a61",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/125844598d9cef4fe72a9f6c4a78ac7c59c3f532",
+                "reference": "125844598d9cef4fe72a9f6c4a78ac7c59c3f532",
                 "shasum": ""
             },
             "require": {
@@ -5823,7 +5823,7 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-http/tree/v7.2.0"
+                "source": "https://github.com/symfony/security-http/tree/v7.2.1"
             },
             "funding": [
                 {
@@ -5839,7 +5839,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-13T13:40:36+00:00"
+            "time": "2024-12-07T08:50:44+00:00"
         },
         {
             "name": "symfony/serializer",
@@ -7543,16 +7543,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "11.0.7",
+            "version": "11.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f7f08030e8811582cc459871d28d6f5a1a4d35ca"
+                "reference": "418c59fd080954f8c4aa5631d9502ecda2387118"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f7f08030e8811582cc459871d28d6f5a1a4d35ca",
-                "reference": "f7f08030e8811582cc459871d28d6f5a1a4d35ca",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/418c59fd080954f8c4aa5631d9502ecda2387118",
+                "reference": "418c59fd080954f8c4aa5631d9502ecda2387118",
                 "shasum": ""
             },
             "require": {
@@ -7571,7 +7571,7 @@
                 "theseer/tokenizer": "^1.2.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^11.4.1"
+                "phpunit/phpunit": "^11.5.0"
             },
             "suggest": {
                 "ext-pcov": "PHP extension that provides line coverage",
@@ -7609,7 +7609,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/11.0.7"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/11.0.8"
             },
             "funding": [
                 {
@@ -7617,7 +7617,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-09T06:21:38+00:00"
+            "time": "2024-12-11T12:34:27+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -7866,16 +7866,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.0",
+            "version": "11.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7"
+                "reference": "2b94d4f2450b9869fa64a46fd8a6a41997aef56a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0569902506a6c0878930b87ea79ec3b50ea563f7",
-                "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2b94d4f2450b9869fa64a46fd8a6a41997aef56a",
+                "reference": "2b94d4f2450b9869fa64a46fd8a6a41997aef56a",
                 "shasum": ""
             },
             "require": {
@@ -7947,7 +7947,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.0"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.1"
             },
             "funding": [
                 {
@@ -7963,7 +7963,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-06T05:57:38+00:00"
+            "time": "2024-12-11T10:52:48+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -8024,23 +8024,23 @@
         },
         {
             "name": "sebastian/code-unit",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/code-unit.git",
-                "reference": "6bb7d09d6623567178cf54126afa9c2310114268"
+                "reference": "ee88b0cdbe74cf8dd3b54940ff17643c0d6543ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/6bb7d09d6623567178cf54126afa9c2310114268",
-                "reference": "6bb7d09d6623567178cf54126afa9c2310114268",
+                "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/ee88b0cdbe74cf8dd3b54940ff17643c0d6543ca",
+                "reference": "ee88b0cdbe74cf8dd3b54940ff17643c0d6543ca",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^11.0"
+                "phpunit/phpunit": "^11.5"
             },
             "type": "library",
             "extra": {
@@ -8069,7 +8069,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/code-unit/issues",
                 "security": "https://github.com/sebastianbergmann/code-unit/security/policy",
-                "source": "https://github.com/sebastianbergmann/code-unit/tree/3.0.1"
+                "source": "https://github.com/sebastianbergmann/code-unit/tree/3.0.2"
             },
             "funding": [
                 {
@@ -8077,7 +8077,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-03T04:44:28+00:00"
+            "time": "2024-12-12T09:59:06+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -9523,7 +9523,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -9531,6 +9531,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
