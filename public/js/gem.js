@@ -61,11 +61,11 @@ function updateProgressBar() {
     const checkboxes = document.querySelectorAll('.gem-checkbox');
     const totalGems = checkboxes.length;
     const checkedGems = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-    const progress = totalGems > 0 ? (checkedGems / totalGems) * 100 : 0;
+    const progress = Math.round(totalGems > 0 ? (checkedGems / totalGems) * 100 : 0);
 
     const progressBar = document.getElementById('progress-bar');
     const progressLabel = document.querySelector('.progress-label');
 
     progressBar.style.width = `${progress}%`;
-    progressLabel.textContent = `${progress.toFixed(2)}% Complete`;
+    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
 }
