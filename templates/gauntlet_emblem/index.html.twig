@@ -4,7 +4,10 @@
 
 {% block body %}
     <h1>Gauntlet Emblems</h1>
-
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
+    </div>
     <!-- Table with Image, Name, and Level -->
     <table>
         <thead>

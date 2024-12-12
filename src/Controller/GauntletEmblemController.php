@@ -50,10 +50,14 @@ class GauntletEmblemController extends AbstractController
         foreach ($userGauntletEmblems as $userGauntletEmblem) {
             $userGauntletEmblemMap[$userGauntletEmblem->getGauntletEmblem()->getId()] = $userGauntletEmblem;
         }
+        $checkedGauntletEmblemsCount = count(array_filter($userGauntletEmblems, fn($userGauntletEmblem) => $userGauntletEmblem->isChecked()));
+        $totalGauntletEmblemsCount = count($gauntletEmblems);
+        $progress = $totalGauntletEmblemsCount > 0 ? ($checkedGauntletEmblemsCount / $totalGauntletEmblemsCount) * 100 : 0;
 
         return $this->render('gauntlet_emblem/index.html.twig', [
             'gauntletEmblems' => $gauntletEmblems,
-            'userGauntletEmblemMap' => $userGauntletEmblemMap
+            'userGauntletEmblemMap' => $userGauntletEmblemMap,
+            'progress' => $progress,
         ]);
     }
 
@@ -80,17 +84,22 @@ class GauntletEmblemController extends AbstractController
             return $this->json(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         }
 
-        $field = $request->request->get('field');
-        $value = $request->request->get('value');
+        $isChecked = (bool) $request->request->get('value');
+        $userGauntletEmblem->setChecked($isChecked);
+        $this->entityManager->persist($userGauntletEmblem);
+        $this->entityManager->flush();
 
-        if ($field === 'checked') {
-            $userGauntletEmblem->setChecked((bool)$value);
-            $this->entityManager->persist($userGauntletEmblem);
-            $this->entityManager->flush();
+        $totalGauntletEmblemsCount = $this->userGauntletEmblemRepository->count(['user' => $currentUser]); // Total gauntlet emblems for this user
+        $checkedGauntletEmblems = $this->userGauntletEmblemRepository->count([
+            'user' => $currentUser,
+            'checked' => true
+        ]); // Number of checked gauntlet emblems
+        $progress = $totalGauntletEmblemsCount > 0 ? round(($checkedGauntletEmblems / $totalGauntletEmblemsCount) * 100) : 0;
 
-            return $this->json(['success' => true, 'message' => 'Soul tree status updated']);
-        }
-
-        return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
+        return $this->json([
+            'success' => true,
+            'message' => 'Gauntlet emblems status updated',
+            'progress' => $progress
+        ]);
     }
 }

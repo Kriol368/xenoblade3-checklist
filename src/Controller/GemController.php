@@ -47,7 +47,7 @@ class GemController extends AbstractController
 
         $checkedGemsCount = count(array_filter($userGems, fn($userGem) => $userGem->isChecked()));
         $totalGemsCount = count($gems);
-        $progress = $totalGemsCount > 0 ? ($checkedGemsCount / $totalGemsCount) * 100 : 0;
+        $progress = $totalGemsCount > 0 ? round(($checkedGemsCount / $totalGemsCount) * 100) : 0;
 
         return $this->render('gem/index.html.twig', [
             'gems' => $gems,

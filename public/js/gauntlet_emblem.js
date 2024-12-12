@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("gauntlet-emblem-description").textContent = row.dataset.description;
             document.getElementById("gauntlet-emblem-effects").textContent = row.dataset.effects;
             document.getElementById("gauntlet-emblem-img").src = "/img/gauntlet/" + row.dataset.imgIndex + '.png';
-
             card.style.display = "block";
         });
     });
@@ -46,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!data.success) {
                         alert(data.error || 'Failed to update status');
                         this.checked = !this.checked; // Revert the checkbox state on failure
+                    }else {
+                        updateProgressBar(); // Update progress bar on success
                     }
                 })
                 .catch(error => {
@@ -56,3 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+function updateProgressBar() {
+    const checkboxes = document.querySelectorAll('.gauntlet-emblem-checkbox');
+    const totalGauntletEmblems = checkboxes.length;
+    const checkedGauntletEmblems = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const progress = Math.round(totalGauntletEmblems > 0 ? (checkedGauntletEmblems / totalGauntletEmblems) * 100 : 0);
+
+    const progressBar = document.getElementById('progress-bar');
+    const progressLabel = document.querySelector('.progress-label');
+
+    progressBar.style.width = `${progress}%`;
+    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+}
