@@ -48,9 +48,14 @@ class QuestController extends AbstractController
             $userQuestMap[$userQuest->getQuest()->getId()] = $userQuest;
         }
 
+        $checkedQuestsCount = count(array_filter($userQuests, fn($userQuest) => $userQuest->isChecked()));
+        $totalQuestsCount = count($quests);
+        $progress = $totalQuestsCount > 0 ? ($checkedQuestsCount / $totalQuestsCount) * 100 : 0;
+
         return $this->render('quest/index.html.twig', [
             'quests' => $quests,
             'userQuestMap' => $userQuestMap,
+            'progress' => $progress,
         ]);
     }
 
@@ -76,17 +81,23 @@ class QuestController extends AbstractController
             return $this->json(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         }
 
-        $field = $request->request->get('field');
-        $value = $request->request->get('value');
+        $isChecked = (bool) $request->request->get('value');
+        $userQuest->setChecked($isChecked);
+        $this->entityManager->persist($userQuest);
+        $this->entityManager->flush();
 
-        if ($field === 'checked') {
-            $userQuest->setChecked((bool)$value);
-            $this->entityManager->persist($userQuest);
-            $this->entityManager->flush();
+        $totalQuestsCount = $this->userQuestRepository->count(['user' => $currentUser]); // Total quests for this user
+        $checkedQuests = $this->userQuestRepository->count([
+            'user' => $currentUser,
+            'checked' => true
+        ]); // Number of checked quests
+        $progress = $totalQuestsCount > 0 ? round(($checkedQuests / $totalQuestsCount) * 100) : 0;
 
-            return $this->json(['success' => true, 'message' => 'Quest status updated']);
-        }
+        return $this->json([
+            'success' => true,
+            'message' => 'Quests status updated',
+            'progress' => $progress
+        ]);
 
-        return $this->json(['success' => false, 'error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 }

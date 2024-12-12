@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!data.success) {
                         alert(data.error || 'Failed to update status');
                         this.checked = !this.checked; // Revert the checkbox state on failure
+                    }else {
+                        updateProgressBar(); // Update progress bar on success
                     }
                 })
                 .catch(error => {
@@ -61,3 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+function updateProgressBar() {
+    const checkboxes = document.querySelectorAll('.quest-checkbox');
+    const totalQuests = checkboxes.length;
+    const checkedQuests = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const progress = Math.round(totalQuests > 0 ? (checkedQuests / totalQuests) * 100 : 0);
+
+    const progressBar = document.getElementById('progress-bar');
+    const progressLabel = document.querySelector('.progress-label');
+
+    progressBar.style.width = `${progress}%`;
+    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+}
