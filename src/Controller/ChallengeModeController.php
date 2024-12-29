@@ -43,14 +43,24 @@ class ChallengeModeController extends AbstractController
         $challengeModes = $this->challengeModeRepository->findAll();
         $userChallengeModes = $this->userChallengeModeRepository->findBy(['user' => $currentUser]);
         $userChallengeModeMap = [];
+        $overallProgress = 0;
 
         foreach ($userChallengeModes as $userChallengeMode) {
+            $progress = 0;
+            $progress += $userChallengeMode->isEasy() ? 33.33 : 0;
+            $progress += $userChallengeMode->isNormal() ? 33.33 : 0;
+            $progress += $userChallengeMode->isHard() ? 33.34 : 0;
             $userChallengeModeMap[$userChallengeMode->getChallengeMode()->getId()] = $userChallengeMode;
+            $overallProgress += $progress;
         }
+
+        $totalChallenges = count($challengeModes);
+        $averageProgress = $totalChallenges > 0 ? round($overallProgress / $totalChallenges, 2) : 0;
 
         return $this->render('challenge_mode/index.html.twig', [
             'challengeModes' => $challengeModes,
-            'userChallengeModeMap' => $userChallengeModeMap
+            'userChallengeModeMap' => $userChallengeModeMap,
+            'progress' => $averageProgress,
         ]);
     }
 
@@ -87,7 +97,16 @@ class ChallengeModeController extends AbstractController
                 $this->entityManager->persist($userChallengeMode);
                 $this->entityManager->flush();
 
-                return $this->json(['success' => true, 'message' => ucfirst($field) . ' status updated']);
+                $progress = 0;
+                $progress += $userChallengeMode->isEasy() ? 33.33 : 0;
+                $progress += $userChallengeMode->isNormal() ? 33.33 : 0;
+                $progress += $userChallengeMode->isHard() ? 33.34 : 0; // Ensure total is 100%
+
+                return $this->json([
+                    'success' => true,
+                    'message' => ucfirst($field) . ' status updated',
+                    'progress' => $progress,
+                ]);
             }
         }
 

@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.getElementById("challenge-mode-card");
     const closeCardBtn = document.getElementById("close-card");
 
+    // Open card on row click
     rows.forEach(row => {
         row.addEventListener("click", () => {
             document.getElementById("challenge-mode-name").textContent = row.dataset.name;
@@ -13,10 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Close card
     closeCardBtn.addEventListener("click", () => {
         card.style.display = "none";
     });
 
+    // Handle checkbox changes
     const checkboxes = document.querySelectorAll('.challenge-mode-checkbox');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function (event) {
@@ -42,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!data.success) {
                         alert(data.error || 'Failed to update status');
                         this.checked = !this.checked;
+                    } else {
+                        updateProgressBar();
                     }
                 })
                 .catch(error => {
@@ -51,4 +56,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         });
     });
+
+    updateProgressBar(); // Initialize progress bar
 });
+
+// Function to update the progress bar
+function updateProgressBar() {
+    const checkboxes = document.querySelectorAll('.challenge-mode-checkbox');
+    const totalCheckboxes = checkboxes.length;
+    const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+
+    const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
+
+    const progressBar = document.getElementById('progress-bar');
+    const progressLabel = document.querySelector('.progress-label');
+
+    progressBar.style.width = `${progress}%`;
+    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+}

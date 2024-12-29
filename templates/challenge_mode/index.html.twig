@@ -3,7 +3,10 @@
 
 {% block body %}
     <h1>Challenge Modes</h1>
-
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
+    </div>
     <table>
         <thead>
         <tr>
