@@ -40,14 +40,25 @@ class UniqueMonsterController extends AbstractController
         $uniqueMonsters = $this->uniqueMonsterRepository->findAll();
         $userUniqueMonsters = $this->userUniqueMonsterRepository->findBy(['user' => $currentUser]);
         $userUniqueMonsterMap = [];
+        $overallProgress = 0;
+
 
         foreach ($userUniqueMonsters as $userUniqueMonster) {
             $userUniqueMonsterMap[$userUniqueMonster->getUniqueMonster()->getId()] = $userUniqueMonster;
+            $progress = 0;
+            $progress += $userUniqueMonster->isDefeated() ? 33.33 : 0;
+            $progress += $userUniqueMonster->isSoulHacked() ? 33.33 : 0;
+            $progress += $userUniqueMonster->isAbilityUpgraded() ? 33.34 : 0;
+            $overallProgress += $progress;
         }
+
+        $totalMonsters = count($uniqueMonsters);
+        $averageProgress = $totalMonsters > 0 ? round($overallProgress / $totalMonsters, 2) : 0;
 
         return $this->render('unique_monster/index.html.twig', [
             'uniqueMonsters' => $uniqueMonsters,
-            'userUniqueMonsterMap' => $userUniqueMonsterMap
+            'userUniqueMonsterMap' => $userUniqueMonsterMap,
+            'progress' => $averageProgress,
         ]);
     }
 
@@ -84,7 +95,16 @@ class UniqueMonsterController extends AbstractController
                 $this->entityManager->persist($userUniqueMonster);
                 $this->entityManager->flush();
 
-                return $this->json(['success' => true, 'message' => ucfirst($field) . ' status updated']);
+                $progress = 0;
+                $progress += $userUniqueMonster->isDefeated() ? 33.33 : 0;
+                $progress += $userUniqueMonster->isSoulHacked() ? 33.33 : 0;
+                $progress += $userUniqueMonster->isAbilityUpgraded() ? 33.34 : 0;
+
+                return $this->json([
+                    'success' => true,
+                    'message' => ucfirst($field) . ' status updated',
+                    'progress' => $progress,
+                ]);
             }
         }
 
