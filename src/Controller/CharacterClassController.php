@@ -49,14 +49,30 @@ class CharacterClassController extends AbstractController
 
         // Create a mapping of characterClassId to UserCharacterClass
         $userCharacterClassesMap = [];
+        $overallProgress = 0;
+
         foreach ($userCharacterClasses as $userCharacterClass) {
+            $progress = 0;
+            $progress += $userCharacterClass->isUnlocked() ? 12.5 : 0;
+            $progress += $userCharacterClass->isAscended() ? 12.5 : 0;
+            $progress += $userCharacterClass->isNoah() ? 12.5 : 0;
+            $progress += $userCharacterClass->isMio() ? 12.5 : 0;
+            $progress += $userCharacterClass->isEunie() ? 12.5 : 0;
+            $progress += $userCharacterClass->isTaion() ? 12.5 : 0;
+            $progress += $userCharacterClass->isLanz() ? 12.5 : 0;
+            $progress += $userCharacterClass->isSena() ? 12.5 : 0;
+
             $charClassId = $userCharacterClass->getCharacterClass()->getId();
             $userCharacterClassesMap[$charClassId] = $userCharacterClass;
+            $overallProgress += $progress;
         }
+        $totalClasses = count($characterClasses);
+        $averageProgress = $totalClasses > 0 ? round($overallProgress / $totalClasses, 2) : 0;
 
         return $this->render('character_class/index.html.twig', [
             'characterClasses' => $characterClasses,
             'userCharacterClassesMap' => $userCharacterClassesMap,
+            'progress' => $averageProgress,
         ]);
     }
 
@@ -100,7 +116,21 @@ class CharacterClassController extends AbstractController
                 $this->entityManager->persist($userCharacterClass);
                 $this->entityManager->flush();
 
-                return $this->json(['success' => true, 'message' => ucfirst($field) . ' status updated']);
+                $progress = 0;
+                $progress += $userCharacterClass->isUnlocked() ? 12.5 : 0;
+                $progress += $userCharacterClass->isAscended() ? 12.5 : 0;
+                $progress += $userCharacterClass->isNoah() ? 12.5 : 0;
+                $progress += $userCharacterClass->isMio() ? 12.5 : 0;
+                $progress += $userCharacterClass->isEunie() ? 12.5 : 0;
+                $progress += $userCharacterClass->isTaion() ? 12.5 : 0;
+                $progress += $userCharacterClass->isLanz() ? 12.5 : 0;
+                $progress += $userCharacterClass->isSena() ? 12.5 : 0;
+
+                return $this->json([
+                    'success' => true,
+                    'message' => ucfirst($field) . ' status updated',
+                    'progress' => $progress,
+                ]);
             } else {
                 return $this->json(['success' => false, 'error' => 'Invalid field'], Response::HTTP_BAD_REQUEST);
             }
