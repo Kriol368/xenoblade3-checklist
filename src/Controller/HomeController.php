@@ -108,8 +108,22 @@ class HomeController extends AbstractController
         $averageClassProgress = $totalClasses > 0 ? round($overallClassProgress / $totalClasses, 2) : 0;
 
 
+        $quests =  $this->questRepository->findAll();
+        $userQuests = $this->userQuestRepository->findBy(['user' => $currentUser]);
+        $checkedQuestsCount = count(array_filter($userQuests, fn($userQuest) => $userQuest->isChecked()));
+        $totalQuestsCount = count($quests);
+        $questProgress = $totalQuestsCount > 0 ? ($checkedQuestsCount / $totalQuestsCount) * 100 : 0;
+
+        $gems = $this->gemRepository->findAll();
+        $userGems = $this->userGemRepository->findBy(['user' => $currentUser]);
+        $checkedGemsCount = count(array_filter($userGems, fn($userGem) => $userGem->isChecked()));
+        $totalGemsCount = count($gems);
+        $gemProgress = $totalGemsCount > 0 ? round(($checkedGemsCount / $totalGemsCount) * 100) : 0;
+
         return $this->render('home/index.html.twig', [
             'classProgress' => $averageClassProgress,
+            'questProgress' => $questProgress,
+            'gemProgress' => $gemProgress,
         ]);
     }
 }

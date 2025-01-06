@@ -9,4 +9,14 @@
         <div class="progress-bar" style="width: {{ classProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ classProgress|number_format(0) }}% Complete</span>
     </div>
+    <h1>Quests</h1>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ questProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ questProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h1>Gems</h1>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ gemProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ gemProgress|number_format(0) }}% Complete</span>
+    </div>
 {% endblock %}
