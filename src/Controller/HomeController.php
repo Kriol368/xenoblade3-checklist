@@ -82,8 +82,34 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
+        $currentUser = $this->getUser();
+        if (!$currentUser) {
+            throw $this->createAccessDeniedException('User not logged in');
+        }
+
+        $characterClasses = $this->characterClassRepository->findAll();
+        // Fetch UserCharacterClass records for the current user
+        $userCharacterClasses = $this->userCharacterClassRepository->findBy(['user' => $currentUser]);
+        $overallClassProgress = 0;
+        foreach ($userCharacterClasses as $userCharacterClass) {
+            $classProgress = 0;
+            $classProgress += $userCharacterClass->isUnlocked() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isAscended() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isNoah() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isMio() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isEunie() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isTaion() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isLanz() ? 12.5 : 0;
+            $classProgress += $userCharacterClass->isSena() ? 12.5 : 0;
+            $charClassId = $userCharacterClass->getCharacterClass()->getId();
+            $overallClassProgress += $classProgress;
+        }
+        $totalClasses = count($characterClasses);
+        $averageClassProgress = $totalClasses > 0 ? round($overallClassProgress / $totalClasses, 2) : 0;
+
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'classProgress' => $averageClassProgress,
         ]);
     }
 }
