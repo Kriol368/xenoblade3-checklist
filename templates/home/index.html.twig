@@ -4,19 +4,49 @@
 
 
 {% block body %}
-    <h1>Character Classes</h1>
+    <h1>Overall Progress</h1>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ overallProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ overallProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h2>Character Classes</h2>
     <div class="progress-container">
         <div class="progress-bar" style="width: {{ classProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ classProgress|number_format(0) }}% Complete</span>
     </div>
-    <h1>Quests</h1>
+    <h2>Quests</h2>
     <div class="progress-container">
         <div class="progress-bar" style="width: {{ questProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ questProgress|number_format(0) }}% Complete</span>
     </div>
-    <h1>Gems</h1>
+    <h2>Gems</h2>
     <div class="progress-container">
         <div class="progress-bar" style="width: {{ gemProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ gemProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h2>Soul Trees</h2>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ soulProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ soulProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h2>Landmarks and Locations</h2>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ landmarkProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ landmarkProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h2>Unique Monsters</h2>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ monsterProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ monsterProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h2>Challenge Mode</h2>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ challengeProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ challengeProgress|number_format(0) }}% Complete</span>
+    </div>
+    <h2>Gauntlet Emblems</h2>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ gauntletProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
+        <span class="progress-label">{{ gauntletProgress|number_format(0) }}% Complete</span>
     </div>
 {% endblock %}

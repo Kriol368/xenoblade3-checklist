@@ -120,10 +120,72 @@ class HomeController extends AbstractController
         $totalGemsCount = count($gems);
         $gemProgress = $totalGemsCount > 0 ? round(($checkedGemsCount / $totalGemsCount) * 100) : 0;
 
+        $soulTrees = $this->soulTreeRepository->findAll();
+        $userSoulTrees = $this->userSoulTreeRepository->findBy(['user' => $currentUser]);
+        $checkedSoulTreesCount = count(array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked()));
+        $totalSoulTreesCount = count($soulTrees);
+        $soulProgress = $totalSoulTreesCount > 0 ? ($checkedSoulTreesCount / $totalSoulTreesCount) * 100 : 0;
+
+        $landmarkLocations = $this->landmarkLocationRepository->findAll();
+        $userLandmarkLocations = $this->userLandmarkLocationRepository->findBy(['user' => $currentUser]);
+        $checkedLandmarkLocationsCount = count(array_filter($userLandmarkLocations, fn($userLandmarkLocation) => $userLandmarkLocation->isChecked()));
+        $totalLandmarkLocationsCount = count($landmarkLocations);
+        $landmarkProgress = $totalLandmarkLocationsCount > 0 ? ($checkedLandmarkLocationsCount / $totalLandmarkLocationsCount) * 100 : 0;
+
+
+        $uniqueMonsters = $this->uniqueMonsterRepository->findAll();
+        $userUniqueMonsters = $this->userUniqueMonsterRepository->findBy(['user' => $currentUser]);
+        $overallMonsterProgress = 0;
+        foreach ($userUniqueMonsters as $userUniqueMonster) {
+            $monsterProgress = 0;
+            $monsterProgress += $userUniqueMonster->isDefeated() ? 33.33 : 0;
+            $monsterProgress += $userUniqueMonster->isSoulHacked() ? 33.33 : 0;
+            $monsterProgress += $userUniqueMonster->isAbilityUpgraded() ? 33.34 : 0;
+            $overallMonsterProgress += $monsterProgress;
+        }
+        $totalMonsters = count($uniqueMonsters);
+        $averageMonsterProgress = $totalMonsters > 0 ? round($overallMonsterProgress / $totalMonsters, 2) : 0;
+
+
+        $challengeModes = $this->challengeModeRepository->findAll();
+        $userChallengeModes = $this->userChallengeModeRepository->findBy(['user' => $currentUser]);
+        $overallChallengeProgress = 0;
+        foreach ($userChallengeModes as $userChallengeMode) {
+            $challengeProgress = 0;
+            $challengeProgress += $userChallengeMode->isEasy() ? 33.33 : 0;
+            $challengeProgress += $userChallengeMode->isNormal() ? 33.33 : 0;
+            $challengeProgress += $userChallengeMode->isHard() ? 33.34 : 0;
+            $overallChallengeProgress += $challengeProgress;
+        }
+        $totalChallenges = count($challengeModes);
+        $averageChallengeProgress = $totalChallenges > 0 ? round($overallChallengeProgress / $totalChallenges, 2) : 0;
+
+        $gauntletEmblems = $this->gauntletEmblemRepository->findAll();
+        $userGauntletEmblems = $this->userGauntletEmblemRepository->findBy(['user' => $currentUser]);
+        $checkedGauntletEmblemsCount = count(array_filter($userGauntletEmblems, fn($userGauntletEmblem) => $userGauntletEmblem->isChecked()));
+        $totalGauntletEmblemsCount = count($gauntletEmblems);
+        $gauntletProgress = $totalGauntletEmblemsCount > 0 ? ($checkedGauntletEmblemsCount / $totalGauntletEmblemsCount) * 100 : 0;
+
+
         return $this->render('home/index.html.twig', [
             'classProgress' => $averageClassProgress,
             'questProgress' => $questProgress,
             'gemProgress' => $gemProgress,
+            'soulProgress' => $soulProgress,
+            'landmarkProgress' => $landmarkProgress,
+            'monsterProgress' => $averageMonsterProgress,
+            'challengeProgress' => $averageChallengeProgress,
+            'gauntletProgress' => $gauntletProgress,
+            'overallProgress' => round((
+                    $averageClassProgress +
+                    $questProgress +
+                    $gemProgress +
+                    $soulProgress +
+                    $landmarkProgress +
+                    $averageMonsterProgress +
+                    $averageChallengeProgress +
+                    $gauntletProgress
+                ) / 8),
         ]);
     }
 }
