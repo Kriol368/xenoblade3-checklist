@@ -1,72 +1,66 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const rows = document.querySelectorAll(".gauntlet-emblem-row");
-    const card = document.getElementById("gauntlet-emblem-card");
-    const closeCardBtn = document.getElementById("close-card");
+$(document).ready(function () {
+    const rows = $(".gauntlet-emblem-row");
+    const card = $("#gauntlet-emblem-card");
+    const closeCardBtn = $("#close-card");
 
     // Open card on row click
-    rows.forEach(row => {
-        row.addEventListener("click", () => {
-            document.getElementById("gauntlet-emblem-name").textContent = row.dataset.name;
-            document.getElementById("gauntlet-emblem-rarity").textContent = row.dataset.rarity;
-            document.getElementById("gauntlet-emblem-description").textContent = row.dataset.description;
-            document.getElementById("gauntlet-emblem-effects").textContent = row.dataset.effects;
-            document.getElementById("gauntlet-emblem-img").src = "/img/gauntlet/" + row.dataset.imgIndex + '.png';
-            card.style.display = "block";
-        });
+    rows.on("click", function (event) {
+        if ($(event.target).is("input")) {
+            return;
+        }
+        $("#gauntlet-emblem-name").text($(this).data("name"));
+        $("#gauntlet-emblem-rarity").text($(this).data("rarity"));
+        $("#gauntlet-emblem-description").text($(this).data("description"));
+        $("#gauntlet-emblem-effects").text($(this).data("effects"));
+        $("#gauntlet-emblem-img").attr("src", "/img/gauntlet/" + $(this).data("imgIndex") + ".png");
+        card.show();
     });
 
     // Close card
-    closeCardBtn.addEventListener("click", () => {
-        card.style.display = "none";
+    closeCardBtn.on("click", function () {
+        card.hide();
     });
 
-    const checkboxes = document.querySelectorAll('.gauntlet-emblem-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function (event) {
-            event.stopPropagation();
-            const gauntletEmblemId = this.dataset.id;
-            const field = 'checked'; // Field is always 'checked'
-            const value = this.checked ? 1 : 0;
+    // Handle checkbox change
+    $(".gauntlet-emblem-checkbox").on("change", function (event) {
+        event.stopPropagation(); // Prevent triggering row click
+        const gauntletEmblemId = $(this).data("id");
+        const field = "checked"; // Field is always 'checked'
+        const value = $(this).prop("checked") ? 1 : 0;
 
-            const formData = new FormData();
-            formData.append('field', field);
-            formData.append('value', value);
-            formData.append('_csrf_token', csrfToken); // CSRF token for security
+        const formData = new FormData();
+        formData.append("field", field);
+        formData.append("value", value);
+        formData.append("_csrf_token", csrfToken); // CSRF token for security
 
-            fetch(`/update-emblem-status/${gauntletEmblemId}`, {
-                method: 'POST', // Correct POST method
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+        $.ajax({
+            url: `/update-emblem-status/${gauntletEmblemId}`,
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.success) {
+                    alert(data.error || "Failed to update status");
+                    $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
+                } else {
+                    updateProgressBar(); // Update progress bar on success
                 }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert(data.error || 'Failed to update status');
-                        this.checked = !this.checked; // Revert the checkbox state on failure
-                    }else {
-                        updateProgressBar(); // Update progress bar on success
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while updating the status.');
-                    this.checked = !this.checked; // Revert the checkbox state on error
-                });
+            }.bind(this),
+            error: function () {
+                alert("An error occurred while updating the status.");
+                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
+            }.bind(this)
         });
     });
 });
 
 function updateProgressBar() {
-    const checkboxes = document.querySelectorAll('.gauntlet-emblem-checkbox');
-    const totalGauntletEmblems = checkboxes.length;
-    const checkedGauntletEmblems = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-    const progress = Math.round(totalGauntletEmblems > 0 ? (checkedGauntletEmblems / totalGauntletEmblems) * 100 : 0);
+    const totalGauntletEmblems = $(".gauntlet-emblem-checkbox").length;
+    const checkedGauntletEmblems = $(".gauntlet-emblem-checkbox:checked").length;
+    const progress = Math.round(
+        totalGauntletEmblems > 0 ? (checkedGauntletEmblems / totalGauntletEmblems) * 100 : 0 );
 
-    const progressBar = document.getElementById('progress-bar');
-    const progressLabel = document.querySelector('.progress-label');
-
-    progressBar.style.width = `${progress}%`;
-    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+    $("#progress-bar").css("width", `${progress}%`);
+    $(".progress-label").text(`${progress}% Complete`);
 }

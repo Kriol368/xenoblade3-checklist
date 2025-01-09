@@ -1,72 +1,73 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const rows = document.querySelectorAll(".unique-monster-row");
-    const card = document.getElementById("unique-monster-card");
-    const closeCardBtn = document.getElementById("close-card");
+$(document).ready(function () {
+    const $rows = $(".unique-monster-row");
+    const $card = $("#unique-monster-card");
+    const $closeCardBtn = $("#close-card");
 
-    rows.forEach(row => {
-        row.addEventListener("click", () => {
-            document.getElementById("unique-monster-name").textContent = row.dataset.name;
-            document.getElementById("unique-monster-area").textContent = row.dataset.area;
-            document.getElementById("unique-monster-location").textContent = row.dataset.location;
-            document.getElementById("unique-monster-level").textContent = row.dataset.level;
-            document.getElementById("unique-monster-soulhacker-ability").textContent = row.dataset.soulhackerAbility;
-            card.style.display = "block";
-        });
+    // Handle row click event to show the unique monster details card
+    $rows.on("click", function (event) {
+        // Prevent the row click from triggering when clicking on the checkbox
+        if ($(event.target).is("input")) {
+            return; // Stops the event from propagating to the row click handler
+        }
+
+        $("#unique-monster-name").text($(this).data("name"));
+        $("#unique-monster-area").text($(this).data("area"));
+        $("#unique-monster-location").text($(this).data("location"));
+        $("#unique-monster-level").text($(this).data("level"));
+        $("#unique-monster-soulhacker-ability").text($(this).data("soulhackerAbility"));
+        $card.show();
     });
 
-    closeCardBtn.addEventListener("click", () => {
-        card.style.display = "none";
+    // Close the unique monster details card
+    $closeCardBtn.on("click", function () {
+        $card.hide();
     });
 
-    const checkboxes = document.querySelectorAll('.unique-monster-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function (event) {
-            event.stopPropagation();
-            const uniqueMonsterId = this.dataset.id;
-            const field = this.dataset.attribute;
-            const value = this.checked ? 1 : 0;
+    // Handle checkbox change event for each unique monster
+    $(".unique-monster-checkbox").on("change", function (event) {
+        event.stopPropagation(); // Prevent the row click event from firing
 
-            const formData = new FormData();
-            formData.append('field', field);
-            formData.append('value', value);
-            formData.append('_csrf_token', csrfToken);
+        const uniqueMonsterId = $(this).data("id");
+        const field = $(this).data("attribute");
+        const value = $(this).prop("checked") ? 1 : 0;
 
-            fetch(`/update-monster-status/${uniqueMonsterId}`, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+        const formData = new FormData();
+        formData.append("field", field);
+        formData.append("value", value);
+        formData.append("_csrf_token", csrfToken); // Include CSRF token for security
+
+        $.ajax({
+            url: `/update-monster-status/${uniqueMonsterId}`,
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.success) {
+                    alert(data.error || "Failed to update status");
+                    $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
+                } else {
+                    updateProgressBar(); // Update progress bar on success
                 }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert(data.error || 'Failed to update status');
-                        this.checked = !this.checked;
-                    } else {
-                        updateProgressBar();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while updating the status.');
-                    this.checked = !this.checked;
-                });
+            },
+            error: function () {
+                alert("An error occurred while updating the status.");
+                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
+            }
         });
     });
-    updateProgressBar(); // Initialize progress bar
+
+    // Initialize progress bar
+    updateProgressBar();
 });
 
+// Update the progress bar based on checked checkboxes
 function updateProgressBar() {
-    const checkboxes = document.querySelectorAll('.unique-monster-checkbox');
-    const totalCheckboxes = checkboxes.length;
-    const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const totalCheckboxes = $(".unique-monster-checkbox").length;
+    const checkedCheckboxes = $(".unique-monster-checkbox:checked").length;
 
     const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
 
-    const progressBar = document.getElementById('progress-bar');
-    const progressLabel = document.querySelector('.progress-label');
-
-    progressBar.style.width = `${progress}%`;
-    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+    $("#progress-bar").css("width", `${progress}%`);
+    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
 }

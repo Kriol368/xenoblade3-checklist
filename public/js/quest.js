@@ -1,78 +1,77 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const rows = document.querySelectorAll(".quest-row");
-    const card = document.getElementById("quest-card");
-    const closeCardBtn = document.getElementById("close-card");
+$(document).ready(function () {
+    const $rows = $(".quest-row");
+    const $card = $("#quest-card");
+    const $closeCardBtn = $("#close-card");
 
-    // Handle the row click event to show the details card
-    rows.forEach(row => {
-        row.addEventListener("click", () => {
-            document.getElementById("quest-name").textContent = row.dataset.name;
-            document.getElementById("quest-region").textContent = row.dataset.region;
-            document.getElementById("quest-type").textContent = row.dataset.type;
-            document.getElementById("quest-level").textContent = row.dataset.level;
-            document.getElementById("quest-summary").textContent = row.dataset.summary;
-            document.getElementById("quest-giver").textContent = row.dataset.giver;
-            document.getElementById("quest-prerequisites").textContent = row.dataset.prerequisites;
-            document.getElementById("quest-rewards").textContent = row.dataset.rewards;
-            document.getElementById("quest-chapter").textContent = row.dataset.chapter;
-            card.style.display = "block";
-        });
+    // Handle row click event to show the quest details card
+    $rows.on("click", function (event) {
+        // Prevent opening the card when the checkbox is clicked
+        if ($(event.target).is("input")) {
+            return;
+        }
+
+        $("#quest-name").text($(this).data("name"));
+        $("#quest-region").text($(this).data("region"));
+        $("#quest-type").text($(this).data("type"));
+        $("#quest-level").text($(this).data("level"));
+        $("#quest-summary").text($(this).data("summary"));
+        $("#quest-giver").text($(this).data("giver"));
+        $("#quest-prerequisites").text($(this).data("prerequisites"));
+        $("#quest-rewards").text($(this).data("rewards"));
+        $("#quest-chapter").text($(this).data("chapter"));
+        $card.show();
     });
 
-    // Close the detailed card when clicking the close button
-    closeCardBtn.addEventListener("click", () => {
-        card.style.display = "none";
+    // Close the quest details card
+    $closeCardBtn.on("click", function () {
+        $card.hide();
     });
 
+    // Handle checkbox change event
+    $(".quest-checkbox").on("change", function (event) {
+        event.stopPropagation(); // Prevent the row click event from firing
 
-    const checkboxes = document.querySelectorAll('.quest-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function (event) {
-            event.stopPropagation();
-            const questId = this.dataset.id;
-            const field = 'checked'; // Field is always 'checked'
-            const value = this.checked ? 1 : 0;
+        const questId = $(this).data("id");
+        const field = "checked"; // The field is always 'checked'
+        const value = $(this).prop("checked") ? 1 : 0;
 
-            const formData = new FormData();
-            formData.append('field', field);
-            formData.append('value', value);
-            formData.append('_csrf_token', csrfToken); // CSRF token for security
+        const formData = new FormData();
+        formData.append("field", field);
+        formData.append("value", value);
+        formData.append("_csrf_token", csrfToken); // Include CSRF token for security
 
-            fetch(`/update-quest-status/${questId}`, {
-                method: 'POST', // Correct POST method
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+        $.ajax({
+            url: `/update-quest-status/${questId}`,
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.success) {
+                    alert(data.error || "Failed to update status");
+                    $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
+                } else {
+                    updateProgressBar(); // Update progress bar on success
                 }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert(data.error || 'Failed to update status');
-                        this.checked = !this.checked; // Revert the checkbox state on failure
-                    }else {
-                        updateProgressBar(); // Update progress bar on success
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while updating the status.');
-                    this.checked = !this.checked; // Revert the checkbox state on error
-                });
+            },
+            error: function () {
+                alert("An error occurred while updating the status.");
+                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
+            }
         });
     });
 
+    // Initialize progress bar
+    updateProgressBar();
 });
 
+// Update the progress bar based on checked checkboxes
 function updateProgressBar() {
-    const checkboxes = document.querySelectorAll('.quest-checkbox');
-    const totalQuests = checkboxes.length;
-    const checkedQuests = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const totalQuests = $(".quest-checkbox").length;
+    const checkedQuests = $(".quest-checkbox:checked").length;
+
     const progress = Math.round(totalQuests > 0 ? (checkedQuests / totalQuests) * 100 : 0);
 
-    const progressBar = document.getElementById('progress-bar');
-    const progressLabel = document.querySelector('.progress-label');
-
-    progressBar.style.width = `${progress}%`;
-    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+    $("#progress-bar").css("width", `${progress}%`);
+    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
 }

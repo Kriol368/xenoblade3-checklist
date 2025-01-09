@@ -1,72 +1,71 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const rows = document.querySelectorAll(".soul-tree-row");
-    const card = document.getElementById("soul-tree-card");
-    const closeCardBtn = document.getElementById("close-card");
+$(document).ready(function () {
+    const $rows = $(".soul-tree-row");
+    const $card = $("#soul-tree-card");
+    const $closeCardBtn = $("#close-card");
 
-    // Handle the row click event to show the details card
-    rows.forEach(row => {
-        row.addEventListener("click", () => {
-            document.getElementById("soul-tree-name").textContent = row.dataset.name;
-            document.getElementById("soul-tree-effect").textContent = row.dataset.effect;
-            document.getElementById("soul-tree-character").textContent = row.dataset.character;
-            card.style.display = "block";
-        });
+    // Handle row click event to show the soul tree details card
+    $rows.on("click", function (event) {
+        // Prevent opening the card when the checkbox is clicked
+        if ($(event.target).is("input")) {
+            return;
+        }
+
+        $("#soul-tree-name").text($(this).data("name"));
+        $("#soul-tree-effect").text($(this).data("effect"));
+        $("#soul-tree-character").text($(this).data("character"));
+        $card.show();
     });
 
-    // Close the detailed card when clicking the close button
-    closeCardBtn.addEventListener("click", () => {
-        card.style.display = "none";
+    // Close the soul tree details card
+    $closeCardBtn.on("click", function () {
+        $card.hide();
     });
 
-    // Handle checkbox change for each Soul tree
-    const checkboxes = document.querySelectorAll('.soul-tree-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function (event) {
-            event.stopPropagation();
-            const soulTreeId = this.dataset.id;
-            const field = 'checked'; // Field is always 'checked'
-            const value = this.checked ? 1 : 0;
+    // Handle checkbox change event for soul tree
+    $(".soul-tree-checkbox").on("change", function (event) {
+        event.stopPropagation(); // Prevent the row click event from firing
 
-            const formData = new FormData();
-            formData.append('field', field);
-            formData.append('value', value);
-            formData.append('_csrf_token', csrfToken); // CSRF token for security
+        const soulTreeId = $(this).data("id");
+        const field = "checked"; // The field is always 'checked'
+        const value = $(this).prop("checked") ? 1 : 0;
 
-            fetch(`/update-soul-status/${soulTreeId}`, {
-                method: 'POST', // Correct POST method
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+        const formData = new FormData();
+        formData.append("field", field);
+        formData.append("value", value);
+        formData.append("_csrf_token", csrfToken); // Include CSRF token for security
+
+        $.ajax({
+            url: `/update-soul-status/${soulTreeId}`,
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.success) {
+                    alert(data.error || "Failed to update status");
+                    $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
+                } else {
+                    updateProgressBar(); // Update progress bar on success
                 }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert(data.error || 'Failed to update status');
-                        this.checked = !this.checked; // Revert the checkbox state on failure
-                    }else {
-                        updateProgressBar(); // Update progress bar on success
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while updating the status.');
-                    this.checked = !this.checked; // Revert the checkbox state on error
-                });
+            },
+            error: function () {
+                alert("An error occurred while updating the status.");
+                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
+            }
         });
     });
 
+    // Initialize progress bar
+    updateProgressBar();
 });
 
+// Update the progress bar based on checked checkboxes
 function updateProgressBar() {
-    const checkboxes = document.querySelectorAll('.soul-tree-checkbox');
-    const totalSoulTrees = checkboxes.length;
-    const checkedSoulTrees = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const totalSoulTrees = $(".soul-tree-checkbox").length;
+    const checkedSoulTrees = $(".soul-tree-checkbox:checked").length;
+
     const progress = Math.round(totalSoulTrees > 0 ? (checkedSoulTrees / totalSoulTrees) * 100 : 0);
 
-    const progressBar = document.getElementById('progress-bar');
-    const progressLabel = document.querySelector('.progress-label');
-
-    progressBar.style.width = `${progress}%`;
-    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+    $("#progress-bar").css("width", `${progress}%`);
+    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
 }

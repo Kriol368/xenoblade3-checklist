@@ -1,59 +1,57 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const rows = document.querySelectorAll(".challenge-mode-row");
-    const card = document.getElementById("challenge-mode-card");
-    const closeCardBtn = document.getElementById("close-card");
+$(document).ready(function () {
+    const $rows = $(".challenge-mode-row");
+    const $card = $("#challenge-mode-card");
+    const $closeCardBtn = $("#close-card");
 
     // Open card on row click
-    rows.forEach(row => {
-        row.addEventListener("click", () => {
-            document.getElementById("challenge-mode-name").textContent = row.dataset.name;
-            document.getElementById("challenge-mode-difficulty").textContent = row.dataset.difficulty;
-            document.getElementById("challenge-mode-waves").textContent = row.dataset.waves;
-            document.getElementById("challenge-mode-levelRestriction").textContent = row.dataset.levelRestriction;
-            card.style.display = "block";
-        });
+    $rows.on("click", function (event) {
+        if ($(event.target).is("input")) {
+            return;
+        }
+        const $row = $(this);
+        $("#challenge-mode-name").text($row.data("name"));
+        $("#challenge-mode-difficulty").text($row.data("difficulty"));
+        $("#challenge-mode-waves").text($row.data("waves"));
+        $("#challenge-mode-levelRestriction").text($row.data("levelRestriction"));
+        $card.show();
     });
 
     // Close card
-    closeCardBtn.addEventListener("click", () => {
-        card.style.display = "none";
+    $closeCardBtn.on("click", function () {
+        $card.hide();
     });
 
     // Handle checkbox changes
-    const checkboxes = document.querySelectorAll('.challenge-mode-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function (event) {
-            event.stopPropagation();
-            const challengeModeId = this.dataset.id;
-            const field = this.dataset.attribute;
-            const value = this.checked ? 1 : 0;
+    $(".challenge-mode-checkbox").on("change", function (event) {
+        event.stopPropagation();
 
-            const formData = new FormData();
-            formData.append('field', field);
-            formData.append('value', value);
-            formData.append('_csrf_token', csrfToken);
+        const challengeModeId = $(this).data("id");
+        const field = $(this).data("attribute");
+        const value = $(this).prop("checked") ? 1 : 0;
 
-            fetch(`/update-challenge-status/${challengeModeId}`, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+        const formData = new FormData();
+        formData.append("field", field);
+        formData.append("value", value);
+        formData.append("_csrf_token", csrfToken);
+
+        $.ajax({
+            url: `/update-challenge-status/${challengeModeId}`,
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.success) {
+                    alert(data.error || "Failed to update status");
+                    $(this).prop("checked", !$(this).prop("checked"));
+                } else {
+                    updateProgressBar();
                 }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert(data.error || 'Failed to update status');
-                        this.checked = !this.checked;
-                    } else {
-                        updateProgressBar();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while updating the status.');
-                    this.checked = !this.checked;
-                });
+            },
+            error: function () {
+                alert("An error occurred while updating the status.");
+                $(this).prop("checked", !$(this).prop("checked"));
+            }
         });
     });
 
@@ -62,15 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function to update the progress bar
 function updateProgressBar() {
-    const checkboxes = document.querySelectorAll('.challenge-mode-checkbox');
-    const totalCheckboxes = checkboxes.length;
-    const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const totalCheckboxes = $(".challenge-mode-checkbox").length;
+    const checkedCheckboxes = $(".challenge-mode-checkbox:checked").length;
 
     const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
 
-    const progressBar = document.getElementById('progress-bar');
-    const progressLabel = document.querySelector('.progress-label');
-
-    progressBar.style.width = `${progress}%`;
-    progressLabel.textContent = `${progress.toFixed(0)}% Complete`;
+    $("#progress-bar").css("width", `${progress}%`);
+    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
 }
