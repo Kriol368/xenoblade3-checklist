@@ -1,0 +1,142 @@
+/* Page container to occupy full height */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* Overall progress bar section */
+.progress-overview {
+    text-align: center;
+    margin-bottom: 2rem;
+    flex: 1; /* Takes up space proportionally */
+}
+
+.progress-overview h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Progress bar container */
+.progress-container {
+    position: relative;
+    height: 1.5rem;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%; /* Stretches full width */
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+}
+
+.progress-label {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+/* Grid for progress sections */
+.progress-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 1.5rem;
+    flex: 2; /* Takes up more space */
+}
+
+/* Individual progress cards */
+.progress-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Progress card hover effect */
+.progress-card:hover {
+    transform: translateY(-5px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading inside progress card */
+.progress-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Progress bar inside progress card */
+.progress-card .progress-container {
+    position: relative;
+    height: 1.5rem;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%; /* Stretches full width */
+}
+
+.progress-card .progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+}
+
+.progress-card .progress-label {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .progress-sections-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-sections-grid {
+        grid-template-columns: 1fr; /* 1 column for very small screens */
+    }
+}
+
+/* Style for the clickable link around the progress card */
+.progress-card-link {
+    display: block;
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Remove default link color */
+}
+
+/* Remove default focus and visited link styles */
+.progress-card-link:focus,
+.progress-card-link:visited {
+    outline: none;
+    color: inherit; /* Inherit color from parent */
+}
+
+/* Remove link active color flash */
+.progress-card-link:active {
+    outline: none;
+    color: inherit;
+    background-color: inherit; /* Ensure the background does not change */
+}

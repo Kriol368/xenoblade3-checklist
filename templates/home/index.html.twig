@@ -2,51 +2,48 @@
 
 {% block title %}XC3 Checklist - Home{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Overall Progress</h1>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ overallProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ overallProgress|number_format(0) }}% Complete</span>
+    <div class="progress-overview">
+        <h1>Overall Progress</h1>
+        <div class="progress-container">
+            <div class="progress-bar"
+                 style="width: {{ overallProgress|round(0, 'floor') }}%;"
+                 id="progress-bar-overall"></div>
+            <span class="progress-label">
+                {{ overallProgress|number_format(0) }}% Complete
+            </span>
+        </div>
     </div>
-    <h2>Character Classes</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ classProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ classProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Quests</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ questProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ questProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Gems</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ gemProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ gemProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Soul Trees</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ soulProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ soulProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Landmarks and Locations</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ landmarkProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ landmarkProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Unique Monsters</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ monsterProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ monsterProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Challenge Mode</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ challengeProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ challengeProgress|number_format(0) }}% Complete</span>
-    </div>
-    <h2>Gauntlet Emblems</h2>
-    <div class="progress-container">
-        <div class="progress-bar" style="width: {{ gauntletProgress|round(0, 'floor') }}%;" id="progress-bar"></div>
-        <span class="progress-label">{{ gauntletProgress|number_format(0) }}% Complete</span>
+
+    <div class="progress-sections-grid">
+        {% set sections = [
+            {'title': 'Character Classes', 'progress': classProgress, 'route': 'app_character_class'},
+            {'title': 'Quests', 'progress': questProgress, 'route': 'app_quest'},
+            {'title': 'Gems', 'progress': gemProgress, 'route': 'app_gem'},
+            {'title': 'Soul Trees', 'progress': soulProgress, 'route': 'app_soul_tree'},
+            {'title': 'Landmarks and Locations', 'progress': landmarkProgress, 'route': 'app_landmark_location'},
+            {'title': 'Unique Monsters', 'progress': monsterProgress, 'route': 'app_unique_monster'},
+            {'title': 'Challenge Mode', 'progress': challengeProgress, 'route': 'app_challenge_mode'},
+            {'title': 'Gauntlet Emblems', 'progress': gauntletProgress, 'route': 'app_gauntlet_emblem'}
+        ] %}
+
+        {% for section in sections %}
+            <a href="{{ path(section.route) }}" class="progress-card-link">
+                <div class="progress-card">
+                    <h2>{{ section.title }}</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar"
+                             style="width: {{ section.progress|round(0, 'floor') }}%;"></div>
+                        <span class="progress-label">
+                            {{ section.progress|number_format(0) }}% Complete
+                        </span>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
     </div>
 {% endblock %}
