@@ -5,6 +5,7 @@
     height: 100vh; /* Full viewport height */
     padding: 1rem;
     box-sizing: border-box;
+    background-color: #121212; /* Dark background for page */
 }
 
 /* Overall progress bar section */
@@ -17,13 +18,14 @@
 .progress-overview h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: #e5e5e5; /* Lighter text color */
 }
 
 /* Progress bar container */
 .progress-container {
     position: relative;
     height: 1.5rem;
-    background-color: #e0e0e0;
+    background-color: #444; /* Darker background for the progress container */
     border-radius: 4px;
     overflow: hidden;
     width: 100%; /* Stretches full width */
@@ -31,7 +33,7 @@
 
 .progress-bar {
     height: 100%;
-    background-color: #4caf50;
+    background-color: #4caf50; /* Green for progress */
     transition: width 0.3s ease;
 }
 
@@ -43,7 +45,7 @@
     transform: translateY(-50%);
     font-size: 0.9rem;
     font-weight: bold;
-    color: #000;
+    color: #e5e5e5; /* Light text for labels */
     text-align: center;
 }
 
@@ -57,14 +59,15 @@
 
 /* Individual progress cards */
 .progress-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #333; /* Dark background for the card */
+    border: 1px solid #444; /* Border slightly lighter than background */
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #e5e5e5; /* Lighter text color */
 }
 
 /* Progress card hover effect */
@@ -77,13 +80,14 @@
 .progress-card h2 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    color: #e5e5e5; /* Lighter text for card headings */
 }
 
 /* Progress bar inside progress card */
 .progress-card .progress-container {
     position: relative;
     height: 1.5rem;
-    background-color: #e0e0e0;
+    background-color: #444; /* Darker background for the progress container */
     border-radius: 4px;
     overflow: hidden;
     width: 100%; /* Stretches full width */
@@ -91,7 +95,7 @@
 
 .progress-card .progress-bar {
     height: 100%;
-    background-color: #4caf50;
+    background-color: #4caf50; /* Green for progress */
     transition: width 0.3s ease;
 }
 
@@ -103,7 +107,7 @@
     transform: translateY(-50%);
     font-size: 0.9rem;
     font-weight: bold;
-    color: #000;
+    color: #e5e5e5; /* Light text color for progress card labels */
     text-align: center;
 }
 

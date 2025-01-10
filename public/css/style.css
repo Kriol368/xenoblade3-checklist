@@ -9,31 +9,34 @@
 body {
     display: flex;
     font-family: "Helvetica Black Oblique", "Arial", sans-serif;
+    background-color: #121212; /* Dark background for immersive look */
+    color: #e5e5e5; /* Lighter text color for readability */
 }
 
+/* Sidebar styles */
 nav {
     width: 250px;
-    height: calc(100vh - 60px); /* Full height minus the height of the header */
-    background-color: #333;
-    color: #fff;
+    height: calc(100vh - 60px); /* Full height minus the header */
+    background-color: #1a1a1a; /* Darker shade for the sidebar */
+    color: #ddd; /* Slightly lighter text for the sidebar */
     position: fixed;
-    left: 0; /* Align to the left edge */
-    top: 60px; /* Position below the header */
-    padding: 20px; /* Keep some padding for aesthetics */
-    transition: width 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
-    overflow-y: auto; /* Enable vertical scrolling */
+    left: 0;
+    top: 60px;
+    padding: 20px;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    overflow-y: auto;
 }
 
-/* Hide sidebar completely when collapsed */
 nav.collapsed {
-    width: 0; /* Set width to 0 */
-    opacity: 0; /* Make it invisible */
-    padding: 0; /* Remove padding */
-    overflow: hidden; /* Hide any overflow */
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 nav ul {
     list-style: none;
+    padding: 0;
 }
 
 nav ul li {
@@ -41,24 +44,32 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #ddd;
     text-decoration: none;
     font-size: 18px;
+    padding: 5px;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #333; /* Slight hover effect */
 }
 
 /* Header styles */
 header {
     width: 100%;
     height: 60px;
-    background-color: #444;
+    background-color: #2e2e2e; /* Dark header */
     color: #fff;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     position: fixed;
     top: 0;
-    left: 0; /* Adjust to 0 so it doesn't affect sidebar */
-    z-index: 1000; /* Ensure header is above sidebar */
+    left: 0;
+    z-index: 1000;
 }
 
 .header-content {
@@ -70,227 +81,109 @@ header {
 .header-content .nav-toggle {
     cursor: pointer;
     font-size: 20px;
-    margin-right: 20px; /* Space between toggle and title */
+    margin-right: 20px;
 }
 
 .header-content .logo {
-    flex: 1; /* Allow title to take available space */
+    flex: 1;
 }
 
 header .search {
-    flex: 1; /* Take available space */
-    display: flex; /* Use flexbox to center the input */
-    justify-content: center; /* Center the input horizontally */
-    margin-left: 10px; /* Slight margin from the title */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
 }
 
 header .search input {
-    width: 80%; /* Set a specific width */
+    width: 80%;
     padding: 8px;
     border: none;
     border-radius: 4px;
+    background-color: #3a3a3a;
+    color: #fff;
 }
 
-/* Adjust auth buttons */
 .auth-buttons {
-    margin-left: 20px; /* Space before buttons */
+    margin-left: 20px;
 }
 
 .auth-buttons a {
-    color: #fff; /* Make the link color white */
-    text-decoration: none; /* Remove underline */
-    padding: 8px 12px; /* Add padding for a button-like appearance */
-    border-radius: 4px; /* Slightly rounded corners */
-    background-color: #555; /* Background color for the buttons */
-    transition: background-color 0.3s; /* Smooth background transition */
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #4a4a4a;
+    transition: background-color 0.3s;
 }
 
 .auth-buttons a:hover {
-    background-color: #666; /* Darker background on hover */
+    background-color: #5a5a5a;
 }
 
 /* Main content styles */
 main {
-    margin-left: 300px; /* Adjust based on sidebar */
+    margin-left: 300px;
     margin-top: 60px;
     padding: 20px;
-    transition: margin-left 0.3s ease; /* Smooth transition for margin change */
+    transition: margin-left 0.3s ease;
 }
 
-/* Collapse menu */
-nav.collapsed ul {
-    display: none; /* Hide the list items in collapsed state */
-}
-
-nav.collapsed ul li a {
-    font-size: 0; /* Hide text */
-}
-
-nav.collapsed ul li a:before {
-    font-size: 18px;
-    content: ""; /* You can replace this with icons */
-}
-
-
-/* Search bar */
-header .search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-right: 20px; /* Ensure space between the login buttons */
-}
-
-header .search input {
-    width: 0; /* Hidden initially */
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    opacity: 0;
-    visibility: hidden;
-    transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s;
-    position: absolute;
-    right: 30px; /* Always position relative to the search icon */
-}
-
-header .search.expanded input {
-    width: 125%; /* Set larger width when expanded */
-    opacity: 1;
-    visibility: visible;
-}
-
-header .search .search-icon {
-    cursor: pointer;
-    font-size: 20px;
-    position: relative; /* Keep it in the same position */
-    z-index: 10; /* Keep above the input */
-}
-
-.home-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.food-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.art-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.challenge-mode-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.character-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.character-class-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.collectible-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.end-game-accessory-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.gauntlet-emblem-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.gem-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -264px -4px;
-}
-
-.hero-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.landmark-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.quest-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.skill-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.soul-tree-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-.unique-monster-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-}
-
-/* Common styles for all icons */
-#sidebar a span{
-    position: relative; /* Allow positioning of the icon */
-    width: 62px; /* Set width to match the icon */
-    height: 48px; /* Set height to match the icon */
-    display: inline-block; /* Make it inline-block to sit next to text */
-    margin-right: 8px; /* Space between icon and text */
-    vertical-align: middle; /* Align the icon with the text */
-}
-
-#sidebar a {
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Align icon and text */
-
-}
-
-
+/* Table styles */
 .table-container {
-    max-height: 80vh; /* Adjust height as needed */
-    height: 100%; /* Occupy full height of the parent container */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds */
-    border: 1px solid #ccc; /* Optional: Border for aesthetics */
-    display: flex; /* Flexbox for layout control */
-    flex-direction: column; /* Ensure proper stacking of content */
+    max-height: 80vh;
+    height: 100%;
+    overflow-y: auto;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
 }
 
 table {
-    width: 100%; /* Occupy full width */
-    height: 100%; /* Occupy full height of container */
-    border-collapse: collapse; /* Remove gaps between cells */
-    table-layout: fixed; /* Ensures consistent column widths */
+    width: 100%; /* Full width */
+    table-layout: fixed; /* Allow table to stretch horizontally */
+    border-collapse: collapse;
+    background-color: #222; /* Darker background for table */
 }
 
 th, td {
-    padding: 8px; /* Space within cells */
-    text-align: left; /* Align text to the left */
-    border: 1px solid #ddd; /* Cell border */
-    word-wrap: break-word; /* Handle long text gracefully */
-    vertical-align: top; /* Align content at the top */
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #444;
+    word-wrap: break-word; /* Ensure long words break across lines */
+    word-break: break-word;
+    vertical-align: top;
 }
 
 th {
-    background-color: #f4f4f4; /* Optional: Header background color */
-    font-weight: bold; /* Emphasize header text */
+    background-color: #333; /* Dark background for headers */
+    font-weight: bold;
+    color: #e5e5e5; /* Lighter text for headers */
 }
 
-.food-row {
-    cursor: pointer;
+td {
+    color: #ccc; /* Lighter text for table content */
 }
+
+tr:hover {
+    background-color: #444; /* Hover effect for rows */
+}
+
+/* Card style for detailed view */
 .card {
     position: fixed;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -20%);
-    background-color: #fff;
+    background-color: #333; /* Dark background for card */
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 300px;
+    color: #fff;
     z-index: 1000;
 }
+
 .close-btn {
     position: absolute;
     top: 10px;
@@ -298,6 +191,7 @@ th {
     background: none;
     border: none;
     font-size: 20px;
+    color: #e5e5e5;
     cursor: pointer;
 }
 
@@ -306,13 +200,12 @@ th {
     position: relative;
     width: 100%;
     height: 30px;
-    background-color: #f3f3f3;
+    background-color: #555;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
 }
 
-/* Progress bar styles */
 .progress-bar {
     height: 100%;
     background-color: #4caf50;
@@ -320,15 +213,41 @@ th {
     transition: width 0.3s ease;
 }
 
-/* Progress label styles */
 .progress-label {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #000;
+    color: #fff;
     font-weight: bold;
     font-size: 14px;
     text-align: center;
     z-index: 2;
+}
+
+/* Icons */
+#sidebar a {
+    display: flex;
+    align-items: center;
+    color: #b1c5d9;
+    transition: color 0.3s ease;
+}
+
+#sidebar a:hover {
+    color: #6db1ff; /* Lighter blue on hover */
+}
+
+#sidebar a span {
+    position: relative;
+    width: 62px;
+    height: 48px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Custom Icons */
+.home-icon, .food-icon, .art-icon, .challenge-mode-icon, .character-icon, .character-class-icon, .collectible-icon, .end-game-accessory-icon, .gauntlet-emblem-icon, .gem-icon, .hero-icon, .landmark-icon, .quest-icon, .skill-icon, .soul-tree-icon, .unique-monster-icon {
+    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
+    /* Add individual background positions if needed for specific icons */
 }
