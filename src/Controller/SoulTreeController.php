@@ -47,7 +47,9 @@ class SoulTreeController extends AbstractController
         }
         $checkedSoulTreesCount = count(array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked()));
         $totalSoulTreesCount = count($soulTrees);
-        $progress = $totalSoulTreesCount > 0 ? ($checkedSoulTreesCount / $totalSoulTreesCount) * 100 : 0;
+        $progress = $totalSoulTreesCount > 0 ? round(($checkedSoulTreesCount / $totalSoulTreesCount) * 100) : 0;
+        $checkedSoulTrees = array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked());
+
 
         return $this->render('soul_tree/index.html.twig', [
             'soulTrees' => $soulTrees,
