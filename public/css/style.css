@@ -246,15 +246,10 @@ header .search .search-icon {
 
 }
 
-/* Add some styles for table and card */
-.table-container {
-    max-height: 400px; /* Adjust height as needed */
-    overflow-y: auto;
-    border: 1px solid #ccc;
-}
 
 .table-container {
-    height: 1050%; /* Occupy full height of the parent container */
+    max-height: 80vh; /* Adjust height as needed */
+    height: 100%; /* Occupy full height of the parent container */
     overflow-y: auto; /* Enable vertical scrolling if content exceeds */
     border: 1px solid #ccc; /* Optional: Border for aesthetics */
     display: flex; /* Flexbox for layout control */
