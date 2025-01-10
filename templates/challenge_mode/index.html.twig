@@ -7,48 +7,51 @@
         <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Difficulty</th>
-            <th>Easy</th>
-            <th>Normal</th>
-            <th>Hard</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for challengeMode in challengeModes %}
-            {% set userChallengeMode = userChallengeModeMap[challengeMode.id] ?? null %}
-            <tr class="challenge-mode-row"
-                data-id="{{ challengeMode.id }}"
-                data-name="{{ challengeMode.name }}"
-                data-difficulty="{{ challengeMode.difficulty }}"
-                data-waves="{{ challengeMode.waves }}"
-                data-level-restriction="{{ challengeMode.levelRestriction }}">
-                <td>{{ challengeMode.name }}</td>
-                <td>{{ challengeMode.difficulty }}</td>
-                {% set attributes = ['easy', 'normal', 'hard'] %}
-                {% for attribute in attributes %}
-                    <td>
-                        <input type="checkbox"
-                               class="challenge-mode-checkbox"
-                               data-attribute="{{ attribute }}"
-                               data-id="{{ challengeMode.id }}"
-                                {% if attribute == 'easy' and userChallengeMode.isEasy %}
-                                    checked
-                                {% elseif attribute == 'normal' and userChallengeMode.isNormal %}
-                                    checked
-                                {% elseif attribute == 'hard' and userChallengeMode.isHard %}
-                                    checked
-                                {% endif %}
-                        >
-                    </td>
-                {% endfor %}
+    <div class="table-container">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Difficulty</th>
+                <th>Easy</th>
+                <th>Normal</th>
+                <th>Hard</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for challengeMode in challengeModes %}
+                {% set userChallengeMode = userChallengeModeMap[challengeMode.id] ?? null %}
+                <tr class="challenge-mode-row"
+                    data-id="{{ challengeMode.id }}"
+                    data-name="{{ challengeMode.name }}"
+                    data-difficulty="{{ challengeMode.difficulty }}"
+                    data-waves="{{ challengeMode.waves }}"
+                    data-level-restriction="{{ challengeMode.levelRestriction }}">
+                    <td>{{ challengeMode.name }}</td>
+                    <td>{{ challengeMode.difficulty }}</td>
+                    {% set attributes = ['easy', 'normal', 'hard'] %}
+                    {% for attribute in attributes %}
+                        <td>
+                            <input type="checkbox"
+                                   class="challenge-mode-checkbox"
+                                   data-attribute="{{ attribute }}"
+                                   data-id="{{ challengeMode.id }}"
+                                    {% if attribute == 'easy' and userChallengeMode.isEasy %}
+                                        checked
+                                    {% elseif attribute == 'normal' and userChallengeMode.isNormal %}
+                                        checked
+                                    {% elseif attribute == 'hard' and userChallengeMode.isHard %}
+                                        checked
+                                    {% endif %}
+                            >
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Card for displaying detailed challenge mode info -->
     <div id="challenge-mode-card" class="card" style="display: none;">

@@ -2,28 +2,32 @@
 {% block title %}XC3 Checklist - Skills{% endblock %}
 {% block body %}
     <h1>Skills</h1>
+    <div class="table-container">
 
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Class</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for skill in skills %}
-            <tr class="skill-row" data-id="{{ skill.id }}" data-name="{{ skill.name }}" data-class="{{ skill.class.name }}" data-effect="{{ skill.effect }}" data-master-level="{{ skill.masterLevel }}" data-imgIndex="{{ skill.imgIndex }}">
-                <td>
-                    <img src="{{ asset('img/skills/icon_skill3_' ~ skill.imgIndex ~ '.png') }}" alt="{{ skill.name }}">
-                </td>
-                <td>{{ skill.name }}</td>
-                <td>{{ skill.class.name }}</td>
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Class</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            {% for skill in skills %}
+                <tr class="skill-row" data-id="{{ skill.id }}" data-name="{{ skill.name }}"
+                    data-class="{{ skill.class.name }}" data-effect="{{ skill.effect }}"
+                    data-master-level="{{ skill.masterLevel }}" data-imgIndex="{{ skill.imgIndex }}">
+                    <td>
+                        <img src="{{ asset('img/skills/icon_skill3_' ~ skill.imgIndex ~ '.png') }}"
+                             alt="{{ skill.name }}">
+                    </td>
+                    <td>{{ skill.name }}</td>
+                    <td>{{ skill.class.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed skill info -->
     <div id="skill-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

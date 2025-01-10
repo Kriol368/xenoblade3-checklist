@@ -8,79 +8,82 @@
         <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Unlocked</th>
-            <th>Ascended</th>
-            <th>Noah</th>
-            <th>Mio</th>
-            <th>Eunie</th>
-            <th>Taion</th>
-            <th>Lanz</th>
-            <th>Sena</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for characterClass in characterClasses %}
-            {% set userCharacterClass = userCharacterClassesMap[characterClass.id] ?? null %}
-            <tr class="character-class-row"
-                data-character-id="{{ characterClass.id }}"
-                data-name="{{ characterClass.name }}"
-                data-role="{{ characterClass.role }}"
-                data-weapon="{{ characterClass.weapon }}"
-                data-nation="{{ characterClass.nation }}"
-                data-offense="{{ characterClass.offense }}"
-                data-defense="{{ characterClass.defense }}"
-                data-healing="{{ characterClass.healing }}"
-                data-difficulty="{{ characterClass.difficulty }}"
-                data-img-index="{{ characterClass.imgIndex }}">
+    <div class="table-container">
 
-                <td>
-                    <img src="{{ asset('img/classes/' ~ characterClass.imgIndex ~ '.png') }}"
-                         alt="{{ characterClass.name }}">
-                </td>
-
-                <td>{{ characterClass.name }}</td>
-
-                <td>
-                    <img src="{{ asset('img/roles/' ~ characterClass.role ~ '.png') }}" alt="{{ characterClass.role }}">
-                </td>
-
-                {% set attributes = ['unlocked', 'ascended', 'noah', 'mio', 'eunie', 'taion', 'lanz', 'sena'] %}
-                {% for attribute in attributes %}
-                    <td>
-                        <input type="checkbox"
-                               class="character-checkbox"
-                               data-attribute="{{ attribute }}"
-                               data-id="{{ characterClass.id }}"
-                                {% if attribute == 'unlocked' and userCharacterClass.isUnlocked() %}
-                                    checked
-                                {% elseif attribute == 'ascended' and userCharacterClass.isAscended() %}
-                                    checked
-                                {% elseif attribute == 'noah' and userCharacterClass.isNoah() %}
-                                    checked
-                                {% elseif attribute == 'mio' and userCharacterClass.isMio() %}
-                                    checked
-                                {% elseif attribute == 'eunie' and userCharacterClass.isEunie() %}
-                                    checked
-                                {% elseif attribute == 'taion' and userCharacterClass.isTaion() %}
-                                    checked
-                                {% elseif attribute == 'lanz' and userCharacterClass.isLanz() %}
-                                    checked
-                                {% elseif attribute == 'sena' and userCharacterClass.isSena() %}
-                                    checked
-                                {% endif %}
-                    </td>
-                {% endfor %}
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Unlocked</th>
+                <th>Ascended</th>
+                <th>Noah</th>
+                <th>Mio</th>
+                <th>Eunie</th>
+                <th>Taion</th>
+                <th>Lanz</th>
+                <th>Sena</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for characterClass in characterClasses %}
+                {% set userCharacterClass = userCharacterClassesMap[characterClass.id] ?? null %}
+                <tr class="character-class-row"
+                    data-character-id="{{ characterClass.id }}"
+                    data-name="{{ characterClass.name }}"
+                    data-role="{{ characterClass.role }}"
+                    data-weapon="{{ characterClass.weapon }}"
+                    data-nation="{{ characterClass.nation }}"
+                    data-offense="{{ characterClass.offense }}"
+                    data-defense="{{ characterClass.defense }}"
+                    data-healing="{{ characterClass.healing }}"
+                    data-difficulty="{{ characterClass.difficulty }}"
+                    data-img-index="{{ characterClass.imgIndex }}">
 
+                    <td>
+                        <img src="{{ asset('img/classes/' ~ characterClass.imgIndex ~ '.png') }}"
+                             alt="{{ characterClass.name }}">
+                    </td>
+
+                    <td>{{ characterClass.name }}</td>
+
+                    <td>
+                        <img src="{{ asset('img/roles/' ~ characterClass.role ~ '.png') }}"
+                             alt="{{ characterClass.role }}">
+                    </td>
+
+                    {% set attributes = ['unlocked', 'ascended', 'noah', 'mio', 'eunie', 'taion', 'lanz', 'sena'] %}
+                    {% for attribute in attributes %}
+                        <td>
+                            <input type="checkbox"
+                                   class="character-checkbox"
+                                   data-attribute="{{ attribute }}"
+                                   data-id="{{ characterClass.id }}"
+                                {% if attribute == 'unlocked' and userCharacterClass.isUnlocked() %}
+                                   checked
+                                {% elseif attribute == 'ascended' and userCharacterClass.isAscended() %}
+                                   checked
+                                {% elseif attribute == 'noah' and userCharacterClass.isNoah() %}
+                                   checked
+                                {% elseif attribute == 'mio' and userCharacterClass.isMio() %}
+                                   checked
+                                {% elseif attribute == 'eunie' and userCharacterClass.isEunie() %}
+                                   checked
+                                {% elseif attribute == 'taion' and userCharacterClass.isTaion() %}
+                                   checked
+                                {% elseif attribute == 'lanz' and userCharacterClass.isLanz() %}
+                                   checked
+                                {% elseif attribute == 'sena' and userCharacterClass.isSena() %}
+                                   checked
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed character class info -->
     <div id="character-class-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

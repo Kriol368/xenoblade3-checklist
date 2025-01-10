@@ -2,27 +2,30 @@
 {% block title %}XC3 Checklist - Characters{% endblock %}
 {% block body %}
     <h1>Characters</h1>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Class</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for character in characters %}
-            <tr class="character-row" data-id="{{ character.id }}" data-name="{{ character.name }}" data-class="{{ character.class.name }}" data-imgIndex="{{ character.imgIndex }}">
-                <td>
-                    <img src="{{ asset('img/characters/icon/icon_' ~ '%02d'|format(character.imgIndex) ~ '.png') }}" alt="{{ character.name }}">
-                </td>
-                <td>{{ character.name }}</td>
-                <td>{{ character.class.name }}</td>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Class</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for character in characters %}
+                <tr class="character-row" data-id="{{ character.id }}" data-name="{{ character.name }}"
+                    data-class="{{ character.class.name }}" data-imgIndex="{{ character.imgIndex }}">
+                    <td>
+                        <img src="{{ asset('img/characters/icon/icon_' ~ '%02d'|format(character.imgIndex) ~ '.png') }}"
+                             alt="{{ character.name }}">
+                    </td>
+                    <td>{{ character.name }}</td>
+                    <td>{{ character.class.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Card for displaying detailed character info -->
     <div id="character-card" class="card" style="display: none;">

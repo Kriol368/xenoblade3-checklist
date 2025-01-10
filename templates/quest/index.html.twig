@@ -8,45 +8,48 @@
         <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Region</th>
-            <th>Checked</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for quest in quests %}
-            {% set userQuest = userQuestMap[quest.id] ?? null %}
-            <tr class="quest-row"
-                data-id="{{ quest.id }}"
-                data-name="{{ quest.name }}"
-                data-type="{{ quest.type }}"
-                data-level="{{ quest.level }}"
-                data-summary="{{ quest.summary }}"
-                data-giver="{{ quest.giver }}"
-                data-prerequisites="{{ quest.prerequisites }}"
-                data-rewards="{{ quest.rewards }}"
-                data-chapter="{{ quest.chapter }}"
-                data-region="{{ quest.region.name }}">
-                <td>{{ quest.name }}</td>
-                <td>{{ quest.type }}</td>
-                <td>{{ quest.region.name }}</td>
-                <td>
-                    <input type="checkbox"
-                           class="quest-checkbox"
-                           data-id="{{ quest.id }}"
-                            {% if userQuest and userQuest.isChecked %}
-                                checked
-                            {% endif %}
-                    >
-                </td>
+    <div class="table-container">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Region</th>
+                <th>Checked</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for quest in quests %}
+                {% set userQuest = userQuestMap[quest.id] ?? null %}
+                <tr class="quest-row"
+                    data-id="{{ quest.id }}"
+                    data-name="{{ quest.name }}"
+                    data-type="{{ quest.type }}"
+                    data-level="{{ quest.level }}"
+                    data-summary="{{ quest.summary }}"
+                    data-giver="{{ quest.giver }}"
+                    data-prerequisites="{{ quest.prerequisites }}"
+                    data-rewards="{{ quest.rewards }}"
+                    data-chapter="{{ quest.chapter }}"
+                    data-region="{{ quest.region.name }}">
+                    <td>{{ quest.name }}</td>
+                    <td>{{ quest.type }}</td>
+                    <td>{{ quest.region.name }}</td>
+                    <td>
+                        <input type="checkbox"
+                               class="quest-checkbox"
+                               data-id="{{ quest.id }}"
+                                {% if userQuest and userQuest.isChecked %}
+                                    checked
+                                {% endif %}
+                        >
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Card for displaying detailed quest info -->
     <div id="quest-card" class="card" style="display: none;">

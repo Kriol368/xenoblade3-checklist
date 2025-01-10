@@ -2,26 +2,29 @@
 {% block title %}XC3 Checklist - Endgame Accessories{% endblock %}
 {% block body %}
     <h1>Endgame Accessories</h1>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for accessory in accessories %}
-            <tr class="accessory-row" data-id="{{ accessory.id }}" data-name="{{ accessory.name }}" data-effect="{{ accessory.effect }}" data-location="{{ accessory.location }}" data-img-index="{{ accessory.imgIndex }}">
-                <td>
-                    <img src="{{ asset('img/accessories/icon_accessory_glow_r_' ~ accessory.imgIndex ~ '.png') }}" alt="{{ accessory.name }}">
-                </td>
-                <td>{{ accessory.name }}</td>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            {% for accessory in accessories %}
+                <tr class="accessory-row" data-id="{{ accessory.id }}" data-name="{{ accessory.name }}"
+                    data-effect="{{ accessory.effect }}" data-location="{{ accessory.location }}"
+                    data-img-index="{{ accessory.imgIndex }}">
+                    <td>
+                        <img src="{{ asset('img/accessories/icon_accessory_glow_r_' ~ accessory.imgIndex ~ '.png') }}"
+                             alt="{{ accessory.name }}">
+                    </td>
+                    <td>{{ accessory.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed accessory info -->
     <div id="accessory-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

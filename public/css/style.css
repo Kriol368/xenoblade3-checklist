@@ -253,18 +253,34 @@ header .search .search-icon {
     border: 1px solid #ccc;
 }
 
+.table-container {
+    height: 1050%; /* Occupy full height of the parent container */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds */
+    border: 1px solid #ccc; /* Optional: Border for aesthetics */
+    display: flex; /* Flexbox for layout control */
+    flex-direction: column; /* Ensure proper stacking of content */
+}
+
 table {
-    width: 100%;
-    border-collapse: collapse;
+    width: 100%; /* Occupy full width */
+    height: 100%; /* Occupy full height of container */
+    border-collapse: collapse; /* Remove gaps between cells */
+    table-layout: fixed; /* Ensures consistent column widths */
 }
-table, th, td {
-    border: 1px solid #ddd;
-}
+
 th, td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #ddd;
+    padding: 8px; /* Space within cells */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #ddd; /* Cell border */
+    word-wrap: break-word; /* Handle long text gracefully */
+    vertical-align: top; /* Align content at the top */
 }
+
+th {
+    background-color: #f4f4f4; /* Optional: Header background color */
+    font-weight: bold; /* Emphasize header text */
+}
+
 .food-row {
     cursor: pointer;
 }

@@ -3,24 +3,26 @@
 {% block body %}
     <h1>Food Items</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Effects</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for food in foods %}
-            <tr class="food-row" data-id="{{ food.id }}" data-name="{{ food.name }}" data-effects="{{ food.effects }}"
-                data-duration="{{ food.duration }}" data-location="{{ food.location }}">
-                <td>{{ food.name }}</td>
-                <td>{{ food.effects }}</td>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Effects</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            {% for food in foods %}
+                <tr class="food-row" data-id="{{ food.id }}" data-name="{{ food.name }}"
+                    data-effects="{{ food.effects }}"
+                    data-duration="{{ food.duration }}" data-location="{{ food.location }}">
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.effects }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed food info -->
     <div id="food-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

@@ -3,26 +3,32 @@
 {% block body %}
     <h1>Arts</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Class</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for art in arts %}
-            <tr class="art-row" data-id="{{ art.id }}" data-name="{{ art.name }}" data-class="{{ art.class.name }}" data-type="{{ art.type }}" data-recharge-type="{{ art.rechargeType }}" data-effect="{{ art.effect }}" data-power-multiplier="{{ art.powerMultiplier }}" data-recharge="{{ art.recharge }}" data-master-level="{{ art.masterLevel }}" data-imgIndex="{{ art.imgIndex }}">
-                <td>
-                    <img src="{{ asset('img/arts/icon_arts2_' ~ art.imgIndex ~ '.png') }}" alt="{{ art.name }}">
-                </td>
-                <td>{{ art.name }}</td>
-                <td>{{ art.class.name }}</td>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Class</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for art in arts %}
+                <tr class="art-row" data-id="{{ art.id }}" data-name="{{ art.name }}" data-class="{{ art.class.name }}"
+                    data-type="{{ art.type }}" data-recharge-type="{{ art.rechargeType }}"
+                    data-effect="{{ art.effect }}"
+                    data-power-multiplier="{{ art.powerMultiplier }}" data-recharge="{{ art.recharge }}"
+                    data-master-level="{{ art.masterLevel }}" data-imgIndex="{{ art.imgIndex }}">
+                    <td>
+                        <img src="{{ asset('img/arts/icon_arts2_' ~ art.imgIndex ~ '.png') }}" alt="{{ art.name }}">
+                    </td>
+                    <td>{{ art.name }}</td>
+                    <td>{{ art.class.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Card for displaying detailed art info -->
     <div id="art-card" class="card" style="display: none;">
@@ -40,6 +46,6 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/art.js') }}"></script>
-{% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('js/art.js') }}"></script>
+    {% endblock %}

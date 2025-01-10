@@ -9,40 +9,43 @@
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
     <!-- Table with Image, Name, and Level -->
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Checked</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for gauntletEmblem in gauntletEmblems %}
-            {% set userGauntletEmblem = userGauntletEmblemMap[gauntletEmblem.id] ?? null %}
-            <tr class="gauntlet-emblem-row"
-                data-id="{{ gauntletEmblem.id }}"
-                data-name="{{ gauntletEmblem.name }}"
-                data-rarity="{{ gauntletEmblem.rarity }}"
-                data-description="{{ gauntletEmblem.description }}"
-                data-effects="{{ gauntletEmblem.effects }}"
-                data-img-index="{{ gauntletEmblem.imgIndex }}">
-                <td><img src="{{ asset('img/gauntlet/' ~ gauntletEmblem.imgIndex ~ '.png') }}" alt="{{ gauntletEmblem.name }}" width="50"></td>
-                <td>{{ gauntletEmblem.name }}</td>
-                <td>
-                    <input type="checkbox"
-                           class="gauntlet-emblem-checkbox"
-                           data-id="{{ gauntletEmblem.id }}"
-                            {% if userGauntletEmblem and userGauntletEmblem.isChecked %}
-                                checked
-                            {% endif %}
-                    >
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
 
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Checked</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for gauntletEmblem in gauntletEmblems %}
+                {% set userGauntletEmblem = userGauntletEmblemMap[gauntletEmblem.id] ?? null %}
+                <tr class="gauntlet-emblem-row"
+                    data-id="{{ gauntletEmblem.id }}"
+                    data-name="{{ gauntletEmblem.name }}"
+                    data-rarity="{{ gauntletEmblem.rarity }}"
+                    data-description="{{ gauntletEmblem.description }}"
+                    data-effects="{{ gauntletEmblem.effects }}"
+                    data-img-index="{{ gauntletEmblem.imgIndex }}">
+                    <td><img src="{{ asset('img/gauntlet/' ~ gauntletEmblem.imgIndex ~ '.png') }}"
+                             alt="{{ gauntletEmblem.name }}" width="50"></td>
+                    <td>{{ gauntletEmblem.name }}</td>
+                    <td>
+                        <input type="checkbox"
+                               class="gauntlet-emblem-checkbox"
+                               data-id="{{ gauntletEmblem.id }}"
+                                {% if userGauntletEmblem and userGauntletEmblem.isChecked %}
+                                    checked
+                                {% endif %}
+                        >
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying full gauntlet emblem details -->
     <div id="gauntlet-emblem-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

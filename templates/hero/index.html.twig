@@ -2,28 +2,30 @@
 {% block title %}XC3 Checklist - Heroes{% endblock %}
 {% block body %}
     <h1>Heroes</h1>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Class</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for hero in heroes %}
-            <tr class="hero-row" data-id="{{ hero.id }}" data-name="{{ hero.name }}" data-class="{{ hero.class.name }}" data-imgIndex="{{ hero.imgIndex }}">
-                <td>
-                    <img src="{{ asset('img/characters/icon/icon_' ~ '%02d'|format(hero.imgIndex) ~ '.png') }}" alt="{{ hero.name }}">
-                </td>
-                <td>{{ hero.name }}</td>
-                <td>{{ hero.class.name }}</td>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Class</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            {% for hero in heroes %}
+                <tr class="hero-row" data-id="{{ hero.id }}" data-name="{{ hero.name }}"
+                    data-class="{{ hero.class.name }}" data-imgIndex="{{ hero.imgIndex }}">
+                    <td>
+                        <img src="{{ asset('img/characters/icon/icon_' ~ '%02d'|format(hero.imgIndex) ~ '.png') }}"
+                             alt="{{ hero.name }}">
+                    </td>
+                    <td>{{ hero.name }}</td>
+                    <td>{{ hero.class.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed hero info -->
     <div id="hero-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

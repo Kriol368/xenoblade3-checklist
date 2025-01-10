@@ -7,50 +7,52 @@
         <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Level</th>
-            <th>Defeated</th>
-            <th>SoulHacked</th>
-            <th>Ability Upgraded</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for uniqueMonster in uniqueMonsters %}
-            {% set userUniqueMonster = userUniqueMonsterMap[uniqueMonster.id] ?? null %}
-            <tr class="unique-monster-row"
-                data-id="{{ uniqueMonster.id }}"
-                data-name="{{ uniqueMonster.name }}"
-                data-area="{{ uniqueMonster.area.name }}"
-                data-level="{{ uniqueMonster.level }}"
-                data-location="{{ uniqueMonster.location }}"
-                data-soulhacker-ability="{{ uniqueMonster.soulhackerAbility }}">
-                <td>{{ uniqueMonster.name }}</td>
-                <td>{{ uniqueMonster.level }}</td>
-                {% set attributes = ['defeated', 'soulHacked', 'abilityUpgraded'] %}
-                {% for attribute in attributes %}
-                    <td>
-                        <input type="checkbox"
-                               class="unique-monster-checkbox"
-                               data-attribute="{{ attribute }}"
-                               data-id="{{ uniqueMonster.id }}"
-                                {% if attribute == 'defeated' and userUniqueMonster.isDefeated %}
-                                    checked
-                                {% elseif attribute == 'soulHacked' and userUniqueMonster.isSoulHacked %}
-                                    checked
-                                {% elseif attribute == 'abilityU    pgraded' and userUniqueMonster.isAbilityUpgraded %}
-                                    checked
-                                {% endif %}
-                               >
-                    </td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
 
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Defeated</th>
+                <th>SoulHacked</th>
+                <th>Ability Upgraded</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for uniqueMonster in uniqueMonsters %}
+                {% set userUniqueMonster = userUniqueMonsterMap[uniqueMonster.id] ?? null %}
+                <tr class="unique-monster-row"
+                    data-id="{{ uniqueMonster.id }}"
+                    data-name="{{ uniqueMonster.name }}"
+                    data-area="{{ uniqueMonster.area.name }}"
+                    data-level="{{ uniqueMonster.level }}"
+                    data-location="{{ uniqueMonster.location }}"
+                    data-soulhacker-ability="{{ uniqueMonster.soulhackerAbility }}">
+                    <td>{{ uniqueMonster.name }}</td>
+                    <td>{{ uniqueMonster.level }}</td>
+                    {% set attributes = ['defeated', 'soulHacked', 'abilityUpgraded'] %}
+                    {% for attribute in attributes %}
+                        <td>
+                            <input type="checkbox"
+                                   class="unique-monster-checkbox"
+                                   data-attribute="{{ attribute }}"
+                                   data-id="{{ uniqueMonster.id }}"
+                                    {% if attribute == 'defeated' and userUniqueMonster.isDefeated %}
+                                        checked
+                                    {% elseif attribute == 'soulHacked' and userUniqueMonster.isSoulHacked %}
+                                        checked
+                                    {% elseif attribute == 'abilityU    pgraded' and userUniqueMonster.isAbilityUpgraded %}
+                                        checked
+                                    {% endif %}
+                            >
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed unique monster info -->
     <div id="unique-monster-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>

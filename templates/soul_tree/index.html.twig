@@ -8,38 +8,41 @@
         <div class="progress-bar" style="width: {{ progress|round(0, 'floor') }}%;" id="progress-bar"></div>
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Character</th>
-            <th>Checked</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for soulTree in soulTrees %}
-            {% set userSoulTree = userSoulTreeMap[soulTree.id] ?? null %}
-            <tr class="soul-tree-row"
-                data-id="{{ soulTree.id }}"
-                data-name="{{ soulTree.name }}"
-                data-character="{{ soulTree.character.name }}"
-                data-effect="{{ soulTree.effect}}">
-                <td>{{ soulTree.name }}</td>
-                <td>{{ soulTree.character.name }}</td>
-                <td>
-                    <input type="checkbox"
-                           class="soul-tree-checkbox"
-                           data-id="{{ soulTree.id }}"
-                            {% if userSoulTree and userSoulTree.isChecked %}
-                                checked
-                            {% endif %}
-                    >
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
+    <div class="table-container">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Character</th>
+                <th>Checked</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for soulTree in soulTrees %}
+                {% set userSoulTree = userSoulTreeMap[soulTree.id] ?? null %}
+                <tr class="soul-tree-row"
+                    data-id="{{ soulTree.id }}"
+                    data-name="{{ soulTree.name }}"
+                    data-character="{{ soulTree.character.name }}"
+                    data-effect="{{ soulTree.effect }}">
+                    <td>{{ soulTree.name }}</td>
+                    <td>{{ soulTree.character.name }}</td>
+                    <td>
+                        <input type="checkbox"
+                               class="soul-tree-checkbox"
+                               data-id="{{ soulTree.id }}"
+                                {% if userSoulTree and userSoulTree.isChecked %}
+                                    checked
+                                {% endif %}
+                        >
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!-- Card for displaying detailed soul tree info -->
     <div id="soul-tree-card" class="card" style="display: none;">
         <button id="close-card" class="close-btn">X</button>
