@@ -128,7 +128,6 @@ main {
     padding: 20px;
     transition: margin-left 0.3s ease;
 }
-
 /* Table styles */
 .table-container {
     max-height: 80vh;
@@ -159,6 +158,9 @@ th {
     background-color: #333; /* Dark background for headers */
     font-weight: bold;
     color: #e5e5e5; /* Lighter text for headers */
+    position: sticky;
+    top: 0; /* Keep header at the top */
+    z-index: 1; /* Ensure headers stay on top of rows */
 }
 
 td {
@@ -168,6 +170,7 @@ td {
 tr:hover {
     background-color: #444; /* Hover effect for rows */
 }
+
 
 /* Card style for detailed view */
 .card {
