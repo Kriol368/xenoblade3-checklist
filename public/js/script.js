@@ -10,7 +10,7 @@ function toggleSidebar() {
     if (sidebarElement.classList.contains('collapsed')) {
         mainContentElement.style.marginLeft = '60px'; // Adjust margin when sidebar is collapsed
     } else {
-        mainContentElement.style.marginLeft = '250px'; // Reset margin when sidebar is expanded
+        mainContentElement.style.marginLeft = '300px'; // Reset margin when sidebar is expanded
     }
 }
 

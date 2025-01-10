@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+% extends 'base.html.twig' %}
 
 {% block title %}XC3 Checklist - Gems{% endblock %}
 
@@ -9,37 +9,40 @@
         <span class="progress-label">{{ progress|number_format(0) }}% Complete</span>
     </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Checked</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for gem in gems %}
-            {% set userGem = userGemMap[gem.id] ?? null %}
-            <tr class="gem-row"
-                data-id="{{ gem.id }}"
-                data-name="{{ gem.name }}"
-                data-type="{{ gem.type }}"
-                data-effect="{{ gem.effect }}">
-                <td>{{ gem.name }}</td>
-                <td>{{ gem.type }}</td>
-                <td>
-                    <input type="checkbox"
-                           class="gem-checkbox"
-                           data-id="{{ gem.id }}"
-                            {% if userGem and userGem.isChecked %}
-                                checked
-                            {% endif %}
-                    >
-                </td>
+    <!-- Scrollable table container -->
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Checked</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for gem in gems %}
+                {% set userGem = userGemMap[gem.id] ?? null %}
+                <tr class="gem-row"
+                    data-id="{{ gem.id }}"
+                    data-name="{{ gem.name }}"
+                    data-type="{{ gem.type }}"
+                    data-effect="{{ gem.effect }}">
+                    <td>{{ gem.name }}</td>
+                    <td>{{ gem.type }}</td>
+                    <td>
+                        <input type="checkbox"
+                               class="gem-checkbox"
+                               data-id="{{ gem.id }}"
+                                {% if userGem and userGem.isChecked %}
+                                    checked
+                                {% endif %}
+                        >
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Card for displaying detailed gem info -->
     <div id="gem-card" class="card" style="display: none;">

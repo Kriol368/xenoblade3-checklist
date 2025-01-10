@@ -7,7 +7,9 @@
     <meta name="keywords" content="HTML, CSS, Template">
     <meta name="author" content="Kriol368">
     <title>{% block title %}XC3 Checklist{% endblock %}</title>
-    <link rel="stylesheet" {% block stylesheets %}href="{{ asset('css/style.css') }}"{% endblock %}>
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% block stylesheets %} {% endblock %}
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
