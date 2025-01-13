@@ -123,6 +123,7 @@ header .search input {
 
 /* Main content styles */
 main {
+    width: 100%;
     margin-left: 300px;
     margin-top: 60px;
     padding: 20px;
