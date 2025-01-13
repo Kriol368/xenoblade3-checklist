@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
 
         $("#soul-tree-name").text($(this).data("name"));
-        $("#gauntlet-emblem-img").attr("src", "/img/ouroboros/" + $(this).data("character") + ".png");
+        $("#soul-tree-img").attr("src", "/img/ouroboros/" + $(this).data("character") + ".png");
         $("#soul-tree-effect").text($(this).data("effect"));
         $("#soul-tree-character").text($(this).data("character"));
         $card.show();
