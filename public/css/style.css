@@ -229,29 +229,97 @@ tr:hover {
     z-index: 2;
 }
 
-/* Icons */
+
+/* General Link Styling */
 #sidebar a {
     display: flex;
-    align-items: center;
+    align-items: center; /* Align the icon and text horizontally */
     color: #b1c5d9;
     transition: color 0.3s ease;
+    text-decoration: none; /* Remove underline from links */
+    padding: 8px 0; /* Padding for spacing */
+    font-size: 16px; /* Default font size */
+    width: 100%; /* Make sure the container has full width */
+    margin-bottom: 10px; /* Space between list items */
 }
 
+/* Hover effect */
 #sidebar a:hover {
     color: #6db1ff; /* Lighter blue on hover */
 }
 
+/* Icon Styling */
 #sidebar a span {
-    position: relative;
-    width: 62px;
-    height: 48px;
-    display: inline-block;
-    margin-right: 8px;
-    vertical-align: middle;
+    width: 56px; /* Set the icon width */
+    height: 56px; /* Set the icon height */
+    margin-right: 10px; /* Space between icon and text */
+    background-size: contain; /* Scale icon to fit within the box */
+    background-repeat: no-repeat;
+    background-position: center; /* Center icon inside the span */
 }
 
-/* Custom Icons */
-.home-icon, .food-icon, .art-icon, .challenge-mode-icon, .character-icon, .character-class-icon, .collectible-icon, .end-game-accessory-icon, .gauntlet-emblem-icon, .gem-icon, .hero-icon, .landmark-icon, .quest-icon, .skill-icon, .soul-tree-icon, .unique-monster-icon {
-    background: url(../img/camp/icon_comm_title_0.png) no-repeat -386px -4px;
-    /* Add individual background positions if needed for specific icons */
+
+/* Custom Icons with Adjusted Sizes */
+.home-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.food-icon {
+    background: url(../img/camp/6.png) no-repeat center;
+}
+
+.art-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.challenge-mode-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.character-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.character-class-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.collectible-icon {
+    background: url(../img/camp/10.png) no-repeat center;
+}
+
+.end-game-accessory-icon {
+    background: url(../img/camp/11.png) no-repeat center;
+}
+
+.gauntlet-emblem-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.gem-icon {
+    background: url(../img/camp/5.png) no-repeat center;
+}
+
+.hero-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.landmark-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.quest-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.skill-icon {
+    background: url(../img/camp/.png) no-repeat center;
+}
+
+.soul-tree-icon {
+    background: url(../img/camp/18.png) no-repeat center;
+}
+
+.unique-monster-icon {
+    background: url(../img/camp/.png) no-repeat center;
 }
