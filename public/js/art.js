@@ -1,45 +1,44 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const artRows = document.querySelectorAll('.art-row');
-    const artCard = document.getElementById('art-card');
-    const artName = document.getElementById('art-name');
-    const artEffect = document.getElementById('art-effect');
-    const artType = document.getElementById('art-type');
-    const artRecharge = document.getElementById('art-recharge');
-    const artRechargeType = document.getElementById('art-recharge-type');
-    const artPowerMultiplier = document.getElementById('art-power-multiplier');
-    const artMasterLevel = document.getElementById('art-master-level');
-    const artClass = document.getElementById('art-class');
-    const artImg = document.getElementById('art-img');
-    const closeCardButton = document.getElementById('close-card');
+$(document).ready(function () {
+    const $artRows = $('.art-row');
+    const $artCard = $('#art-card');
+    const $artName = $('#art-name');
+    const $artEffect = $('#art-effect');
+    const $artType = $('#art-type');
+    const $artRecharge = $('#art-recharge');
+    const $artRechargeType = $('#art-recharge-type');
+    const $artPowerMultiplier = $('#art-power-multiplier');
+    const $artMasterLevel = $('#art-master-level');
+    const $artClass = $('#art-class');
+    const $artImg = $('#art-img');
+    const $closeCardButton = $('#close-card');
 
-    artRows.forEach(row => {
-        row.addEventListener('click', function () {
-            const name = row.dataset.name;
-            const artClassData = row.dataset.class;
-            const effect = row.dataset.effect;
-            const type = row.dataset.type;
-            const recharge = row.dataset.recharge;
-            const rechargeType = row.dataset.rechargeType;
-            const powerMultiplier = row.dataset.powerMultiplier;
-            const masterLevel = row.dataset.masterLevel;
-            const imgIndex = row.dataset.imgindex;
+    $artRows.on('click', function () {
+        const $row = $(this);
+        const name = $row.data('name');
+        const artClassData = $row.data('class');
+        const effect = $row.data('effect');
+        const type = $row.data('type');
+        const recharge = $row.data('recharge');
+        const rechargeType = $row.data('rechargeType');
+        const powerMultiplier = $row.data('powerMultiplier');
+        const masterLevel = $row.data('masterLevel');
+        const imgIndex = $row.data('imgindex');
 
-            artName.textContent = name;
-            artClass.textContent = artClassData;
-            artEffect.textContent = effect;
-            artType.textContent = type;
-            artRechargeType.textContent = rechargeType;
-            artPowerMultiplier.textContent = powerMultiplier;
-            artRecharge.textContent = recharge;
-            artMasterLevel.textContent = masterLevel;
-            artImg.src = `img/arts/icon_arts2_${imgIndex}.png`;
-            artImg.alt = name;
+        $artName.text(name);
+        $artClass.text(artClassData);
+        $artEffect.text(effect);
+        $artType.text(type);
+        $artRechargeType.text(rechargeType);
+        $artPowerMultiplier.text(powerMultiplier);
+        $artRecharge.text(recharge);
+        $artMasterLevel.text(masterLevel);
+        $artImg.attr('src', `img/arts/icon_arts2_${imgIndex}.png`);
+        $artImg.attr('alt', name);
 
-            artCard.style.display = 'block';
-        });
+        $artCard.show();
     });
 
-    closeCardButton.addEventListener('click', function () {
-        artCard.style.display = 'none';
+    $closeCardButton.on('click', function () {
+        $artCard.hide();
     });
 });

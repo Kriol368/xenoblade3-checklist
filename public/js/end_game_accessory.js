@@ -1,30 +1,29 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const accessoryRows = document.querySelectorAll('.accessory-row');
-    const accessoryCard = document.getElementById('accessory-card');
-    const accessoryName = document.getElementById('accessory-name');
-    const accessoryEffect = document.getElementById('accessory-effect');
-    const accessoryLocation = document.getElementById('accessory-location');
-    const accessoryImg = document.getElementById('accessory-img');
-    const closeCardButton = document.getElementById('close-card');
+$(document).ready(function () {
+    const $accessoryRows = $('.accessory-row');
+    const $accessoryCard = $('#accessory-card');
+    const $accessoryName = $('#accessory-name');
+    const $accessoryEffect = $('#accessory-effect');
+    const $accessoryLocation = $('#accessory-location');
+    const $accessoryImg = $('#accessory-img');
+    const $closeCardButton = $('#close-card');
 
-    accessoryRows.forEach(row => {
-        row.addEventListener('click', function () {
-            const name = row.dataset.name || 'Unknown';
-            const effect = row.dataset.effect || 'Unknown';
-            const location = row.dataset.location || 'Unknown';
-            const imgIndex = row.dataset.imgIndex || 0;
+    $accessoryRows.on('click', function () {
+        const $row = $(this);
+        const name = $row.data('name') || 'Unknown';
+        const effect = $row.data('effect') || 'Unknown';
+        const location = $row.data('location') || 'Unknown';
+        const imgIndex = $row.data('imgIndex') || 0;
 
-            accessoryName.textContent = name;
-            accessoryEffect.textContent = effect;
-            accessoryLocation.textContent = location;
-            accessoryImg.src = `/img/accessories/icon_accessory_glow_r_${imgIndex}.png`;
-            accessoryImg.alt = name;
+        $accessoryName.text(name);
+        $accessoryEffect.text(effect);
+        $accessoryLocation.text(location);
+        $accessoryImg.attr('src', `/img/accessories/icon_accessory_glow_r_${imgIndex}.png`);
+        $accessoryImg.attr('alt', name);
 
-            accessoryCard.style.display = 'block';
-        });
+        $accessoryCard.show();
     });
 
-    closeCardButton.addEventListener('click', function () {
-        accessoryCard.style.display = 'none';
+    $closeCardButton.on('click', function () {
+        $accessoryCard.hide();
     });
 });

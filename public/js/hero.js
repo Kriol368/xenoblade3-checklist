@@ -1,28 +1,21 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const heroRows = document.querySelectorAll('.hero-row');
-    const heroCard = document.getElementById('hero-card');
-    const heroName = document.getElementById('hero-name');
-    const heroClass = document.getElementById('hero-class');
-    const heroImg = document.getElementById('hero-img');
-    const closeCardButton = document.getElementById('close-card');
+$(document).ready(function () {
+    $('.hero-row').on('click', function () {
+        const $row = $(this);
+        const $heroCard = $('#hero-card');
 
-    heroRows.forEach(row => {
-        row.addEventListener('click',   function () {
-            const name = row.dataset.name;
-            const heroClassData = row.dataset.class;
-            const imgIndex = row.dataset.imgIndex;
+        const name = $row.data('name');
+        const heroClassData = $row.data('class');
+        const imgIndex = $row.data('imgIndex');
+        const index = String($row.data('id')).padStart(2, '0');
 
-            heroName.textContent = name;
-            heroClass.textContent = heroClassData;
-            const index = row.dataset.id.padStart(2, '0');
-            heroImg.src = `/img/characters/artwork/strm_hero_book_${index}_01_0.png`;
-            heroImg.alt = name;
+        $('#hero-name').text(name);
+        $('#hero-class').text(heroClassData);
+        $('#hero-img').attr('src', `/img/characters/artwork/strm_hero_book_${index}_01_0.png`).attr('alt', name);
 
-            heroCard.style.display = 'block';
-        });
+        $heroCard.show();
     });
 
-    closeCardButton.addEventListener('click', function () {
-        heroCard.style.display = 'none';
+    $('#close-card').on('click', function () {
+        $('#hero-card').hide();
     });
 });
