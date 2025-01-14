@@ -323,3 +323,7 @@ tr:hover {
 .unique-monster-icon {
     background: url(../img/camp/.png) no-repeat center;
 }
+
+.about-icon{
+    background: url(../img/camp/17.png) no-repeat center;
+}
