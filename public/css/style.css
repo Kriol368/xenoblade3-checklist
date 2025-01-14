@@ -281,7 +281,7 @@ tr:hover {
 }
 
 .character-class-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/19.png) no-repeat center;
 }
 
 .collectible-icon {
@@ -305,11 +305,11 @@ tr:hover {
 }
 
 .landmark-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/50.png) no-repeat center;
 }
 
 .quest-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/49.png) no-repeat center;
 }
 
 .skill-icon {

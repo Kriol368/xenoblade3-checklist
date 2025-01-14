@@ -19,3 +19,7 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /ca.pem
+###> php-cs-fixer/shim ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< php-cs-fixer/shim ###
