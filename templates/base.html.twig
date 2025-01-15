@@ -23,13 +23,7 @@
             <input type="text" placeholder="Search... (Coming Soon)" disabled id="searchInput">
             <span id="searchToggle" class="search-icon">🔍</span>
         </div>
-        <div class="auth-buttons">
-            {% if app.user %}
-                <a href="{{ path('app_logout') }}">Logout</a>
-            {% else %}
-                <a href="{{ path('app_login') }}">Login</a>
-            {% endif %}
-        </div>
+
     </div>
 </header>
 

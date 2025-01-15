@@ -104,22 +104,6 @@ header .search input {
     color: #fff;
 }
 
-.auth-buttons {
-    margin-left: 20px;
-}
-
-.auth-buttons a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background-color: #4a4a4a;
-    transition: background-color 0.3s;
-}
-
-.auth-buttons a:hover {
-    background-color: #5a5a5a;
-}
 
 /* Main content styles */
 main {
