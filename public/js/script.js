@@ -16,22 +16,22 @@ function toggleSidebar() {
 
 // Function to toggle the search bar
 function toggleSearch() {
-    const searchContainer = document.getElementById('searchContainer');
+    const searchContainer = document.querySelector('header .search');
     const searchInput = document.getElementById('searchInput');
     const searchToggle = document.getElementById('searchToggle');
 
-    // Toggle the 'expanded' class on the search container
+    // Toggle the expanded class on the search container
     searchContainer.classList.toggle('expanded');
 
-    // Clear the input and focus if expanding
+    // Clear and manage input state
     if (searchContainer.classList.contains('expanded')) {
         searchInput.disabled = false;
         searchInput.focus();
-        searchToggle.textContent = '✖'; // Change to X when expanded
+        searchToggle.textContent = '✖'; // Change icon to X
     } else {
-        searchInput.value = ''; // Clear input when closing
-        searchInput.disabled = true; // Disable input
-        searchToggle.textContent = '🔍'; // Change back to lens when collapsed
+        searchInput.value = ''; // Clear input
+        searchInput.disabled = true; // Disable input when collapsed
+        searchToggle.textContent = '🔍'; // Change back to lens
     }
 }
 

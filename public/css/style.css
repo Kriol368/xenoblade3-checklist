@@ -92,16 +92,41 @@ header .search {
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative; /* Allows positioning of the toggle button */
     margin-left: 10px;
 }
 
 header .search input {
-    width: 80%;
-    padding: 8px;
+    width: 70%; /* Adjusted width for better fit */
+    padding: 10px 12px;
+    border: 1px solid #555; /* Border to give structure */
+    border-radius: 20px; /* Rounded corners for a modern look */
+    background-color: #2c2c2c; /* Slightly lighter background */
+    color: #fff; /* White text for contrast */
+    font-size: 16px; /* Improved readability */
+    outline: none; /* Removes default outline */
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+header .search input:focus {
+    box-shadow: 0 0 5px 2px #6db1ff; /* Subtle focus effect */
+    background-color: #3a3a3a; /* Slightly lighter on focus */
+}
+
+header .search button {
+    position: absolute;
+    right: 15%; /* Adjusted for alignment */
+    background: none;
     border: none;
-    border-radius: 4px;
-    background-color: #3a3a3a;
+    font-size: 18px;
     color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+header .search button:hover {
+    color: #6db1ff; /* Highlight on hover */
 }
 
 
