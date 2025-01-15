@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/settings/settings.css') }}">
 {% endblock %}
 
-
 {% block body %}
     <div class="container">
         <h1>Update Profile</h1>
@@ -30,6 +29,9 @@
             {{ form_errors(form.email) }}
         </div>
 
+        <button type="submit" class="btn btn-primary">Update</button>
         {{ form_end(form) }}
+
+        <a href="{{ path('app_settings') }}" class="btn btn-secondary mt-3">Back to Settings</a>
     </div>
 {% endblock %}
