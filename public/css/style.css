@@ -273,11 +273,11 @@ tr:hover {
 }
 
 .challenge-mode-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/46.png) no-repeat center;
 }
 
 .character-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/45.png) no-repeat center;
 }
 
 .character-class-icon {
@@ -293,7 +293,7 @@ tr:hover {
 }
 
 .gauntlet-emblem-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/44.png) no-repeat center;
 }
 
 .gem-icon {
@@ -301,7 +301,7 @@ tr:hover {
 }
 
 .hero-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/41.png) no-repeat center;
 }
 
 .landmark-icon {
@@ -321,9 +321,16 @@ tr:hover {
 }
 
 .unique-monster-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/camp/48.png) no-repeat center;
 }
 
 .about-icon{
     background: url(../img/camp/17.png) no-repeat center;
+}
+
+.settings-icon{
+    background: url(../img/camp/47.png) no-repeat center;
+}
+.logout-icon {
+    background: url(../img/camp/42.png) no-repeat center;
 }
