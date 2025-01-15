@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\CharacterClass;
 use App\Repository\ChallengeModeRepository;
 use App\Repository\CharacterClassRepository;
-use App\Repository\CharacterRepository;
 use App\Repository\GauntletEmblemRepository;
 use App\Repository\GemRepository;
 use App\Repository\LandmarkLocationRepository;
@@ -60,8 +58,7 @@ class HomeController extends AbstractController
         UserChallengeModeRepository $userChallengeModeRepository,
         GauntletEmblemRepository $gauntletEmblemRepository,
         UserGauntletEmblemRepository $userGauntletEmblemRepository,
-
-    ){
+    ) {
         $this->characterClassRepository = $characterClassRepository;
         $this->userCharacterClassRepository = $userCharacterClassRepository;
         $this->questRepository = $questRepository;
@@ -79,6 +76,7 @@ class HomeController extends AbstractController
         $this->gauntletEmblemRepository = $gauntletEmblemRepository;
         $this->userGauntletEmblemRepository = $userGauntletEmblemRepository;
     }
+
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
@@ -101,37 +99,34 @@ class HomeController extends AbstractController
             $classProgress += $userCharacterClass->isTaion() ? 12.5 : 0;
             $classProgress += $userCharacterClass->isLanz() ? 12.5 : 0;
             $classProgress += $userCharacterClass->isSena() ? 12.5 : 0;
-            $charClassId = $userCharacterClass->getCharacterClass()->getId();
             $overallClassProgress += $classProgress;
         }
         $totalClasses = count($characterClasses);
         $averageClassProgress = $totalClasses > 0 ? round($overallClassProgress / $totalClasses, 2) : 0;
 
-
-        $quests =  $this->questRepository->findAll();
+        $quests = $this->questRepository->findAll();
         $userQuests = $this->userQuestRepository->findBy(['user' => $currentUser]);
-        $checkedQuestsCount = count(array_filter($userQuests, fn($userQuest) => $userQuest->isChecked()));
+        $checkedQuestsCount = count(array_filter($userQuests, fn ($userQuest) => $userQuest->isChecked()));
         $totalQuestsCount = count($quests);
         $questProgress = $totalQuestsCount > 0 ? ($checkedQuestsCount / $totalQuestsCount) * 100 : 0;
 
         $gems = $this->gemRepository->findAll();
         $userGems = $this->userGemRepository->findBy(['user' => $currentUser]);
-        $checkedGemsCount = count(array_filter($userGems, fn($userGem) => $userGem->isChecked()));
+        $checkedGemsCount = count(array_filter($userGems, fn ($userGem) => $userGem->isChecked()));
         $totalGemsCount = count($gems);
         $gemProgress = $totalGemsCount > 0 ? round(($checkedGemsCount / $totalGemsCount) * 100) : 0;
 
         $soulTrees = $this->soulTreeRepository->findAll();
         $userSoulTrees = $this->userSoulTreeRepository->findBy(['user' => $currentUser]);
-        $checkedSoulTreesCount = count(array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked()));
+        $checkedSoulTreesCount = count(array_filter($userSoulTrees, fn ($userSoulTree) => $userSoulTree->isChecked()));
         $totalSoulTreesCount = count($soulTrees);
         $soulProgress = $totalSoulTreesCount > 0 ? ($checkedSoulTreesCount / $totalSoulTreesCount) * 100 : 0;
 
         $landmarkLocations = $this->landmarkLocationRepository->findAll();
         $userLandmarkLocations = $this->userLandmarkLocationRepository->findBy(['user' => $currentUser]);
-        $checkedLandmarkLocationsCount = count(array_filter($userLandmarkLocations, fn($userLandmarkLocation) => $userLandmarkLocation->isChecked()));
+        $checkedLandmarkLocationsCount = count(array_filter($userLandmarkLocations, fn ($userLandmarkLocation) => $userLandmarkLocation->isChecked()));
         $totalLandmarkLocationsCount = count($landmarkLocations);
         $landmarkProgress = $totalLandmarkLocationsCount > 0 ? ($checkedLandmarkLocationsCount / $totalLandmarkLocationsCount) * 100 : 0;
-
 
         $uniqueMonsters = $this->uniqueMonsterRepository->findAll();
         $userUniqueMonsters = $this->userUniqueMonsterRepository->findBy(['user' => $currentUser]);
@@ -145,7 +140,6 @@ class HomeController extends AbstractController
         }
         $totalMonsters = count($uniqueMonsters);
         $averageMonsterProgress = $totalMonsters > 0 ? round($overallMonsterProgress / $totalMonsters, 2) : 0;
-
 
         $challengeModes = $this->challengeModeRepository->findAll();
         $userChallengeModes = $this->userChallengeModeRepository->findBy(['user' => $currentUser]);
@@ -162,10 +156,9 @@ class HomeController extends AbstractController
 
         $gauntletEmblems = $this->gauntletEmblemRepository->findAll();
         $userGauntletEmblems = $this->userGauntletEmblemRepository->findBy(['user' => $currentUser]);
-        $checkedGauntletEmblemsCount = count(array_filter($userGauntletEmblems, fn($userGauntletEmblem) => $userGauntletEmblem->isChecked()));
+        $checkedGauntletEmblemsCount = count(array_filter($userGauntletEmblems, fn ($userGauntletEmblem) => $userGauntletEmblem->isChecked()));
         $totalGauntletEmblemsCount = count($gauntletEmblems);
         $gauntletProgress = $totalGauntletEmblemsCount > 0 ? ($checkedGauntletEmblemsCount / $totalGauntletEmblemsCount) * 100 : 0;
-
 
         return $this->render('home/index.html.twig', [
             'classProgress' => $averageClassProgress,
@@ -177,15 +170,15 @@ class HomeController extends AbstractController
             'challengeProgress' => $averageChallengeProgress,
             'gauntletProgress' => $gauntletProgress,
             'overallProgress' => round((
-                    $averageClassProgress +
-                    $questProgress +
-                    $gemProgress +
-                    $soulProgress +
-                    $landmarkProgress +
-                    $averageMonsterProgress +
-                    $averageChallengeProgress +
-                    $gauntletProgress
-                ) / 8),
+                $averageClassProgress +
+                $questProgress +
+                $gemProgress +
+                $soulProgress +
+                $landmarkProgress +
+                $averageMonsterProgress +
+                $averageChallengeProgress +
+                $gauntletProgress
+            ) / 8),
         ]);
     }
 }
