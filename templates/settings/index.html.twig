@@ -24,14 +24,16 @@
             </a>
         </div>
         <div class="setting">
-            <a href="{{ path('app_settings') }}">
+            <a href="{{ path('app_reset') }}">
                 <p>Reset Account</p>
             </a>
         </div>
         <div>
-            <form action="{{ path('app_settings') }}" method="POST">
-                <button type="submit" class="btn btn-danger">Delete Account</button>
+            <form action="{{ path('app_settings_delete_account') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+                <button type="submit" class="delete-button">Delete Account</button>
             </form>
+
         </div>
     </div>
 {% endblock %}

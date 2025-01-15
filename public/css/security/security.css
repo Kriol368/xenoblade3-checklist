@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Helvetica Black Oblique";
-    src: url("../fonts/HelveticaBlackOblique.otf") format("opentype");
+    src: url("../../fonts/HelveticaBlackOblique.otf") format("opentype");
     font-weight: bold;
     font-style: oblique;
 }

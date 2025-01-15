@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset Account{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/settings/settings.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Reset Your Account</h1>
+
+        <p>Warning: This action will reset all your progress. Are you sure you want to continue?</p>
+
+        <form method="post" action="{{ path('app_reset_account') }}">
+            <button type="submit" class="btn btn-danger">Reset Account</button>
+        </form>
+    </div>
+{% endblock %}
