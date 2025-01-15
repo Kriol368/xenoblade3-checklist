@@ -261,76 +261,77 @@ tr:hover {
 
 /* Custom Icons with Adjusted Sizes */
 .home-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/menu/home.png) no-repeat center;
 }
 
 .food-icon {
-    background: url(../img/camp/6.png) no-repeat center;
+    background: url(../img/menu/food.png) no-repeat center;
 }
 
 .art-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/menu/art.png) no-repeat center;
 }
 
 .challenge-mode-icon {
-    background: url(../img/camp/46.png) no-repeat center;
+    background: url(../img/menu/challenge.png) no-repeat center;
 }
 
 .character-icon {
-    background: url(../img/camp/45.png) no-repeat center;
+    background: url(../img/menu/character.png) no-repeat center;
 }
 
 .character-class-icon {
-    background: url(../img/camp/19.png) no-repeat center;
+    background: url(../img/menu/class.png) no-repeat center;
 }
 
 .collectible-icon {
-    background: url(../img/camp/10.png) no-repeat center;
+    background: url(../img/menu/collectible.png) no-repeat center;
 }
 
 .end-game-accessory-icon {
-    background: url(../img/camp/11.png) no-repeat center;
+    background: url(../img/menu/accessory.png) no-repeat center;
 }
 
 .gauntlet-emblem-icon {
-    background: url(../img/camp/44.png) no-repeat center;
+    background: url(../img/menu/emblem.png) no-repeat center;
 }
 
 .gem-icon {
-    background: url(../img/camp/5.png) no-repeat center;
+    background: url(../img/menu/gem.png) no-repeat center;
 }
 
 .hero-icon {
-    background: url(../img/camp/41.png) no-repeat center;
+    background: url(../img/menu/hero.png) no-repeat center;
 }
 
 .landmark-icon {
-    background: url(../img/camp/50.png) no-repeat center;
+    background: url(../img/menu/landmark.png) no-repeat center;
 }
 
 .quest-icon {
-    background: url(../img/camp/49.png) no-repeat center;
+    background: url(../img/menu/quest.png) no-repeat center;
 }
 
 .skill-icon {
-    background: url(../img/camp/.png) no-repeat center;
+    background: url(../img/menu/skill.png) no-repeat center;
 }
 
 .soul-tree-icon {
-    background: url(../img/camp/18.png) no-repeat center;
+    background: url(../img/menu/soul.png) no-repeat center;
 }
 
 .unique-monster-icon {
-    background: url(../img/camp/48.png) no-repeat center;
+    background: url(../img/menu/monster.png) no-repeat center;
 }
 
 .about-icon{
-    background: url(../img/camp/17.png) no-repeat center;
+    background: url(../img/menu/about.png) no-repeat center;
 }
 
 .settings-icon{
-    background: url(../img/camp/47.png) no-repeat center;
+    background: url(../img/menu/settings.png) no-repeat center;
 }
+
 .logout-icon {
-    background: url(../img/camp/42.png) no-repeat center;
+    background: url(../img/menu/logout.png) no-repeat center;
 }
