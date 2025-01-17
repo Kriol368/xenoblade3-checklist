@@ -1,21 +1,34 @@
 $(document).ready(function () {
+    const $closeCardBtn = $('#close-card');
+    const $card = $('#hero-card');
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
+
+
+
     $('.hero-row').on('click', function () {
         const $row = $(this);
-        const $heroCard = $('#hero-card');
-
         const name = $row.data('name');
         const heroClassData = $row.data('class');
-        const imgIndex = $row.data('imgIndex');
         const index = String($row.data('id')).padStart(2, '0');
 
         $('#hero-name').text(name);
         $('#hero-class').text(heroClassData);
         $('#hero-img').attr('src', `/img/characters/artwork/strm_hero_book_${index}_01_0.png`).attr('alt', name);
 
-        $heroCard.show();
+        $card.show();
+        $overlay.show();
+
     });
 
-    $('#close-card').on('click', function () {
-        $('#hero-card').hide();
+    // Close the card when clicking the close button
+    $closeCardBtn.on("click", function () {
+        $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 });

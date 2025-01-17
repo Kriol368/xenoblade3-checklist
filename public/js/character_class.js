@@ -1,10 +1,10 @@
 $(document).ready(function () {
     const classRows = $(".character-class-row");
-    const classCard = $("#character-class-card");
-    const closeCardButton = $("#close-card");
+    const card = $("#character-class-card");
+    const closeCardBtn = $("#close-card");
+    const overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
 
     const className = $("#class-name");
-    const roleImg = $("#role-img");
     const imgIndex = $("#img-index");
     const classWeapon = $("#class-weapon");
     const classNation = $("#class-nation");
@@ -21,7 +21,6 @@ $(document).ready(function () {
         }
 
         const name = $(this).data("name");
-        const role = $(this).data("role");
         const weapon = $(this).data("weapon");
         const nation = $(this).data("nation");
         const offense = $(this).data("offense");
@@ -33,7 +32,6 @@ $(document).ready(function () {
         // Set values in the card
         className.text(name);
         imgIndex.attr("src", `/img/classes/${imgIndexPath}.png`).attr("alt", name);
-        roleImg.attr("src", `/img/roles/${role}.png`).attr("alt", role);
         classWeapon.text(weapon || "N/A");
         classNation.text(nation || "N/A");
         classOffense.text(offense || "N/A");
@@ -41,12 +39,22 @@ $(document).ready(function () {
         classHealing.text(healing || "N/A");
         classDifficulty.text(difficulty || "N/A");
 
-        classCard.show();
+        card.show();
+        overlay.show();
+
     });
 
-    // Close the class card
-    closeCardButton.on("click", function () {
-        classCard.hide();
+
+    // Close the card when clicking the close button
+    closeCardBtn.on("click", function () {
+        card.hide();
+        overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    overlay.on("click", function () {
+        card.hide();
+        $(this).hide();
     });
 
     // Handle checkbox change event for character checkboxes

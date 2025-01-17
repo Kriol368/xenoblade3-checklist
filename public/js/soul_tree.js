@@ -2,6 +2,8 @@ $(document).ready(function () {
     const $rows = $(".soul-tree-row");
     const $card = $("#soul-tree-card");
     const $closeCardBtn = $("#close-card");
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
+
 
     // Handle row click event to show the soul tree details card
     $rows.on("click", function (event) {
@@ -15,11 +17,19 @@ $(document).ready(function () {
         $("#soul-tree-effect").text($(this).data("effect"));
         $("#soul-tree-character").text($(this).data("character"));
         $card.show();
+        $overlay.show();
     });
 
-    // Close the soul tree details card
+    // Close the card when clicking the close button
     $closeCardBtn.on("click", function () {
         $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 
     // Handle checkbox change event for soul tree

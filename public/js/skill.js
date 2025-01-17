@@ -1,7 +1,10 @@
 $(document).ready(function () {
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
+    const $closeCardBtn = $('#close-card');
+    const $card = $('#skill-card');
+
     $('.skill-row').on('click', function () {
         const $row = $(this);
-        const $skillCard = $('#skill-card');
 
         const name = $row.data('name');
         const skillClassData = $row.data('class');
@@ -17,10 +20,19 @@ $(document).ready(function () {
             .attr('src', `img/skills/icon_skill3_${imgIndex}.png`)
             .attr('alt', name);
 
-        $skillCard.show();
+        $card.show();
+        $overlay.show();
     });
 
-    $('#close-card').on('click', function () {
-        $('#skill-card').hide();
+    // Close the card when clicking the close button
+    $closeCardBtn.on("click", function () {
+        $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 });
