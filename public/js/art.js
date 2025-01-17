@@ -1,6 +1,6 @@
 $(document).ready(function () {
     const $artRows = $('.art-row');
-    const $artCard = $('#art-card');
+    const $card = $('#art-card');
     const $artName = $('#art-name');
     const $artEffect = $('#art-effect');
     const $artType = $('#art-type');
@@ -10,7 +10,8 @@ $(document).ready(function () {
     const $artMasterLevel = $('#art-master-level');
     const $artClass = $('#art-class');
     const $artImg = $('#art-img');
-    const $closeCardButton = $('#close-card');
+    const $closeCardBtn = $('#close-card');
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
 
     $artRows.on('click', function () {
         const $row = $(this);
@@ -35,10 +36,18 @@ $(document).ready(function () {
         $artImg.attr('src', `img/arts/icon_arts2_${imgIndex}.png`);
         $artImg.attr('alt', name);
 
-        $artCard.show();
+        $card.show();
+        $overlay.show();    });
+
+    // Close the card when clicking the close button
+    $closeCardBtn.on("click", function () {
+        $card.hide();
+        $overlay.hide();
     });
 
-    $closeCardButton.on('click', function () {
-        $artCard.hide();
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 });
