@@ -45,10 +45,10 @@ class SoulTreeController extends AbstractController
         foreach ($userSoulTrees as $userSoulTree) {
             $userSoulTreeMap[$userSoulTree->getSoulTree()->getId()] = $userSoulTree;
         }
+
         $checkedSoulTreesCount = count(array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked()));
         $totalSoulTreesCount = count($soulTrees);
         $progress = $totalSoulTreesCount > 0 ? round(($checkedSoulTreesCount / $totalSoulTreesCount) * 100) : 0;
-        $checkedSoulTrees = array_filter($userSoulTrees, fn($userSoulTree) => $userSoulTree->isChecked());
 
 
         return $this->render('soul_tree/index.html.twig', [

@@ -66,15 +66,12 @@ $(document).ready(function () {
         });
     });
 
-    // Initialize progress bar
-    updateProgressBar();
 });
 
 // Update the progress bar based on checked checkboxes
 function updateProgressBar() {
     const totalSoulTrees = $(".soul-tree-checkbox").length;
     const checkedSoulTrees = $(".soul-tree-checkbox:checked").length;
-
     const progress = Math.round(totalSoulTrees > 0 ? (checkedSoulTrees / totalSoulTrees) * 100 : 0);
 
     $("#progress-bar").css("width", `${progress}%`);

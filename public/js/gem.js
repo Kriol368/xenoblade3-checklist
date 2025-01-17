@@ -15,7 +15,6 @@ $(document).ready(function () {
         $("#gem-name").text($(this).data("name"));
         $("#gem-effect").text($(this).data("effect"));
         $("#gem-type").text($(this).data("type"));
-
         // Show card and overlay
         card.show();
         overlay.show();
