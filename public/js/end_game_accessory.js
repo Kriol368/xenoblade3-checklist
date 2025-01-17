@@ -1,11 +1,12 @@
 $(document).ready(function () {
     const $accessoryRows = $('.accessory-row');
-    const $accessoryCard = $('#accessory-card');
+    const $card = $('#accessory-card');
     const $accessoryName = $('#accessory-name');
     const $accessoryEffect = $('#accessory-effect');
     const $accessoryLocation = $('#accessory-location');
     const $accessoryImg = $('#accessory-img');
-    const $closeCardButton = $('#close-card');
+    const $closeCardBtn = $('#close-card');
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
 
     $accessoryRows.on('click', function () {
         const $row = $(this);
@@ -20,10 +21,19 @@ $(document).ready(function () {
         $accessoryImg.attr('src', `/img/accessories/icon_accessory_glow_r_${imgIndex}.png`);
         $accessoryImg.attr('alt', name);
 
-        $accessoryCard.show();
+        $card.show();
+        $overlay.show();
     });
 
-    $closeCardButton.on('click', function () {
-        $accessoryCard.hide();
+    // Close the card when clicking the close button
+    $closeCardBtn.on("click", function () {
+        $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 });
