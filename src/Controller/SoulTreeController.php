@@ -53,7 +53,7 @@ class SoulTreeController extends AbstractController
 
         return $this->render('soul_tree/index.html.twig', [
             'soulTrees' => $soulTrees,
-            'userSoulTreesMap' => $userSoulTreeMap,
+            'userSoulTreeMap' => $userSoulTreeMap,
             'progress' => $progress,
         ]);
     }
