@@ -1,7 +1,8 @@
 $(document).ready(function () {
     const rows = $(".gauntlet-emblem-row");
-    const card = $("#gauntlet-emblem-card");
-    const closeCardBtn = $("#close-card");
+    const $card = $("#gauntlet-emblem-card");
+    const $closeCardBtn = $("#close-card");
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
 
     // Open card on row click
     rows.on("click", function (event) {
@@ -13,12 +14,20 @@ $(document).ready(function () {
         $("#gauntlet-emblem-description").text($(this).data("description"));
         $("#gauntlet-emblem-effects").text($(this).data("effects"));
         $("#gauntlet-emblem-img").attr("src", "/img/gauntlet/" + $(this).data("imgIndex") + ".png");
-        card.show();
+        $card.show();
+        $overlay.show();
     });
 
-    // Close card
-    closeCardBtn.on("click", function () {
-        card.hide();
+    // Close the card when clicking the close button
+    $closeCardBtn.on("click", function () {
+        $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 
     // Handle checkbox change
