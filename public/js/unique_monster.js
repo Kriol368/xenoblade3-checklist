@@ -2,6 +2,7 @@ $(document).ready(function () {
     const $rows = $(".unique-monster-row");
     const $card = $("#unique-monster-card");
     const $closeCardBtn = $("#close-card");
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
 
     // Handle row click event to show the unique monster details card
     $rows.on("click", function (event) {
@@ -16,11 +17,19 @@ $(document).ready(function () {
         $("#unique-monster-level").text($(this).data("level"));
         $("#unique-monster-soulhacker-ability").text($(this).data("soulhackerAbility"));
         $card.show();
+        $overlay.show();
     });
 
-    // Close the unique monster details card
+    // Close the card when clicking the close button
     $closeCardBtn.on("click", function () {
         $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 
     // Handle checkbox change event for each unique monster
