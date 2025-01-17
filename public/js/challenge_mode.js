@@ -2,6 +2,7 @@ $(document).ready(function () {
     const $rows = $(".challenge-mode-row");
     const $card = $("#challenge-mode-card");
     const $closeCardBtn = $("#close-card");
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
 
     // Open card on row click
     $rows.on("click", function (event) {
@@ -14,11 +15,19 @@ $(document).ready(function () {
         $("#challenge-mode-waves").text($row.data("waves"));
         $("#challenge-mode-levelRestriction").text($row.data("levelRestriction"));
         $card.show();
+        $overlay.show();
     });
 
-    // Close card
+    // Close the card when clicking the close button
     $closeCardBtn.on("click", function () {
         $card.hide();
+        $overlay.hide();
+    });
+
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 
     // Handle checkbox changes
