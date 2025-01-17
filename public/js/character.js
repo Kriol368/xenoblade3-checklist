@@ -12,7 +12,6 @@ $(document).ready(function () {
         const $row = $(this);
         const name = $row.data('name');
         const characterClassData = $row.data('class');
-        const imgIndex = $row.data('imgIndex');
         const index = String($row.data('id')).padStart(2, '0');
 
         $characterName.text(name);
