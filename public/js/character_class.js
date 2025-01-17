@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         // Set values in the card
         className.text(name);
-        imgIndex.attr("src", `/img/classes/${imgIndexPath}.png`).attr("alt", name);
+        imgIndex.attr("src", `/img/characters/smol/${imgIndexPath}.png`).attr("alt", name);
         classWeapon.text(weapon || "N/A");
         classNation.text(nation || "N/A");
         classOffense.text(offense || "N/A");
