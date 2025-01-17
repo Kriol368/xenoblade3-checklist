@@ -1,11 +1,13 @@
 $(document).ready(function () {
     const $collectibleRows = $('.collectible-row');
-    const $collectibleCard = $('#collectible-card');
+    const $card = $('#collectible-card');
     const $collectibleName = $('#collectible-name');
     const $collectibleRarity = $('#collectible-rarity');
     const $collectibleLocation = $('#collectible-location');
     const $collectibleImg = $('#collectible-img');
-    const $closeCardButton = $('#close-card');
+    const $closeCardBtn = $('#close-card');
+    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
+
 
     $collectibleRows.on('click', function () {
         const $row = $(this);
@@ -20,10 +22,18 @@ $(document).ready(function () {
         $collectibleImg.attr('src', `/img/collectibles/icon_collectible_glow_r_${imgIndex}.png`);
         $collectibleImg.attr('alt', name);
 
-        $collectibleCard.show();
+        $card.show();
+        $overlay.show();
+    });
+    // Close the card when clicking the close button
+    $closeCardBtn.on("click", function () {
+        $card.hide();
+        $overlay.hide();
     });
 
-    $closeCardButton.on('click', function () {
-        $collectibleCard.hide();
+    // Close the card when clicking outside it
+    $overlay.on("click", function () {
+        $card.hide();
+        $(this).hide();
     });
 });
