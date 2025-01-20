@@ -32,7 +32,7 @@
                     <td>{{ challengeMode.difficulty }}</td>
                     {% set attributes = ['easy', 'normal', 'hard'] %}
                     {% for attribute in attributes %}
-                        <td>
+                        <td class="checkbox-container">
                             <input type="checkbox"
                                    class="challenge-mode-checkbox"
                                    data-attribute="{{ attribute }}"

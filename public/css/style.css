@@ -153,6 +153,7 @@ table {
     table-layout: auto; /* Allow table to stretch horizontally */
     border-collapse: collapse;
     background-color: #222; /* Darker background for table */
+    text-align: center; /* Center-align text and elements */
 }
 
 th, td {
@@ -171,10 +172,14 @@ th {
     position: sticky;
     top: 0; /* Keep header at the top */
     z-index: 1; /* Ensure headers stay on top of rows */
+    text-align: center; /* Center align the content inside the cell */
+    vertical-align: middle; /* Center align vertically within the table cell */
 }
 
 td {
     color: #ccc; /* Lighter text for table content */
+    text-align: center; /* Center align the content inside the cell */
+    vertical-align: middle; /* Center align vertically within the table cell */
 }
 
 tr:hover {
@@ -191,14 +196,6 @@ tr:hover {
     text-align: center;
 }
 
-/* Container for checkboxes */
-.checkbox-container {
-    display: flex;
-    flex-direction: column; /* Stack checkboxes vertically */
-    align-items: center;    /* Center items within the column */
-    width: auto;     /* Only occupy the necessary width */
-    margin: 0 auto;         /* Center the container horizontally */
-}
 
 /* Checkbox with increased size */
 input[type="checkbox"] {
@@ -209,7 +206,11 @@ input[type="checkbox"] {
     margin: 5px 0;          /* Add vertical spacing */
 }
 
-
+/* Center align the checkboxes */
+.checkbox-container {
+    text-align: center; /* Center align the content inside the cell */
+    vertical-align: middle; /* Center align vertically within the table cell */
+}
 
 /* Card style for detailed view */
 .card {
