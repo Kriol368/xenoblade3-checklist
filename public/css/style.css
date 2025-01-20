@@ -150,7 +150,7 @@ main {
 
 table {
     width: 100%; /* Full width */
-    table-layout: fixed; /* Allow table to stretch horizontally */
+    table-layout: auto; /* Allow table to stretch horizontally */
     border-collapse: collapse;
     background-color: #222; /* Darker background for table */
 }
@@ -180,6 +180,35 @@ td {
 tr:hover {
     background-color: #444; /* Hover effect for rows */
 }
+
+
+
+/* Parent container to center align the checkboxes */
+/* Header for the checkbox section */
+.checkbox-header {
+    width: fit-content;
+    margin: 0 auto; /* Center the header */
+    text-align: center;
+}
+
+/* Container for checkboxes */
+.checkbox-container {
+    display: flex;
+    flex-direction: column; /* Stack checkboxes vertically */
+    align-items: center;    /* Center items within the column */
+    width: auto;     /* Only occupy the necessary width */
+    margin: 0 auto;         /* Center the container horizontally */
+}
+
+/* Checkbox with increased size */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    transform: scale(1.5);  /* Enlarge the checkbox */
+    transform-origin: center; /* Ensure it scales from the center */
+    margin: 5px 0;          /* Add vertical spacing */
+}
+
 
 
 /* Card style for detailed view */

@@ -16,7 +16,7 @@
             <tr>
                 <th>Name</th>
                 <th>Character</th>
-                <th>Checked</th>
+                <th class="checkbox-header">Checked</th>
             </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     data-effect="{{ soulTree.effect }}">
                     <td>{{ soulTree.name }}</td>
                     <td>{{ soulTree.character.name }}</td>
-                    <td>
+                    <td class="checkbox-container">
                         <input type="checkbox"
                                class="soul-tree-checkbox"
                                data-id="{{ soulTree.id }}"
