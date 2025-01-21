@@ -63,7 +63,6 @@ $(document).ready(function () {
                 if (!data.success) {
                     alert(data.error || "Failed to update status"); // Show error message if unsuccessful
                     $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state if error
-                } else {
                 }
             }.bind(this), // Bind 'this' so the correct context is used in the success callback
         });
