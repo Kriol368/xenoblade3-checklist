@@ -13,6 +13,13 @@ body {
     color: #e5e5e5; /* Lighter text color for readability */
 }
 
+.card-img {
+    height: 250px; /* Fixed height */
+    width: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensures the image fits without distortion */
+}
+
+
 /* Sidebar styles */
 nav {
     width: 250px;
