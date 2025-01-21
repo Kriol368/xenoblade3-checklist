@@ -1,82 +1,100 @@
 $(document).ready(function () {
-    const $rows = $(".unique-monster-row");
-    const $card = $("#unique-monster-card");
-    const $closeCardBtn = $("#close-card");
-    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
+    // Dynamically create and append an overlay element to the body
+    const $overlay = $("<div class='overlay'></div>").appendTo("body");
 
-    // Handle row click event to show the unique monster details card
+    // Get the close button and the unique monster card element
+    const $closeCardBtn = $("#close-card");
+    const $card = $("#unique-monster-card");
+
+    // Select all rows representing unique monsters
+    const $rows = $(".unique-monster-row");
+
+    // Handle click events on unique monster rows
     $rows.on("click", function (event) {
-        // Prevent the row click from triggering when clicking on the checkbox
+        // Prevent action if the click is on a checkbox
         if ($(event.target).is("input")) {
-            return; // Stops the event from propagating to the row click handler
+            return; // Exit the function if a checkbox is clicked
         }
 
-        $("#unique-monster-name").text($(this).data("name"));
-        $("#unique-monster-area").text($(this).data("area"));
-        $("#unique-monster-location").text($(this).data("location"));
-        $("#unique-monster-level").text($(this).data("level"));
-        $("#unique-monster-soulhacker-ability").text($(this).data("soulhackerAbility"));
+        // Populate the unique monster card with data from the clicked row
+        $("#unique-monster-name").text($(this).data("name")); // Monster name
+        $("#unique-monster-area").text($(this).data("area")); // Area of the monster
+        $("#unique-monster-location").text($(this).data("location")); // Specific location
+        $("#unique-monster-level").text($(this).data("level")); // Level of the monster
+        $("#unique-monster-soulhacker-ability").text($(this).data("soulhackerAbility")); // Soulhacker ability
+
+        // Show the card and overlay
         $card.show();
         $overlay.show();
     });
 
-    // Close the card when clicking the close button
+    // Close the unique monster card when clicking the close button
     $closeCardBtn.on("click", function () {
-        $card.hide();
-        $overlay.hide();
+        $card.hide(); // Hide the card
+        $overlay.hide(); // Hide the overlay
     });
 
-    // Close the card when clicking outside it
+    // Close the unique monster card when clicking the overlay
     $overlay.on("click", function () {
-        $card.hide();
-        $(this).hide();
+        $card.hide(); // Hide the card
+        $(this).hide(); // Hide the overlay
     });
 
-    // Handle checkbox change event for each unique monster
+    // Handle checkbox state change for unique monsters
     $(".unique-monster-checkbox").on("change", function (event) {
-        event.stopPropagation(); // Prevent the row click event from firing
+        // Prevent the row click event from firing
+        event.stopPropagation();
 
-        const uniqueMonsterId = $(this).data("id");
-        const field = $(this).data("attribute");
-        const value = $(this).prop("checked") ? 1 : 0;
+        // Retrieve data about the specific checkbox and its monster
+        const uniqueMonsterId = $(this).data("id"); // Monster ID
+        const field = $(this).data("attribute"); // Field/attribute to update (e.g., "checked")
+        const value = $(this).prop("checked") ? 1 : 0; // Checked state (1 or 0)
 
+        // Prepare form data for the AJAX request
         const formData = new FormData();
-        formData.append("field", field);
-        formData.append("value", value);
-        formData.append("_csrf_token", csrfToken); // Include CSRF token for security
+        formData.append("field", field); // Append the field
+        formData.append("value", value); // Append the new value
+        formData.append("_csrf_token", csrfToken); // Append the CSRF token for security
 
+        // Send an AJAX request to update the unique monster's status
         $.ajax({
-            url: `/update-monster-status/${uniqueMonsterId}`,
-            method: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
+            url: `/update-monster-status/${uniqueMonsterId}`, // API endpoint for updating status
+            method: "POST", // HTTP method
+            data: formData, // Form data to send
+            processData: false, // Prevent jQuery from processing the data
+            contentType: false, // Prevent jQuery from setting content type
             success: function (data) {
                 if (!data.success) {
+                    // Handle failure: Alert the user and revert the checkbox state
                     alert(data.error || "Failed to update status");
-                    $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
+                    $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
                 } else {
-                    updateProgressBar(); // Update progress bar on success
+                    // On success, update the progress bar
+                    updateProgressBar();
                 }
             },
             error: function () {
+                // Handle error: Alert the user and revert the checkbox state
                 alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
+                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
             }
         });
     });
 
-    // Initialize progress bar
+    // Initialize the progress bar on page load
     updateProgressBar();
 });
 
-// Update the progress bar based on checked checkboxes
+// Function to update the progress bar
 function updateProgressBar() {
+    // Calculate the total number of checkboxes and how many are checked
     const totalCheckboxes = $(".unique-monster-checkbox").length;
     const checkedCheckboxes = $(".unique-monster-checkbox:checked").length;
 
+    // Calculate the progress as a percentage
     const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
 
+    // Update the width of the progress bar and the label text
     $("#progress-bar").css("width", `${progress}%`);
     $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
 }
