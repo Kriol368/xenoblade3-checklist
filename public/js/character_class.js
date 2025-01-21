@@ -62,6 +62,7 @@ $(document).ready(function () {
     // Handle checkbox change event for character checkboxes
     $(".character-checkbox").on("change", function (event) {
         event.stopPropagation(); // Prevent the row click event when changing checkbox state
+        updateProgressBar(); // Update the progress bar after success
 
         // Retrieve character ID and checkbox data attributes
         const characterId = $(this).data("id");
@@ -86,15 +87,8 @@ $(document).ready(function () {
                 if (!data.success) {
                     alert(data.error || "Failed to update status"); // Show error message
                     $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
-                } else {
-                    updateProgressBar(); // Update the progress bar after success
                 }
             },
-            error: function () {
-                // If an error occurs during the AJAX request
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
-            }
         });
     });
 

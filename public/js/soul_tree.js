@@ -48,6 +48,7 @@ $(document).ready(function () {
     $(".soul-tree-checkbox").on("change", function (event) {
         // Prevent the row click event from firing when the checkbox is clicked
         event.stopPropagation();
+        updateProgressBar(); // Update the progress bar if the status was successfully updated
 
         // Get the ID of the soul tree and the checked status
         const soulTreeId = $(this).data("id");
@@ -72,15 +73,8 @@ $(document).ready(function () {
                     // If the request was not successful, alert the user and revert the checkbox
                     alert(data.error || "Failed to update status");
                     $(this).prop("checked", !$(this).prop("checked")); // Revert the checkbox state
-                } else {
-                    updateProgressBar(); // Update the progress bar if the status was successfully updated
                 }
             },
-            error: function () {
-                // If the request failed, alert the user and revert the checkbox
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert the checkbox state
-            }
         });
     });
 

@@ -46,6 +46,7 @@ $(document).ready(function () {
     $(".quest-checkbox").on("change", function (event) {
         // Prevent the row click event from firing when a checkbox is clicked
         event.stopPropagation();
+        updateProgressBar(); // Update progress bar if status is updated successfully
 
         // Get the quest ID and determine whether the checkbox is checked or not
         const questId = $(this).data("id");
@@ -70,20 +71,11 @@ $(document).ready(function () {
                 if (!data.success) {
                     alert(data.error || "Failed to update status"); // Alert if there was an error
                     $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
-                } else {
-                    updateProgressBar(); // Update progress bar if status is updated successfully
                 }
             },
-            error: function () {
-                // If an error occurs during the AJAX request
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
-            }
         });
     });
 
-    // Initialize progress bar when the document is ready
-    updateProgressBar();
 });
 
 // Function to update the progress bar based on the checked checkboxes

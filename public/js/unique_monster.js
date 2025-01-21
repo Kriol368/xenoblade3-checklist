@@ -44,6 +44,7 @@ $(document).ready(function () {
     $(".unique-monster-checkbox").on("change", function (event) {
         // Prevent the row click event from firing
         event.stopPropagation();
+        updateProgressBar();
 
         // Retrieve data about the specific checkbox and its monster
         const uniqueMonsterId = $(this).data("id"); // Monster ID
@@ -68,16 +69,8 @@ $(document).ready(function () {
                     // Handle failure: Alert the user and revert the checkbox state
                     alert(data.error || "Failed to update status");
                     $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
-                } else {
-                    // On success, update the progress bar
-                    updateProgressBar();
                 }
             },
-            error: function () {
-                // Handle error: Alert the user and revert the checkbox state
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
-            }
         });
     });
 

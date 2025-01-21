@@ -44,6 +44,7 @@ $(document).ready(function () {
     $(".gauntlet-emblem-checkbox").on("change", function (event) {
         // Prevent triggering the row click event when interacting with the checkbox
         event.stopPropagation();
+        updateProgressBar();
 
         // Get the emblem's ID and create a FormData object for the AJAX request
         const gauntletEmblemId = $(this).data("id");
@@ -68,16 +69,8 @@ $(document).ready(function () {
                     // If update failed, alert the user and revert the checkbox state
                     alert(data.error || "Failed to update status");
                     $(this).prop("checked", !$(this).prop("checked"));
-                } else {
-                    // If successful, update the progress bar
-                    updateProgressBar();
                 }
             }.bind(this), // Bind 'this' so it refers to the checkbox that triggered the event
-            error: function () {
-                // In case of error, alert the user and revert the checkbox state
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked"));
-            }.bind(this) // Bind 'this' to ensure it's the checkbox
         });
     });
 });

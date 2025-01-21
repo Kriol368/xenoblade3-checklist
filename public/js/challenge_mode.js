@@ -39,6 +39,7 @@ $(document).ready(function () {
     // Event handler for changes to the checkbox state (checked/unchecked)
     $(".challenge-mode-checkbox").on("change", function (event) {
         event.stopPropagation(); // Prevent the click event from bubbling up to parent elements
+        updateProgressBar(); // Update the progress bar after success
 
         // Get the challenge mode ID, field name, and checkbox state (checked or unchecked)
         const challengeModeId = $(this).data("id");
@@ -63,15 +64,8 @@ $(document).ready(function () {
                 if (!data.success) {
                     alert(data.error || "Failed to update status"); // Show error message
                     $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
-                } else {
-                    updateProgressBar(); // Update the progress bar after success
                 }
             },
-            error: function () {
-                // If there was an error during the AJAX request
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state
-            }
         });
     });
 

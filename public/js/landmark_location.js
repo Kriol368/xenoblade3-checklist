@@ -40,6 +40,7 @@ $(document).ready(function () {
     // Handle checkbox change event for landmark location checkboxes
     $(".landmark-location-checkbox").on("change", function (event) {
         event.stopPropagation(); // Prevent the row click event from firing when the checkbox is clicked
+        updateProgressBar(); // Update the progress bar on success
 
         // Get the landmark location ID and determine whether the checkbox is checked
         const landmarkLocationId = $(this).data("id");
@@ -65,19 +66,11 @@ $(document).ready(function () {
                     alert(data.error || "Failed to update status"); // Alert the user if there was an error
                     $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on failure
                 } else {
-                    updateProgressBar(); // Update the progress bar on success
                 }
             },
-            error: function () {
-                // Handle errors during the AJAX request
-                alert("An error occurred while updating the status.");
-                $(this).prop("checked", !$(this).prop("checked")); // Revert checkbox state on error
-            }
         });
     });
 
-    // Initialize the progress bar when the document is ready
-    updateProgressBar();
 });
 
 // Function to update the progress bar based on the checked checkboxes
