@@ -186,7 +186,11 @@ tr:hover {
     background-color: #444; /* Hover effect for rows */
 }
 
-
+td img {
+    display: inline-block; /* Ensure images behave as inline-block for centering */
+    max-width: 100%; /* Optional: prevent images from exceeding the cell width */
+    height: auto; /* Maintain aspect ratio */
+}
 
 /* Parent container to center align the checkboxes */
 /* Header for the checkbox section */
