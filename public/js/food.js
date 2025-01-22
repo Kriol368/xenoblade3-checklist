@@ -1,33 +1,39 @@
 $(document).ready(() => {
-    const $overlay = $("<div class='overlay'></div>").appendTo("body"); // Add overlay dynamically
+    // Dynamically create and append an overlay to the body
+    const $overlay = $("<div class='overlay'></div>").appendTo("body");
+
+    // Cache the card and close button elements
     const $card = $('#food-card');
     const $closeCardBtn = $('#close-card');
 
+    // Event handler for when a food row is clicked
     $('.food-row').on('click', function () {
-        const $row = $(this);
+        const $row = $(this); // Reference to the clicked row
 
-        $('#food-name').text($row.data('name'));
-        $('#food-effects').text($row.data('effects'));
-        $('#food-duration').text(`${$row.data('duration')} minutes`);
-        $('#food-location').text($row.data('location'));
+        // Set the text content of the card based on data attributes of the clicked row
+        $('#food-name').text($row.data('name')); // Set food name
+        $('#food-effects').text($row.data('effects')); // Set food effects
+        $('#food-duration').text(`${$row.data('duration')} minutes`); // Set food duration
+        $('#food-location').text($row.data('location')); // Set food location
 
-        // Dynamically set the image path
-        const index = String($row.data('id')).padStart(3, '0');
-        $('#food-img').attr('src', `/img/food/strm_dish_thmb_${index}_0.png`);
+        // Dynamically set the image based on the row's data
+        const index = String($row.data('id')).padStart(3, '0'); // Format the ID with leading zeros if necessary
+        $('#food-img').attr('src', `/img/food/strm_dish_thmb_${index}_0.png`); // Set the image source
 
+        // Display the food card and the overlay
         $card.show();
         $overlay.show();
     });
 
-    // Close the card when clicking the close button
+    // Event handler for closing the card when the close button is clicked
     $closeCardBtn.on("click", function () {
-        $card.hide();
-        $overlay.hide();
+        $card.hide(); // Hide the food card
+        $overlay.hide(); // Hide the overlay
     });
 
-    // Close the card when clicking outside it
+    // Event handler for closing the card when the overlay is clicked
     $overlay.on("click", function () {
-        $card.hide();
-        $(this).hide();
+        $card.hide(); // Hide the food card
+        $(this).hide(); // Hide the overlay
     });
 });
