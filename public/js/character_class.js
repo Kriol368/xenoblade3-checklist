@@ -91,9 +91,6 @@ $(document).ready(function () {
             },
         });
     });
-
-    // Initialize the progress bar when the page loads
-    updateProgressBar();
 });
 
 // Function to update the progress bar based on the number of checked checkboxes

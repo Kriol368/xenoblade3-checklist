@@ -73,9 +73,6 @@ $(document).ready(function () {
             },
         });
     });
-
-    // Initialize the progress bar on page load
-    updateProgressBar();
 });
 
 // Function to update the progress bar
