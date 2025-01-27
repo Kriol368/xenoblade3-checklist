@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Project Description">
-    <meta name="keywords" content="HTML, CSS, Template">
-    <meta name="author" content="Kriol368">
+    <meta name="description" content="A comprehensive checklist for the video game Xenoblade Chronicles 3, helping players track collectibles, quests, heroes, and more.">
+    <meta name="keywords" content="Xenoblade Chronicles 3, checklist, video game, RPG, collectibles, quests, heroes, XC3, Nintendo">
+    <meta name="author" content="kriol368">
+    <meta name="robots" content="index, follow">
     <title>{% block title %}XC3 Checklist{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -17,10 +18,10 @@
     <div class="header-content">
         <div class="nav-toggle">☰</div>
         <div class="logo">
-            <h1>{% block page_name %}Xenoblade Chronicles 3 Checklist{% endblock %}</h1>
+            <img src="{{ asset('img/logo.png') }}" alt="logo" width="350px"></img>
         </div>
         <div class="search">
-            <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Search... (upcoming)" disabled />
+            <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Search... (upcoming)"  />
             <button id="searchToggle">🔍</button>
         </div>
 
@@ -33,7 +34,7 @@
         <li class="home">
             <a href="{{ path('app_home') }}"><span class="home-icon"></span>Home</a>
         </li>
-        <li>---------------</li>
+        <li>-----------------------------------------------</li>
         <li class="character_class">
             <a href="{{ path('app_character_class') }}"><span class="character-class-icon"></span>Classes</a>
         </li>
@@ -58,7 +59,7 @@
         <li class="gauntletEmblem">
             <a href="{{ path('app_gauntlet_emblem') }}"><span class="gauntlet-emblem-icon"></span>Gauntlet Emblems</a>
         </li>
-        <li>---------------</li>
+        <li>-----------------------------------------------</li>
         <li class="character">
             <a href="{{ path('app_character') }}"><span class="character-icon"></span>Characters</a>
         </li>

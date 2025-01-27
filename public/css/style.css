@@ -412,3 +412,20 @@ input[type="checkbox"] {
 .logout-icon {
     background: url(../img/menu/logout.png) no-repeat center;
 }
+@media (max-width: 768px) {
+    nav {
+        width: 0;
+        padding: 0;
+    }
+    main {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebar a span {
+        width: 40px;
+        height: 40px;
+    }
+}
+
