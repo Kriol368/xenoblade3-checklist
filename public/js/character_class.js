@@ -62,7 +62,7 @@ $(document).ready(function () {
     // Handle checkbox change event for character checkboxes
     $(".character-checkbox").on("change", function (event) {
         event.stopPropagation(); // Prevent the row click event when changing checkbox state
-        updateProgressBar(); // Update the progress bar after success
+        $.fn.updateProgressBar(".character-checkbox");
 
         // Retrieve character ID and checkbox data attributes
         const characterId = $(this).data("id");
@@ -92,16 +92,3 @@ $(document).ready(function () {
         });
     });
 });
-
-// Function to update the progress bar based on the number of checked checkboxes
-function updateProgressBar() {
-    const totalCheckboxes = $(".character-checkbox").length; // Total number of checkboxes
-    const checkedCheckboxes = $(".character-checkbox:checked").length; // Number of checked checkboxes
-
-    // Calculate the progress percentage
-    const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
-
-    // Update the progress bar width and label text
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress}% Complete`); // Show progress percentage as text
-}

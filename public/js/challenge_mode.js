@@ -39,7 +39,7 @@ $(document).ready(function () {
     // Event handler for changes to the checkbox state (checked/unchecked)
     $(".challenge-mode-checkbox").on("change", function (event) {
         event.stopPropagation(); // Prevent the click event from bubbling up to parent elements
-        updateProgressBar(); // Update the progress bar after success
+        $.fn.updateProgressBar(".challenge-mode-checkbox");
 
         // Get the challenge mode ID, field name, and checkbox state (checked or unchecked)
         const challengeModeId = $(this).data("id");
@@ -68,19 +68,5 @@ $(document).ready(function () {
             },
         });
     });
-
-    updateProgressBar(); // Initialize the progress bar when the page loads
 });
 
-// Function to update the progress bar based on the checked checkboxes
-function updateProgressBar() {
-    const totalCheckboxes = $(".challenge-mode-checkbox").length; // Total number of checkboxes
-    const checkedCheckboxes = $(".challenge-mode-checkbox:checked").length; // Number of checked checkboxes
-
-    // Calculate the progress percentage
-    const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
-
-    // Update the progress bar width and label text
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress.toFixed(0)}% Complete`); // Show percentage as text
-}

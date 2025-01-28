@@ -38,8 +38,7 @@ $(document).ready(function () {
     $(".gem-checkbox").on("change", function (event) {
         // Prevent the checkbox change event from triggering the row click event
         event.stopPropagation();
-        updateProgressBar(); // Update the progress bar on success
-
+        $.fn.updateProgressBar(".gem-checkbox");
 
         const gemId = $(this).data("id"); // Get the gem ID from the data attribute
         const field = "checked"; // Field name is always 'checked' for checkbox
@@ -68,17 +67,3 @@ $(document).ready(function () {
         });
     });
 });
-
-// Function to update the progress bar based on checked checkboxes
-function updateProgressBar() {
-    // Get the total number of gem checkboxes and the number of checked ones
-    const totalGems = $(".gem-checkbox").length;
-    const checkedGems = $(".gem-checkbox:checked").length;
-
-    // Calculate progress as a percentage
-    const progress = Math.round(totalGems > 0 ? (checkedGems / totalGems) * 100 : 0);
-
-    // Update the progress bar width and label text with the calculated progress
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress}% Complete`);
-}

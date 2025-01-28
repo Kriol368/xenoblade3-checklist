@@ -48,7 +48,8 @@ $(document).ready(function () {
     $(".soul-tree-checkbox").on("change", function (event) {
         // Prevent the row click event from firing when the checkbox is clicked
         event.stopPropagation();
-        updateProgressBar(); // Update the progress bar if the status was successfully updated
+        $.fn.updateProgressBar(".soul-tree-checkbox");
+
 
         // Get the ID of the soul tree and the checked status
         const soulTreeId = $(this).data("id");
@@ -79,19 +80,3 @@ $(document).ready(function () {
     });
 
 });
-
-// Function to update the progress bar based on checked checkboxes
-function updateProgressBar() {
-    // Get the total number of soul tree checkboxes
-    const totalSoulTrees = $(".soul-tree-checkbox").length;
-
-    // Get the number of checked soul tree checkboxes
-    const checkedSoulTrees = $(".soul-tree-checkbox:checked").length;
-
-    // Calculate the percentage of checked soul trees
-    const progress = Math.round(totalSoulTrees > 0 ? (checkedSoulTrees / totalSoulTrees) * 100 : 0);
-
-    // Update the progress bar width and label text
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
-}

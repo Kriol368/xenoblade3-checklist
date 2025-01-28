@@ -40,7 +40,7 @@ $(document).ready(function () {
     // Handle checkbox change event for landmark location checkboxes
     $(".landmark-location-checkbox").on("change", function (event) {
         event.stopPropagation(); // Prevent the row click event from firing when the checkbox is clicked
-        updateProgressBar(); // Update the progress bar on success
+        $.fn.updateProgressBar(".landmark-location-checkbox");
 
         // Get the landmark location ID and determine whether the checkbox is checked
         const landmarkLocationId = $(this).data("id");
@@ -72,17 +72,3 @@ $(document).ready(function () {
     });
 
 });
-
-// Function to update the progress bar based on the checked checkboxes
-function updateProgressBar() {
-    // Get the total number of landmark location checkboxes and the number of checked checkboxes
-    const totalLandmarkLocations = $(".landmark-location-checkbox").length;
-    const checkedLandmarkLocations = $(".landmark-location-checkbox:checked").length;
-
-    // Calculate the progress as a percentage
-    const progress = Math.round(totalLandmarkLocations > 0 ? (checkedLandmarkLocations / totalLandmarkLocations) * 100 : 0);
-
-    // Update the progress bar width and the progress label text
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
-}

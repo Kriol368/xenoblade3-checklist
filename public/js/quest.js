@@ -46,7 +46,7 @@ $(document).ready(function () {
     $(".quest-checkbox").on("change", function (event) {
         // Prevent the row click event from firing when a checkbox is clicked
         event.stopPropagation();
-        updateProgressBar(); // Update progress bar if status is updated successfully
+        $.fn.updateProgressBar(".quest-checkbox");
 
         // Get the quest ID and determine whether the checkbox is checked or not
         const questId = $(this).data("id");
@@ -77,17 +77,3 @@ $(document).ready(function () {
     });
 
 });
-
-// Function to update the progress bar based on the checked checkboxes
-function updateProgressBar() {
-    // Get the total number of quest checkboxes and the number of checked quests
-    const totalQuests = $(".quest-checkbox").length;
-    const checkedQuests = $(".quest-checkbox:checked").length;
-
-    // Calculate the progress percentage
-    const progress = Math.round(totalQuests > 0 ? (checkedQuests / totalQuests) * 100 : 0);
-
-    // Update the progress bar width and label with the progress percentage
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
-}

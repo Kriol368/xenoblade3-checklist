@@ -44,7 +44,7 @@ $(document).ready(function () {
     $(".gauntlet-emblem-checkbox").on("change", function (event) {
         // Prevent triggering the row click event when interacting with the checkbox
         event.stopPropagation();
-        updateProgressBar();
+        $.fn.updateProgressBar(".gauntlet-emblem-checkbox");
 
         // Get the emblem's ID and create a FormData object for the AJAX request
         const gauntletEmblemId = $(this).data("id");
@@ -75,17 +75,3 @@ $(document).ready(function () {
     });
 });
 
-// Function to update the progress bar based on the checked gauntlet emblems
-function updateProgressBar() {
-    const totalGauntletEmblems = $(".gauntlet-emblem-checkbox").length; // Total number of checkboxes
-    const checkedGauntletEmblems = $(".gauntlet-emblem-checkbox:checked").length; // Number of checked checkboxes
-
-    // Calculate the progress percentage (rounding to the nearest whole number)
-    const progress = Math.round(
-        totalGauntletEmblems > 0 ? (checkedGauntletEmblems / totalGauntletEmblems) * 100 : 0
-    );
-
-    // Update the width of the progress bar and the progress label text
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress}% Complete`);
-}

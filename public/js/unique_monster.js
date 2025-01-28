@@ -44,7 +44,7 @@ $(document).ready(function () {
     $(".unique-monster-checkbox").on("change", function (event) {
         // Prevent the row click event from firing
         event.stopPropagation();
-        updateProgressBar();
+        $.fn.updateProgressBar(".unique-monster-checkbox");
 
         // Retrieve data about the specific checkbox and its monster
         const uniqueMonsterId = $(this).data("id"); // Monster ID
@@ -74,17 +74,3 @@ $(document).ready(function () {
         });
     });
 });
-
-// Function to update the progress bar
-function updateProgressBar() {
-    // Calculate the total number of checkboxes and how many are checked
-    const totalCheckboxes = $(".unique-monster-checkbox").length;
-    const checkedCheckboxes = $(".unique-monster-checkbox:checked").length;
-
-    // Calculate the progress as a percentage
-    const progress = Math.round(totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0);
-
-    // Update the width of the progress bar and the label text
-    $("#progress-bar").css("width", `${progress}%`);
-    $(".progress-label").text(`${progress.toFixed(0)}% Complete`);
-}
